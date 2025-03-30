@@ -1,0 +1,86 @@
+{
+    "stops": [
+        {
+            "id": "m8vcqizls0jfkyq7ydi",
+            "name": "Будинок національних художніх колективів України",
+            "lat": 50.44608,
+            "lon": 30.49836,
+            "radius": 25,
+            "routes": ["m8vdwfyfo7wvvja4vt"]
+        },
+        {
+            "id": "m8vcsbtq828ukefk6mo",
+            "name": "вул. Івана Франка",
+            "lat": 50.44456,
+            "lon": 30.50804,
+            "radius": 25,
+            "routes": ["m8vdw8l5qv8ju1tmd", "m8vdwfyfo7wvvja4vt"]
+        },
+        {
+            "id": "m8vcsho74s2w3xsplff",
+            "name": "вул. Володимирська",
+            "lat": 50.44367,
+            "lon": 30.51307,
+            "radius": 20,
+            "routes": ["m8vdw8l5qv8ju1tmd"]
+        },
+        {
+            "id": "m8vd7u9lib11n49v7dt",
+            "name": "бул. Тараса Шевченка",
+            "lat": 50.44329, 
+            "lon": 30.51574,
+            "radius": 27,
+            "routes": ["m8vdw8l5qv8ju1tmd", "m8vdwlb2fzi6b49hd2"]
+        },
+        {
+            "id": "m8vdaakmtlmxcz5pzhp",
+            "name": "пл. Бессарабська",
+            "lat": 50.44177,  
+            "lon": 30.51986,
+            "radius": 30,
+            "routes": ["m8vdwlb2fzi6b49hd2"]
+        },
+        {
+            "id": "m8vdboinpstxohc2n7r",
+            "name": "Музей \"Київська фортеця\"",
+            "lat": 50.43457,   
+            "lon": 30.53074,
+            "radius": 25,
+            "routes": ["m8vdwlb2fzi6b49hd2"]
+        },
+        {
+            "id": "m8vdh33yy8aw0bpryug",
+            "name": "пров. Кріпосний",
+            "lat": 50.44475,   
+            "lon": 30.53894,
+            "radius": 20,
+            "routes": ["m8vdwfyfo7wvvja4vt"]
+        }
+    ],
+    "routes": [
+        {
+            "id": "m8vdw8l5qv8ju1tmd",
+            "name": "Route 1",
+            "stops": {
+                "start-to-end": ["m8vcsbtq828ukefk6mo", "m8vcsho74s2w3xsplff", "m8vd7u9lib11n49v7dt"],
+                "end-to-start": ["m8vd7u9lib11n49v7dt", "m8vcsho74s2w3xsplff", "m8vcsbtq828ukefk6mo"]
+            }
+        },
+        {
+            "id": "m8vdwfyfo7wvvja4vt",
+            "name": "Route 2",
+            "stops": {
+                "start-to-end": ["m8vcqizls0jfkyq7ydi", "m8vcsbtq828ukefk6mo", "m8vdh33yy8aw0bpryug"],
+                "end-to-start": ["m8vdh33yy8aw0bpryug", "m8vcsbtq828ukefk6mo", "m8vcqizls0jfkyq7ydi"]
+            }
+        },
+        {
+            "id": "m8vdwlb2fzi6b49hd2",
+            "name": "Route 3",
+            "stops": {
+                "start-to-end": ["m8vd7u9lib11n49v7dt", "m8vdaakmtlmxcz5pzhp", "m8vdboinpstxohc2n7r"],
+                "end-to-start": ["m8vdboinpstxohc2n7r", "m8vdaakmtlmxcz5pzhp", "m8vd7u9lib11n49v7dt"]
+            }
+        }
+    ]
+}

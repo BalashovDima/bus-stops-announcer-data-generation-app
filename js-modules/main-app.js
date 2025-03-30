@@ -1,14 +1,20 @@
+import Data from './data.js';
 import StopsScreen from './stops-screen.js';
 import RoutesScreen from './routes-screen.js';
 
 export default class MainApp {
     constructor(rootElement) { 
+        this.data = new Data();
+
         this.rootElement = rootElement;
 
         this.createStopsAndRoutesSwitch();
         this.stopsScreen = new StopsScreen(this.rootElement);
         this.routesScreen = new RoutesScreen(this.rootElement);
         this.routesScreen.hide();
+
+        
+        this.data.readFromFile("./example-data.json").then(() => console.log(this.data.allStops));
     }
 
     createStopsAndRoutesSwitch() {
