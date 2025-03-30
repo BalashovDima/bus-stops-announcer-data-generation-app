@@ -1,8 +1,14 @@
+import StopsScreen from './stops-screen.js';
+import RoutesScreen from './routes-screen.js';
+
 export default class MainApp {
     constructor(rootElement) { 
         this.rootElement = rootElement;
 
         this.createStopsAndRoutesSwitch();
+        this.stopsScreen = new StopsScreen(this.rootElement);
+        this.routesScreen = new RoutesScreen(this.rootElement);
+        this.routesScreen.hide();
     }
 
     createStopsAndRoutesSwitch() {
@@ -29,12 +35,18 @@ export default class MainApp {
             routesButton.classList.remove('active');
             stopsButton.classList.add('active');
             switchIndicator.style.transform = `translateX(70%)`;
+
+            this.stopsScreen.show();
+            this.routesScreen.hide();
         });
 
         routesButton.addEventListener('click', () => {
             stopsButton.classList.remove('active');
             routesButton.classList.add('active');
             switchIndicator.style.transform = `translateX(315%)`;
+
+            this.routesScreen.show();
+            this.stopsScreen.hide();
         });
     }
 }
