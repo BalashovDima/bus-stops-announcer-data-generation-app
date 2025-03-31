@@ -32,16 +32,20 @@ export default class Data {
         URL.revokeObjectURL(url);
     }
 
-    get allStops() {
+    get stops() {
         return this.#_stops;
     }
 
-    get allRoutes() {
+    get routes() {
         return this.#_routes;
     }
 
     getStopById(id) {
         return this.#_stops.find(stop => stop.id === id);
+    }
+
+    getRouteById(id) {
+        return this.#_routes.find(route => route.id === id);
     }
 
     generateId() {

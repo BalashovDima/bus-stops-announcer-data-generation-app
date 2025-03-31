@@ -9,12 +9,16 @@ export default class MainApp {
         this.rootElement = rootElement;
 
         this.createStopsAndRoutesSwitch();
-        this.stopsScreen = new StopsScreen(this.rootElement);
+        this.stopsScreen = new StopsScreen(this, this.rootElement);
         this.routesScreen = new RoutesScreen(this.rootElement);
         this.routesScreen.hide();
 
         
-        this.data.readFromFile("./example-data.json").then(() => console.log(this.data.allStops));
+        this.data.readFromFile("./example-data.json").then(() => {
+            this.data.stops.forEach(stop => this.stopsScreen.renderStop(stop));
+            this.data.stops.forEach(stop => this.stopsScreen.renderStop(stop));
+            this.data.stops.forEach(stop => this.stopsScreen.renderStop(stop));
+        });
     }
 
     createStopsAndRoutesSwitch() {

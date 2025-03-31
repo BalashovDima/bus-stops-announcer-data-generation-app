@@ -13,4 +13,197 @@
     color: #999;
     font-family: Roboto Mono, monospace;
     font-size: 1.3rem;
+    grid-column: name-start / routes-end;
+    padding: 20px;
+}
+
+.stops-list__container {
+    width: 90%;
+    max-width: 900px;
+    max-height: 70vh;
+    overflow: auto;
+    margin-top: 20px;
+    border-radius: 8px 8px 0 0;
+}
+
+.small-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+.small-scrollbar::-webkit-scrollbar-corner {
+    background: transparent; 
+}
+
+.small-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #44475A;
+    border-radius: 50em;
+}
+
+.small-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: #475376;
+}
+
+.small-scrollbar::-webkit-scrollbar-thumb:active {
+    background-color: #6272A4;
+}
+
+.small-scrollbar::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.stops-list-grid-layout {
+    display: grid;
+    min-width: 700px;
+    grid-template-columns: [name-start] 1fr [name-end coords-start] 20% [coords-end audio-start] 10% [audio-end radius-start] 10% [radius-end routes-start]15% [routes-end];
+    gap: 0 7px;
+}
+
+.stops-list__header {
+    font-family: Roboto Mono, monospace;
+    color: rgba(255 255 255 / 0.8);
+}
+
+.stops-list__header div {
+    background-color: rgb(0 255 165 / 33%);
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    padding: 10px;
+    text-align: center;
+}
+
+.stops-list__header div:first-child {
+    border-top-left-radius: 8px;
+}
+
+.stops-list__header div:last-child {
+    border-top-right-radius: 8px;
+}
+
+.stops-list__row {
+    display: grid;
+    grid-template-columns: subgrid; 
+    grid-column: name-start / routes-end;
+    color: rgba(255 255 255 / 0.8);
+    font-family: Roboto Mono, monospace;
+}
+
+.stops-list__row:hover {
+    background-color: rgba(255 255 255 / 0.05);
+}
+
+.stops-list__row div {
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    padding: 5px 0;
+    text-align: center;
+    position: relative;
+}
+
+.stops-list__row div:after {
+    content: '';
+    position: absolute;
+    right: -4px;
+    top: 0;
+    height: 70%;
+    transform: translateY(25%);
+    width: 1px;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.stops-list__row div:last-child:after {
+    display: none;
+}
+
+.stops-list__row .name-cell {
+    grid-column: name-start / name-end;
+    justify-content: left;
+    text-align: left;
+    padding-left: 5px;
+}
+
+.stops-list__row .coords-cell {
+    grid-column: coords-start / coords-end;
+    flex-direction: column;
+}
+
+.stops-list__row .audio-cell {
+    grid-column: audio-start / audio-end;
+}
+
+.stops-list__row .radius-cell {
+    grid-column: radius-start / radius-end;
+}
+
+.stops-list__row .routes-cell {
+    grid-column: routes-start / routes-end;
+    gap: 10px;
+}
+
+.stops-list__row .routes-cell .show-routes {
+    display: none;
+    font-size: small;
+    padding: 2px 5px;
+    border-radius: 50em;
+    cursor: pointer;
+    background-color: #44475A;
+}
+
+.stops-list__row .routes-cell:hover .show-routes {
+    display: inline-block;
+}
+
+.routes-info-container {
+    display: none;
+    position: absolute;
+    width: 200px;
+    border-radius: 8px;
+    background-color: #2f313e;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.routes-info-header {
+    background-color: #44475A;
+    color: #fff;
+    padding: 5px 23px 5px 10px;
+    border-radius: 8px 8px 0 0;
+    font-family: Roboto Mono, monospace;
+    font-size: 0.9rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden; 
+}
+
+.routes-info-list-wrapper {
+    max-height: 170px;
+    border-radius: 0 0 8px 8px;
+    overflow-y: auto;
+}
+
+.routes-info-list {
+    color: rgba(255, 255, 255, 0.9);
+    font-family: Roboto Mono, monospace;
+    font-size: 0.9rem;
+    padding: 5px 5px 5px 30px;
+}
+
+.routes-info__close-button {
+    position: absolute;
+    top: 13px;
+    right: 5px;
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    line-height: 0;
+    cursor: pointer;
+    transform: rotate(45deg);
+}
+
+@media (max-width: 1000px) {
+    .stops-list__container {
+        width: 100%;
+    }
 }
