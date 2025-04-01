@@ -3,12 +3,64 @@
     flex-direction: column;
     align-items: center;
     height: 100vh;
-    width: 100vw;
+    max-width: 1000px;
+    margin: 0 auto;
     padding-top: 20px;
-    background: linear-gradient(180deg, #1E1E2F 0%, #1E1E2F 50%, #2A2A3D 100%);
+    /* background: linear-gradient(180deg, #1E1E2F 0%, #1E1E2F 50%, #2A2A3D 100%); */
+}
+
+.controls-container {
+    width: 90%;
+    display: grid;
+    grid-template-columns: [file-start] 1fr [file-end switch-start] 1fr [switch-end generate-start] 1fr [generate-end];
+    justify-items: center;
+}
+
+.file-controls {
+    grid-column: file-start / file-end;
+    grid-row: 1 / 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.file-controls__icon {
+    line-height: 0;
+}
+
+.file-control__icon svg {
+    display: block;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    transition: 0.2s ease;
+    fill: #8e8e8e;
+}
+
+.file-control__icon:hover svg {
+    fill: #fff;
+}
+
+.generate-code-button {
+    grid-column: generate-start / generate-end;
+    grid-row: 1 / 1;
+    position: relative;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #999;
+    font-family: Roboto Mono, monospace;
+    font-size: 1.3rem;
+    transition: 0.2s ease;
+}
+
+.generate-code-button:hover {
+    color: #fff;
 }
 
 .stops-and-routes-switch {
+    grid-column: switch-start / switch-end;
+    grid-row: 1 / 1;
     position: relative;
     width: fit-content;
     display: flex;

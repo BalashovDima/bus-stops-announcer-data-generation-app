@@ -8,12 +8,25 @@ export default class Data {
 
     async readFromFile(file) {
         try {
-            const response = await fetch(file);
-            const data = await response.json();
+            let data;
+    
+            if (typeof file === "string") {
+                // Fetch JSON from a URL
+                const response = await fetch(file);
+                data = await response.json();
+            } else if (file instanceof File) {
+                // Read JSON from a local file
+                const text = await file.text();
+                data = JSON.parse(text);
+            } else {
+                throw new Error("Invalid file input");
+            }
+    
             this.#_stops = data.stops || [];
             this.#_routes = data.routes || [];
         } catch (error) {
-            return console.error("Error opening file:", error);
+            alert("Error reading file: " + error.message);
+            console.error("Error opening file:", error);
         }
     }
 

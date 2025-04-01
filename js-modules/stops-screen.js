@@ -72,11 +72,17 @@ export default class StopsScreen {
         this.stopsListBody.appendChild(row);
     }
 
+    clearStopsList() {
+        this.stopsListBody.innerHTML = '';
+        this.stopsListBody.dataset.numberOfStops = 0;
+        this.showNoStopsMessage();
+    }
+
     createNoStopsMessage() {
         this.noStopsMessage = document.createElement('div');
         this.noStopsMessage.classList.add('no-stops-message');
         this.noStopsMessage.textContent = 'No stops available. Open a file or create a new stop.';
-        this.stopsListBody.appendChild(this.noStopsMessage);
+        this.stopsListContainer.appendChild(this.noStopsMessage);
     }
 
     hideNoStopsMessage() {
@@ -84,7 +90,7 @@ export default class StopsScreen {
     }
 
     showNoStopsMessage() {
-        this.noStopsMessage.style.display = 'flex';
+        this.noStopsMessage.style.display = 'block';
     }
 
     handleBodyClick(event) {
