@@ -131,42 +131,61 @@
         {
             "id": "m8vdw8l5qv8ju1tmd",
             "name": "Route 1",
-            "stops": {
-                "startToEnd": ["m8ykl9qaqz191ibie6l", "m8vcsbtq828ukefk6mo", "m8vcsho74s2w3xsplff", "m8vd7u9lib11n49v7dt", "m8ykjc93zqg1lgops17"],
-                "endToStart": ["m8ykjc93zqg1lgops17", "m8vd7u9lib11n49v7dt", "m8vcsho74s2w3xsplff", "m8vcsbtq828ukefk6mo", "m8ykl9qaqz191ibie6l"]
-            }
+            "stops": [
+                ["m8ykl9qaqz191ibie6l", "m8ykl9qaqz191ibie6l"],
+                ["m8vcsbtq828ukefk6mo", "m8vcsbtq828ukefk6mo"],
+                ["m8vcsho74s2w3xsplff", "m8vcsho74s2w3xsplff"],
+                ["m8vd7u9lib11n49v7dt", "m8vd7u9lib11n49v7dt"],
+                ["m8ykjc93zqg1lgops17", "m8ykjc93zqg1lgops17"]
+            ]
         },
         {
             "id": "m8vdwfyfo7wvvja4vt",
             "name": "Route 2",
-            "stops": {
-                "startToEnd": ["m8vcqizls0jfkyq7ydi", "m8vcsbtq828ukefk6mo", "m8vdh33yy8aw0bpryug"],
-                "endToStart": ["m8vdh33yy8aw0bpryug", "m8vcsbtq828ukefk6mo", "m8vcqizls0jfkyq7ydi"]
-            }
+            "stops": [
+                ["m8vcqizls0jfkyq7ydi", "m8vcqizls0jfkyq7ydi"],
+                ["m8vcsbtq828ukefk6mo", "m8vcsbtq828ukefk6mo"],
+                ["m8vdh33yy8aw0bpryug", "m8vdh33yy8aw0bpryug"]
+            ]
         },
         {
             "id": "m8vdwlb2fzi6b49hd2",
             "name": "Route 3",
-            "stops": {
-                "startToEnd": ["m8vd7u9lib11n49v7dt", "m8vdaakmtlmxcz5pzhp", "m8vdboinpstxohc2n7r"],
-                "endToStart": ["m8vdboinpstxohc2n7r", "m8vdaakmtlmxcz5pzhp", "m8vd7u9lib11n49v7dt"]
-            }
+            "stops": [
+                ["m8vd7u9lib11n49v7dt", "m8vd7u9lib11n49v7dt"],
+                ["m8vdaakmtlmxcz5pzhp", "m8vdaakmtlmxcz5pzhp"],
+                ["m8vdboinpstxohc2n7r", "m8vdboinpstxohc2n7r"]
+            ]
         },
         {
             "id": "m8ykz5kyfk1z58bsnqh",
             "name": "Route 6",
-            "stops": {
-                "startToEnd": ["m8vcqizls0jfkyq7ydi", "m8vcsbtq828ukefk6mo", "m8vcsho74s2w3xsplff", "m8vd7u9lib11n49v7dt", "m8vdaakmtlmxcz5pzhp", "m8vdboinpstxohc2n7r", "m8vdh33yy8aw0bpryug", "m8ykjc93zqg1lgops17", "m8ykl9qaqz191ibie6l", "m8ykno0js0sx64jxqtl", "m8ykpf3hapac8w2smm", "m8ykuz5iihgxm4v2u", "m8ykuhb0g2kbyw33xa", "m8ykwjmd0f1qnpl9olqt"],
-                "endToStart": ["m8ykwjmd0f1qnpl9olqt", "m8ykuhb0g2kbyw33xa", "m8ykuz5iihgxm4v2u", "m8ykpf3hapac8w2smm", "m8ykno0js0sx64jxqtl", "m8ykl9qaqz191ibie6l", "m8ykjc93zqg1lgops17", "m8vdh33yy8aw0bpryug", "m8vdboinpstxohc2n7r", "m8vdaakmtlmxcz5pzhp", "m8vd7u9lib11n49v7dt", "m8vcsho74s2w3xsplff", "m8vcsbtq828ukefk6mo", "m8vcqizls0jfkyq7ydi"]
-            }
+            "stops": [
+                ["m8vcqizls0jfkyq7ydi", "m8vcqizls0jfkyq7ydi"],
+                ["m8vcsbtq828ukefk6mo", "m8vcsbtq828ukefk6mo"],
+                ["m8vcsho74s2w3xsplff", "m8vcsho74s2w3xsplff"],
+                ["m8vd7u9lib11n49v7dt", "m8vd7u9lib11n49v7dt"],
+                ["m8vdaakmtlmxcz5pzhp", "m8vdaakmtlmxcz5pzhp"],
+                ["m8vdboinpstxohc2n7r", "m8vdboinpstxohc2n7r"],
+                ["m8vdh33yy8aw0bpryug", "m8vdh33yy8aw0bpryug"],
+                ["m8ykjc93zqg1lgops17", "m8ykjc93zqg1lgops17"],
+                ["m8ykl9qaqz191ibie6l", "m8ykl9qaqz191ibie6l"],
+                ["m8ykno0js0sx64jxqtl", "0"],
+                ["m8ykpf3hapac8w2smm", "m8ykpf3hapac8w2smm"],
+                ["m8ykuz5iihgxm4v2u", "m8ykuz5iihgxm4v2u"],
+                ["m8ykuhb0g2kbyw33xa", "m8ykuhb0g2kbyw33xa"],
+                ["m8ykwjmd0f1qnpl9olqt", "m8ykwjmd0f1qnpl9olqt"]
+            ]
         },
         {
             "id": "m8yl6h83a975m8tl3wl",
             "name": "Route 15",
-            "stops": {
-                "startToEnd": ["m8ykwjmd0f1qnpl9olqt", "m8ykz5kyfk1z58bsnqh", "m8ykjc93zqg1lgops17", "m8vd7u9lib11n49v7dt", "m8vcsho74s2w3xsplff"],
-                "endToStart": ["m8vcsho74s2w3xsplff", "m8vd7u9lib11n49v7dt", "m8ykjc93zqg1lgops17", "m8ykz5kyfk1z58bsnqh", "m8ykwjmd0f1qnpl9olqt"]
-            }
+            "stops": [
+                ["m8ykwjmd0f1qnpl9olqt", "m8ykwjmd0f1qnpl9olqt"],
+                ["m8ykjc93zqg1lgops17","m8ykjc93zqg1lgops17"],
+                ["m8vd7u9lib11n49v7dt", "m8vd7u9lib11n49v7dt"],
+                ["m8vcsho74s2w3xsplff", "m8vcsho74s2w3xsplff"]
+            ]
         }
     ]
 }
