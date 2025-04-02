@@ -7,7 +7,7 @@
             "lon": 30.49836,
             "radius": 25,
             "audioTrackNumber": 1,
-            "routes": ["m8vdwfyfo7wvvja4vt"]
+            "routes": ["m8vdwfyfo7wvvja4vt", "m8ykz5kyfk1z58bsnqh"]
         },
         {
             "id": "m8vcsbtq828ukefk6mo",
@@ -16,7 +16,7 @@
             "lon": 30.50804,
             "radius": 25,
             "audioTrackNumber": 2,
-            "routes": ["m8vdw8l5qv8ju1tmd", "m8vdwfyfo7wvvja4vt"]
+            "routes": ["m8vdw8l5qv8ju1tmd", "m8vdwfyfo7wvvja4vt", "m8ykz5kyfk1z58bsnqh"]
         },
         {
             "id": "m8vcsho74s2w3xsplff",
@@ -25,7 +25,7 @@
             "lon": 30.51307,
             "radius": 20,
             "audioTrackNumber": 3,
-            "routes": ["m8vdw8l5qv8ju1tmd"]
+            "routes": ["m8vdw8l5qv8ju1tmd", "m8ykz5kyfk1z58bsnqh", "m8yl6h83a975m8tl3wl"]
         },
         {
             "id": "m8vd7u9lib11n49v7dt",
@@ -34,7 +34,7 @@
             "lon": 30.51574,
             "radius": 27,
             "audioTrackNumber": 4,
-            "routes": ["m8vdw8l5qv8ju1tmd", "m8vdwlb2fzi6b49hd2"]
+            "routes": ["m8vdw8l5qv8ju1tmd", "m8vdwlb2fzi6b49hd2", "m8ykz5kyfk1z58bsnqh", "m8yl6h83a975m8tl3wl"]
         },
         {
             "id": "m8vdaakmtlmxcz5pzhp",
@@ -43,7 +43,7 @@
             "lon": 30.51986,
             "radius": 30,
             "audioTrackNumber": 5,
-            "routes": ["m8vdwlb2fzi6b49hd2"]
+            "routes": ["m8vdwlb2fzi6b49hd2", "m8ykz5kyfk1z58bsnqh"]
         },
         {
             "id": "m8vdboinpstxohc2n7r",
@@ -52,7 +52,7 @@
             "lon": 30.53074,
             "radius": 25,
             "audioTrackNumber": 6,
-            "routes": ["m8vdwlb2fzi6b49hd2"]
+            "routes": ["m8vdwlb2fzi6b49hd2", "m8ykz5kyfk1z58bsnqh"]
         },
         {
             "id": "m8vdh33yy8aw0bpryug",
@@ -61,7 +61,70 @@
             "lon": 30.53894,
             "radius": 20,
             "audioTrackNumber": 7,
-            "routes": ["m8vdwfyfo7wvvja4vt"]
+            "routes": ["m8vdwfyfo7wvvja4vt", "m8ykz5kyfk1z58bsnqh"]
+        },
+        {
+            "id": "m8ykjc93zqg1lgops17",
+            "name": "вул. Раїси Окіпної",
+            "lat": 50.44900,   
+            "lon": 30.59392,
+            "radius": 22,
+            "audioTrackNumber": 8,
+            "routes": ["m8vdw8l5qv8ju1tmd", "m8ykz5kyfk1z58bsnqh", "m8yl6h83a975m8tl3wl"]
+        },
+        {
+            "id": "m8ykl9qaqz191ibie6l",
+            "name": "ст. м. Лівобережна",
+            "lat": 50.44984,  
+            "lon": 30.59865,
+            "radius": 19,
+            "audioTrackNumber": 9,
+            "routes": ["m8vdw8l5qv8ju1tmd", "m8ykz5kyfk1z58bsnqh"]
+        },
+        {
+            "id": "m8ykno0js0sx64jxqtl",
+            "name": "ст. м. Дарниця",
+            "lat": 50.45357,  
+            "lon": 30.61101,
+            "radius": 27,
+            "audioTrackNumber": 10,
+            "routes": ["m8ykz5kyfk1z58bsnqh"]
+        },
+        {
+            "id": "m8ykpf3hapac8w2smm",
+            "name": "вул. Анатолія Слов'яненка",
+            "lat": 50.46530, 
+            "lon": 30.62712,
+            "radius": 25,
+            "audioTrackNumber": 14,
+            "routes": ["m8ykz5kyfk1z58bsnqh", "m8yl6h83a975m8tl3wl"]
+        },
+        {
+            "id": "m8ykuz5iihgxm4v2u",
+            "name": "вул. Юності",
+            "lat": 50.46936,  
+            "lon": 30.62045,
+            "radius": 27,
+            "audioTrackNumber": 15,
+            "routes": ["m8ykz5kyfk1z58bsnqh"]
+        },
+        {
+            "id": "m8ykuhb0g2kbyw33xa",
+            "name": "пр. Алішера Навої",
+            "lat": 50.47218,
+            "lon": 30.61164,
+            "radius": 27,
+            "audioTrackNumber": 16,
+            "routes": ["m8ykz5kyfk1z58bsnqh"]
+        },
+        {
+            "id": "m8ykwjmd0f1qnpl9olqt",
+            "name": "вул. Щекавицька",
+            "lat": 50.46873,  
+            "lon": 30.50963,
+            "radius": 23,
+            "audioTrackNumber": 19,
+            "routes": ["m8ykz5kyfk1z58bsnqh"]
         }
     ],
     "routes": [
@@ -69,8 +132,8 @@
             "id": "m8vdw8l5qv8ju1tmd",
             "name": "Route 1",
             "stops": {
-                "startToEnd": ["m8vcsbtq828ukefk6mo", "m8vcsho74s2w3xsplff", "m8vd7u9lib11n49v7dt"],
-                "endToStart": ["m8vd7u9lib11n49v7dt", "m8vcsho74s2w3xsplff", "m8vcsbtq828ukefk6mo"]
+                "startToEnd": ["m8ykl9qaqz191ibie6l", "m8vcsbtq828ukefk6mo", "m8vcsho74s2w3xsplff", "m8vd7u9lib11n49v7dt", "m8ykjc93zqg1lgops17"],
+                "endToStart": ["m8ykjc93zqg1lgops17", "m8vd7u9lib11n49v7dt", "m8vcsho74s2w3xsplff", "m8vcsbtq828ukefk6mo", "m8ykl9qaqz191ibie6l"]
             }
         },
         {
@@ -87,6 +150,22 @@
             "stops": {
                 "startToEnd": ["m8vd7u9lib11n49v7dt", "m8vdaakmtlmxcz5pzhp", "m8vdboinpstxohc2n7r"],
                 "endToStart": ["m8vdboinpstxohc2n7r", "m8vdaakmtlmxcz5pzhp", "m8vd7u9lib11n49v7dt"]
+            }
+        },
+        {
+            "id": "m8ykz5kyfk1z58bsnqh",
+            "name": "Route 6",
+            "stops": {
+                "startToEnd": ["m8vcqizls0jfkyq7ydi", "m8vcsbtq828ukefk6mo", "m8vcsho74s2w3xsplff", "m8vd7u9lib11n49v7dt", "m8vdaakmtlmxcz5pzhp", "m8vdboinpstxohc2n7r", "m8vdh33yy8aw0bpryug", "m8ykjc93zqg1lgops17", "m8ykl9qaqz191ibie6l", "m8ykno0js0sx64jxqtl", "m8ykpf3hapac8w2smm", "m8ykuz5iihgxm4v2u", "m8ykuhb0g2kbyw33xa", "m8ykwjmd0f1qnpl9olqt"],
+                "endToStart": ["m8ykwjmd0f1qnpl9olqt", "m8ykuhb0g2kbyw33xa", "m8ykuz5iihgxm4v2u", "m8ykpf3hapac8w2smm", "m8ykno0js0sx64jxqtl", "m8ykl9qaqz191ibie6l", "m8ykjc93zqg1lgops17", "m8vdh33yy8aw0bpryug", "m8vdboinpstxohc2n7r", "m8vdaakmtlmxcz5pzhp", "m8vd7u9lib11n49v7dt", "m8vcsho74s2w3xsplff", "m8vcsbtq828ukefk6mo", "m8vcqizls0jfkyq7ydi"]
+            }
+        },
+        {
+            "id": "m8yl6h83a975m8tl3wl",
+            "name": "Route 15",
+            "stops": {
+                "startToEnd": ["m8ykwjmd0f1qnpl9olqt", "m8ykz5kyfk1z58bsnqh", "m8ykjc93zqg1lgops17", "m8vd7u9lib11n49v7dt", "m8vcsho74s2w3xsplff"],
+                "endToStart": ["m8vcsho74s2w3xsplff", "m8vd7u9lib11n49v7dt", "m8ykjc93zqg1lgops17", "m8ykz5kyfk1z58bsnqh", "m8ykwjmd0f1qnpl9olqt"]
             }
         }
     ]
