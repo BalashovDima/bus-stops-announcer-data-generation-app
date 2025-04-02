@@ -6,4 +6,32 @@
 
 body {
     background: linear-gradient(180deg, #1E1E2F 0%, #1E1E2F 50%, #2A2A3D 100%);
+    font-family: Roboto Mono, monospace;
+    color: rgba(255 255 255 / 0.8);
+}
+
+.small-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+.small-scrollbar::-webkit-scrollbar-corner {
+    background: transparent; 
+}
+
+.small-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #44475A;
+    border-radius: 50em;
+}
+
+.small-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: #475376;
+}
+
+.small-scrollbar::-webkit-scrollbar-thumb:active {
+    background-color: #6272A4;
+}
+
+.small-scrollbar::-webkit-scrollbar-track {
+    background-color: transparent;
 }

@@ -11,15 +11,17 @@ export default class MainApp {
         // this.createStopsAndRoutesSwitch();
         this.createControls();
         this.stopsScreen = new StopsScreen(this, this.rootElement);
-        this.routesScreen = new RoutesScreen(this.rootElement);
+        this.routesScreen = new RoutesScreen(this, this.rootElement);
         this.routesScreen.hide();
 
         
         this.data.readFromFile("./example-data.json").then(() => {
             this.data.stops.forEach(stop => this.stopsScreen.renderStop(stop));
-            this.data.stops.forEach(stop => this.stopsScreen.renderStop(stop));
-            this.data.stops.forEach(stop => this.stopsScreen.renderStop(stop));
+
+            this.data.routes.forEach(route => this.routesScreen.addRouteToList(route));
         });
+
+        this.routesButton.click();
     }
 
     createControls() {
@@ -66,7 +68,10 @@ export default class MainApp {
             
             this.data.readFromFile(file).then(() => {
                 this.stopsScreen.clearStopsList();
+                this.routesScreen.clearRoutesList();
+
                 this.data.stops.forEach(stop => this.stopsScreen.renderStop(stop));
+                this.data.routes.forEach(stop => this.routesScreen.addRouteToList(stop));
             });
 
         } catch (err) {
@@ -80,32 +85,32 @@ export default class MainApp {
         this.stopsAndRoutesSwitch.classList.add('stops-and-routes-switch');
         parentElement.appendChild(this.stopsAndRoutesSwitch);
 
-        const stopsButton = document.createElement('button');
-        stopsButton.textContent = 'Stops';
-        stopsButton.classList.add('switch-button', 'active');
-        this.stopsAndRoutesSwitch.appendChild(stopsButton);
+        this.stopsButton = document.createElement('button');
+        this.stopsButton.textContent = 'Stops';
+        this.stopsButton.classList.add('switch-button', 'active');
+        this.stopsAndRoutesSwitch.appendChild(this.stopsButton);
 
-        const routesButton = document.createElement('button');
-        routesButton.textContent = 'Routes';
-        routesButton.classList.add('switch-button');
-        this.stopsAndRoutesSwitch.appendChild(routesButton);
+        this.routesButton = document.createElement('button');
+        this.routesButton.textContent = 'Routes';
+        this.routesButton.classList.add('switch-button');
+        this.stopsAndRoutesSwitch.appendChild(this.routesButton);
 
         const switchIndicator = document.createElement('div');
         switchIndicator.classList.add('switch-indicator');
         this.stopsAndRoutesSwitch.appendChild(switchIndicator);
 
-        stopsButton.addEventListener('click', () => {
-            routesButton.classList.remove('active');
-            stopsButton.classList.add('active');
+        this.stopsButton.addEventListener('click', () => {
+            this.routesButton.classList.remove('active');
+            this.stopsButton.classList.add('active');
             switchIndicator.style.transform = `translateX(70%)`;
 
             this.stopsScreen.show();
             this.routesScreen.hide();
         });
 
-        routesButton.addEventListener('click', () => {
-            stopsButton.classList.remove('active');
-            routesButton.classList.add('active');
+        this.routesButton.addEventListener('click', () => {
+            this.stopsButton.classList.remove('active');
+            this.routesButton.classList.add('active');
             switchIndicator.style.transform = `translateX(315%)`;
 
             this.routesScreen.show();

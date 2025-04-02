@@ -59,8 +59,8 @@ export default class StopsScreen {
         row.innerHTML = `
             <div class="name-cell">${stop.name}</div>
             <div class="coords-cell">
-                <span>Lat: ${stop.lat}</span>
-                <span>Lon: ${stop.lon}</span>
+                <span>Lat: ${stop.lat.toFixed(5)}</span>
+                <span>Lon: ${stop.lon.toFixed(5)}</span>
             </div>
             <div class="audio-cell">${stop.audioTrackNumber}</div>
             <div class="radius-cell">${stop.radius}</div>
