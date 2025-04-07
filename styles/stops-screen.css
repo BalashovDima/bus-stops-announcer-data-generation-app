@@ -24,6 +24,7 @@
     overflow: auto;
     margin-top: 20px;
     border-radius: 8px 8px 0 0;
+    position: relative;
 }
 
 .stops-list-grid-layout {
@@ -36,9 +37,44 @@
 .stops-list__header {
     font-family: Roboto Mono, monospace;
     color: rgba(255 255 255 / 0.8);
+    background-color: #1E1E2F;
+    border-radius: 8px 8px 0 0;
+    -webkit-mask-image: radial-gradient(white 100%, transparent 100%);
+        mask-image: radial-gradient(white 100%, transparent 100%);
+        -webkit-mask-composite: destination-in;
+        mask-composite: intersect;
 }
 
-.stops-list__header div {
+.stops-list__header.sticky {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.stops-list__pin-header {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    padding: 5px;
+    border-radius: 50em;
+    z-index: 10;
+    cursor: pointer;
+}
+
+.stops-list__pin-header svg {
+    display: block;
+    width: 25px;
+    height: 25px;
+    stroke:rgba(255, 255, 255, 0.7);
+    stroke-width: 2px;
+    transition: 0.2s;
+}
+
+.stops-list__pin-header:hover svg {
+    stroke: #fff;
+}
+
+.stops-list__header .header-cell {
     background-color: rgb(0 255 165 / 33%);
     display: flex;
     align-items: center; 
@@ -47,11 +83,11 @@
     text-align: center;
 }
 
-.stops-list__header div:first-child {
+.stops-list__header .header-cell:first-child {
     border-top-left-radius: 8px;
 }
 
-.stops-list__header div:last-child {
+.stops-list__header .header-cell:last-child {
     border-top-right-radius: 8px;
 }
 

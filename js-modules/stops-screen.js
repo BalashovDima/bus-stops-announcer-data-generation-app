@@ -32,17 +32,47 @@ export default class StopsScreen {
         this.stopsListContainer.appendChild(this.stopsListHeader);
 
         this.stopsListHeader.innerHTML = `
-            <div class="name-cell">Name</div>
-            <div class="coords-cell">Coordinates</div>
-            <div class="audio-cell">Audio</div>
-            <div class="radius-cell">Radius</div>
-            <div class="routes-cell">Routes using</div>
+            <div class="header-cell name-cell">Name</div>
+            <div class="header-cell coords-cell">Coordinates</div>
+            <div class="header-cell audio-cell">Audio</div>
+            <div class="header-cell radius-cell">Radius</div>
+            <div class="header-cell routes-cell">Routes using</div>
         `;
         
         this.stopsListBody = document.createElement('div');
         this.stopsListBody.classList.add('stops-list__body', 'stops-list-grid-layout');
         this.stopsListBody.dataset.numberOfStops = 0;
         this.stopsListContainer.appendChild(this.stopsListBody);
+
+        this.createPinUnpinHeaderButton();
+    }
+
+    createPinUnpinHeaderButton() {
+        this.pinHeaderButton = document.createElement('div');
+        this.pinHeaderButton.classList.add('stops-list__pin-header');
+        this.stopsListHeader.appendChild(this.pinHeaderButton);
+
+        this.pinHeaderButton.innerHTML = `
+        <svg class='pin' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14.579 14.579L11.6316 17.5264L10.7683 16.6631C10.3775 16.2723 10.1579 15.7422 10.1579 15.1894V13.1053L7.21052 10.158L5 9.42111L9.42111 5L10.158 7.21052L13.1053 10.1579L15.1894 10.1579C15.7422 10.1579 16.2722 10.3775 16.6631 10.7683L17.5264 11.6316L14.579 14.579ZM14.579 14.579L19 19" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+
+        <svg class='pin-slash' style="display: none" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14.579 14.579L11.6316 17.5264L11.0526 16.9474M14.579 14.579L17.5264 11.6316L16.9474 11.0526M14.579 14.579L19 19M5 19L10.1579 13.8421M19 5L13.8421 10.1579M13.8421 10.1579L13.1053 10.1579L10.158 7.21052L9.42111 5L5 9.42111L7.21052 10.158L10.1579 13.1053V13.8421M13.8421 10.1579L10.1579 13.8421" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        `;
+
+        this.pinHeaderButton.addEventListener('click', (e) => {
+            if (this.stopsListHeader.classList.contains('sticky')) {
+                this.pinHeaderButton.querySelector('.pin').style.display = 'block';
+                this.pinHeaderButton.querySelector('.pin-slash').style.display = 'none';
+                this.stopsListHeader.classList.remove('sticky');
+            } else {
+                this.pinHeaderButton.querySelector('.pin').style.display = 'none';
+                this.pinHeaderButton.querySelector('.pin-slash').style.display = 'block';
+                this.stopsListHeader.classList.add('sticky');
+            }
+        });
     }
 
     renderStop(stop) {
