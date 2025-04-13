@@ -7,6 +7,7 @@ export default class StopsScreen {
         this.wrapper.classList.add('stops-screen-wrapper');
         this.parentElement.appendChild(this.wrapper);
         
+        this.createToolbar();
         this.createStopsList();
         this.createNoStopsMessage();
         this.createRoutesInfoContainer();
@@ -20,6 +21,46 @@ export default class StopsScreen {
 
     show() {
         this.wrapper.style.display = 'flex';
+    }
+
+    createToolbar() {
+        this.toolbar = document.createElement('div');
+        this.toolbar.classList.add('stops-toolbar');
+        this.wrapper.appendChild(this.toolbar);
+
+        this.sortBox = document.createElement('div');
+        this.sortBox.classList.add('stops-toolbar__sort-box');
+        this.sortBox.innerHTML = `
+            <span class="sorb-box__label">Sort by:</span>
+            <select class="stops-toolbar__sort-select">
+                <option value="add-order">Add order</option>
+                <option value="name">Name</option>
+                <option value="audio">Audio</option>
+                <option value="radius">Radius</option>
+                <option value="routes">Routes</option>
+            </select>
+            <div class="sort-ascend-descend-indicator ascending">
+                <svg class="ascending" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.00012 3V21M7.00012 21L3.00012 17M7.00012 21L11.0001 17M14.0001 21H21.0001M14.0001 15H19.0001M14.0001 9H17.0001M14.0001 3H15.0001" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <svg class="descending" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7 3V21M7 21L3 17M7 21L11 17M14 3H21M14 9H19M14 15H17M14 21H15" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        `;
+        this.toolbar.appendChild(this.sortBox);
+
+        this.searchContainer = document.createElement('div');
+        this.searchContainer.classList.add('stops-toolbar__search-container');
+        this.searchContainer.innerHTML = `
+            <input type="text" class="stops-toolbar__search-input" placeholder="Start entering name, id or coordinates to search"/>
+        `;
+        this.toolbar.appendChild(this.searchContainer);
+
+        this.addNewStopButton = document.createElement('button');
+        this.addNewStopButton.classList.add('stops-toolbar__add-new-stop');
+        this.addNewStopButton.textContent = 'Add new stop';
+        this.toolbar.appendChild(this.addNewStopButton);
     }
 
     createStopsList() {

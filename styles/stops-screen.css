@@ -8,6 +8,127 @@
     /* border: 1px solid rgba(255, 255, 255, 0.5); */
 }
 
+.stops-toolbar {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    max-width: 900px;
+    height: 50px;
+}
+
+.stops-toolbar__sort-box {
+    padding: 5px 10px;
+    border: 1px solid #999;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.sorb-box__label {
+    user-select: none;
+    color: #999;
+    font-size: 0.9rem;
+}
+
+.stops-toolbar__sort-select {
+    appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+    background-color: #1E1E2F;
+    color: #999;
+    font-family: Roboto Mono, monospace;
+    font-size: 0.9rem;
+    font-weight: bold;
+    padding: 5px 10px;
+    width: fit-content;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    transition: 0.2s ease;
+    text-align: center;
+}
+
+.stops-toolbar__sort-select:hover {
+    color: #fff;
+}
+
+.sort-ascend-descend-indicator svg {
+    display: none;
+    width: 20px;
+    height: 20px;
+    stroke: #999;
+    stroke-width: 2px;
+    transition: 0.2s ease;
+}
+
+.sort-ascend-descend-indicator:hover svg {
+    stroke: #fff;
+}
+
+.sort-ascend-descend-indicator.ascending svg.ascending {
+    display: block;
+}
+
+.sort-ascend-descend-indicator.descending svg.descending {
+    display: block;
+}
+
+.stops-toolbar__search-container {
+    flex-grow: 2;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.stops-toolbar__search-input {
+    width: 100%;
+    padding: 10px 20px;
+    border: 1px solid #999;
+    border-radius: 50em;
+    background-color: transparent;
+    color: rgba(255, 255, 255, 1);
+    font-size: 1rem;
+    font-family: Roboto Mono, monospace;
+    transition: 0.2s ease;
+}
+
+.stops-toolbar__search-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1rem;
+}
+
+.stops-toolbar__search-input:hover {
+    border: 1px solid #fff;
+}
+
+.stops-toolbar__search-input:focus {
+    outline: none;
+    border: 2px solid #fff;
+}
+
+.stops-toolbar__search-input:focus::placeholder {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.stops-toolbar__add-new-stop {
+    background-color: transparent;
+    border-radius: 50em;
+    border: 1px solid #999;
+    font-family: Roboto Mono, monospace;
+    font-size: 1rem;
+    color: #999;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.stops-toolbar__add-new-stop:hover {
+    border: 1px solid #fff;
+    color: rgba(255, 255, 255, 1);
+}
+
 .no-stops-message {
     text-align: center;
     color: #999;
