@@ -1,0 +1,67 @@
+.context-menu__container, .context-menu__copy-submenu {
+    position: absolute;
+    top: 0;
+    z-index: 1000;
+    background-color: #1e1e1e;
+    padding: 10px 0;
+    border-radius: 8px;
+    display: flex;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 3px 4px 8px rgba(0, 0, 0, 0.5);
+    min-width: 190px;
+    max-width: 340px;
+    user-select: none;
+}
+
+.context-menu__container {
+    transform: translate(-10px, -20px);
+    left: 0;
+}
+
+.context-menu__copy-submenu {
+    transform: translatex(-10px);
+    color: rgba(255 255 255 / 0.8);
+    white-space: nowrap;
+    display: flex;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.context-menu__copy-submenu-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.context-menu__copy-submenu-button svg {
+    display: block;
+    width: 13px;
+    height: 13px;
+    fill: #999;
+    transition: 0.2s ease;
+}
+
+.context-menu__copy-submenu-button:hover svg{
+    fill: #fff;
+}
+
+.context-menu__copy-submenu-button.active {
+    transform: rotate(-90deg) scale(1, 1.5) translate(50%, 0%);
+}
+
+.context-menu__container .context-menu__item {
+    background-color: transparent;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    cursor: default;
+}
+
+.context-menu__container .context-menu__item:hover {
+    background-color: #38393f;
+    color: #fff;
+}

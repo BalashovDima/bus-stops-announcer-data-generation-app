@@ -1,10 +1,14 @@
 import Data from './data.js';
 import StopsScreen from './stops-screen.js';
 import RoutesScreen from './routes-screen.js';
+import ContextMenu from './context-menu.js';
 
 export default class MainApp {
     constructor(rootElement) { 
         this.data = new Data();
+        this.contextMenu = new ContextMenu(this);
+
+        rootElement.addEventListener('contextmenu', this.contextMenu.handleRightClick.bind(this.contextMenu));
 
         this.rootElement = rootElement;
 
@@ -21,7 +25,41 @@ export default class MainApp {
             this.data.routes.forEach(route => this.routesScreen.addRouteToList(route));
         });
 
-        this.routesButton.click();
+        // this.routesButton.click();
+
+        document.addEventListener('mousedown', (event) => {
+            if(this.currentPopUp) {
+                switch (this.currentPopUp) {
+                    case 'contextMenu':
+                        if(!this.contextMenu.contextMenuContainer.contains(event.target)) {
+                            this.contextMenu.hideContextMenu();
+                            this.currentPopUp = null;
+                        }
+                        break;
+                    // case 'routesInfo':
+                    //     this.routesScreen.hideStopRoutesInfo();
+                    //     this.currentPopUp = null;
+                    //     break;
+                }
+            }
+        });
+
+        window.addEventListener("scroll", (event) => {
+            if(this.currentPopUp) {
+                switch (this.currentPopUp) {
+                    case 'contextMenu':
+                        if(!this.contextMenu.contextMenuContainer.contains(event.target)) {
+                            this.contextMenu.hideContextMenu();
+                            this.currentPopUp = null;
+                        }
+                        break;
+                    // case 'routesInfo':
+                    //     this.routesScreen.hideStopRoutesInfo();
+                    //     this.currentPopUp = null;
+                    //     break;
+                }
+            }
+        }, true);
     }
 
     createControls() {

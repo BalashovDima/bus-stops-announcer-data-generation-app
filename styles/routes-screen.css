@@ -267,7 +267,7 @@
 .route-stop__no-stop {
     justify-content: center;
     color: rgba(255, 255, 255, 0.2);
-    cursor: not-allowed;
+    user-select: none;
 }
 
 .route-stop__ste-stop {

@@ -208,22 +208,22 @@ export default class RoutesScreen {
                             </svg>`;
 
         const steStop = document.createElement('div');
-        steStop.classList.add('route-stop__ste-stop');
+        steStop.classList.add('route-stop__ste-stop', 'route-stop');
         steStop.dataset.stopId = stop[0];
         if(stop[0] === '0') {
             steStop.textContent = 'No stop';
-            steStop.classList.add('route-stop__no-stop');
+            steStop.classList.add('route-stop__no-stop', 'route-stop');
         } else {
             steStop.textContent = this.mainApp.data.getStopById(stop[0]).name;
         }
         row.appendChild(steStop);
 
         const etsStop = document.createElement('div');
-        etsStop.classList.add('route-stop__ets-stop');
+        etsStop.classList.add('route-stop__ets-stop', 'route-stop');
         etsStop.dataset.stopId = stop[1];
         if(stop[1] === '0') {
             etsStop.textContent = 'No stop';
-            etsStop.classList.add('route-stop__no-stop');
+            etsStop.classList.add('route-stop__no-stop', 'route-stop');
         } else {
             etsStop.textContent = this.mainApp.data.getStopById(stop[1]).name;
         }
