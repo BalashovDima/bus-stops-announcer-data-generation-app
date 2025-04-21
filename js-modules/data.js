@@ -45,6 +45,42 @@ export default class Data {
         URL.revokeObjectURL(url);
     }
 
+    addNewStop(name, lat, lon, audio, radius) {
+        const id = this.generateId();
+        const stop = {
+            "id": id,
+            "name": name,
+            "lat": lat,
+            "lon": lon,
+            "audioTrackNumber": audio,
+            "radius": radius,
+            "routes": []
+        }
+
+        this.#_stops.push(stop);
+        return id; 
+    }
+
+    editStop(stopId, newName = '', newLat = '', newLon = '', newAudio = '', newRadius = '') {
+        const index = this.#_stops.findIndex(stop => stop.id === stopId);
+
+        if(newName !== '') {
+            this.#_stops[index].name = newName;
+        }
+        if(newLat !== '') {
+            this.#_stops[index].lat = newLat;
+        }
+        if(newLon !== '') {
+            this.#_stops[index].lon = newLon;
+        }
+        if(newAudio !== '') {
+            this.#_stops[index].audioTrackNumber = newAudio;
+        }
+        if(newRadius !== '') {
+            this.#_stops[index].radius = newRadius;
+        }
+    }
+
     get stops() {
         return this.#_stops;
     }

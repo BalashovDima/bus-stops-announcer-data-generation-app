@@ -154,6 +154,9 @@ export default class ContextMenu {
         const stop = this.mainAppInstance.data.getStopById(id);
 
         switch(action) {
+            case 'openCopySubMenu':
+                this.showCopySubMenu();
+                return;
             case 'copySelectedText':
                 // add custom notification for success/error to ui later
                 navigator.clipboard.writeText(window.getSelection().toString())
@@ -191,9 +194,13 @@ export default class ContextMenu {
                             .catch(err => alert("Failed to copy: " + err));
                 break;
             case 'showStopInfo':
-                alert(`ID: ${stop.id}\nName: ${stop.name}\nCoords: ${stop.lat}, ${stop.lon}\nAudio track number: ${stop.audioTrackNumber}\nRadius: ${stop.radius}\nRoutes using: ${stop.routes.length}`)
+                this.hideContextMenu();
+                this.mainAppInstance.addEditInfoStopScreen.showStopInfo(id);
                 break;
-
+            case 'editStop':
+                this.hideContextMenu();
+                this.mainAppInstance.addEditInfoStopScreen.startStopEdit(id);
+                break;
             default:
                 return;
         }
@@ -251,13 +258,8 @@ export default class ContextMenu {
     }
 
     showCopySubMenu() {
-        const menuRect = this.contextMenuContainer.getBoundingClientRect();
-        const subMenuRect = this.copySubMenuContainer.getBoundingClientRect();
-        const spaceRight = window.innerWidth - menuRect.right;
-        const spaceBottom = window.innerHeight - menuRect.top;
-
-
-        
+        clearTimeout(this.showSubMenuTimeout);
+        this.showSubMenuTimeout = null;
 
         this.copySubMenuContainer.style.opacity = '1';
         this.copySubMenuContainer.style.transform = 'translateX(0)';
@@ -265,6 +267,9 @@ export default class ContextMenu {
     }
 
     hideCopySubMenu() {
+        clearTimeout(this.hideSubMenuTimeout);
+        this.hideSubMenuTimeout = null;
+
         this.copySubMenuContainer.style.opacity = '0';
         this.copySubMenuContainer.style.transform = 'translateX(-10px)';
         this.copySubMenuContainer.style.pointerEvents = 'none';
@@ -279,7 +284,6 @@ export default class ContextMenu {
 
         this.showSubMenuTimeout = setTimeout(() => {
             this.showCopySubMenu();
-            this.showSubMenuTimeout = null;
         }, 550);
     }
 
@@ -292,7 +296,6 @@ export default class ContextMenu {
         
         this.hideSubMenuTimeout = setTimeout(() => {
             this.hideCopySubMenu();
-            this.hideSubMenuTimeout = null;
         }, 600);
     }
 }

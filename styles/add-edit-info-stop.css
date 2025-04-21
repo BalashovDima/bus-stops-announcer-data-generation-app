@@ -1,0 +1,227 @@
+.add-edit-info__background {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(17, 17, 36, 0.5); 
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    overflow-y: auto;
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s ease;
+}
+
+.add-edit-info__unsaved-warning__bg {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(17, 17, 36, 0.5); 
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s ease;
+}
+
+.add-edit-info__unsaved-warning__container {
+    width: 350px;
+    padding: 20px;
+    transform: translateY(-50px);
+    transition: 0.2s ease;
+    background-color: #1E1E2F;
+    border: 1px solid #999;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.add-edit-info__unsaved-warning__text {
+    text-align: center;
+    font-size: 1.3rem;
+}
+
+.add-edit-info__unsaved-warning__controls {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.add-edit-info__container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #1E1E2F;
+    border: 1px solid #999;
+    border-radius: 10px;
+    min-width: 430px;
+    width: 60%;
+    max-width: 600px;
+    height: auto;
+    padding: 20px;
+    transform: translateY(-50px);
+    transition: 0.3s ease;
+}
+
+.add-edit-info__title {
+    font-size: 1.5rem;
+    color: #fff;
+    font-family: Cambria;
+    margin: auto;
+    width: fit-content;
+}
+
+.add-edit-info__input-grid-container {
+    width: 100%;
+    border-bottom: 1px solid #999;
+    height: auto;
+    padding: 15px 0;
+    display: grid;
+    gap: 10px;
+    align-items: center;
+    grid-template-columns: [label-start] auto [label-end input-start] 1fr [input-end];
+    grid-template-rows: [name-start] auto [name-end lat-start] auto [lat-end lon-start] auto [lon-end audio-start] auto [audio-end radius-start] auto [radius-end routes-start] auto [routes-end];
+}
+
+.add-edit-info__input-grid-container input,
+.add-edit-info__input-grid-container textarea {
+    grid-column: input-start / input-end;
+    outline: none;
+    padding: 5px 10px;
+    border: 1px solid #999;
+    border-radius: 8px;
+    background-color: transparent;
+    color: rgba(255, 255, 255, 1);
+    font-size: 1rem;
+    font-family: Roboto Mono, monospace;
+    transition: 0.2s ease;
+}
+
+.add-edit-info__input-grid-container.show-stop-info input,
+.add-edit-info__input-grid-container.show-stop-info textarea {
+    border: none;
+}
+
+.add-edit-info__input-grid-container input::placeholder,
+.add-edit-info__input-grid-container textarea::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1rem;
+}
+
+.add-edit-info__input-grid-container input:hover,
+.add-edit-info__input-grid-container textarea:hover {
+    border: 1px solid #fff;
+}
+
+.add-edit-info__input-grid-container.show-stop-info input:hover,
+.add-edit-info__input-grid-container.show-stop-info textarea:hover {
+    border: none;
+}
+
+.add-edit-info__input-grid-container input:focus,
+.add-edit-info__input-grid-container textarea:focus {
+    border: 1px solid #fff;
+}
+
+.add-edit-info__input-grid-container.show-stop-info input:focus,
+.add-edit-info__input-grid-container.show-stop-info textarea:focus {
+    border: none;
+}
+
+.add-edit-info__input-grid-container input:focus::placeholder,
+.add-edit-info__input-grid-container textarea:focus::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.add-edit-info__name-textarea {
+    resize: none;
+    overflow-y: hidden;
+}
+
+.add-edit-info__lat-input,
+.add-edit-info__lon-input {
+    width: 165px;
+}
+
+.add-edit-info__audioTrackNumber-input,
+.add-edit-info__radius-input {
+    width: 85px;
+}
+
+.add-edit-info__name-label,
+.add-edit-info__lat-label,
+.add-edit-info__lon-label,
+.add-edit-info__audioTrackNumberInput-label,
+.add-edit-info__radius-label,
+.add-edit-info__routes-using-label { 
+    justify-self: right;
+    grid-column: label-start / label-end;
+}
+
+.add-edit-info__name-label,
+.add-edit-info__name-textarea {
+    grid-row: name-start / name-end;
+}
+
+.add-edit-info__lat-label,
+.add-edit-info__lat-input {
+    grid-row: lat-start / lat-end;
+}
+
+.add-edit-info__lon-label,
+.add-edit-info__lon-input {
+    grid-row: lon-start / lon-end;
+}
+
+.add-edit-info__audioTrackNumber-label,
+.add-edit-info__audioTrackNumber-input {
+    grid-row: audio-start / audio-end;
+}
+
+.add-edit-info__radius-label,
+.add-edit-info__radius-input {
+    grid-row: radius-start / radius-end;
+}
+
+.add-edit-info__routes-using-label,
+.add-edit-info__routes-using-container {
+    grid-row: routes-start / routes-end;
+}
+
+.add-edit-info__routes-using-container {
+    position: relative;
+    width: 100%;
+}
+
+.add-edit-info__routes-using-number {
+    position: absolute;
+    top: 0px;
+    right: 9px;
+    color: #999;
+    line-height: 4px;
+}
+
+.add-edit-info__routes-using-list {
+    padding-left: 20px;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.add-edit-info__controls-container {
+    display: flex;
+    justify-content: space-around;
+    width: 60%;
+    padding-top: 15px;
+}

@@ -109,10 +109,10 @@
 }
 
 .stops-toolbar__search-input:focus::placeholder {
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.7);
 }
 
-.stops-toolbar__add-new-stop {
+/* .stops-toolbar__add-new-stop {
     background-color: transparent;
     border-radius: 50em;
     border: 1px solid #999;
@@ -127,7 +127,7 @@
 .stops-toolbar__add-new-stop:hover {
     border: 1px solid #fff;
     color: rgba(255, 255, 255, 1);
-}
+} */
 
 .no-stops-message {
     text-align: center;

@@ -2,6 +2,7 @@ import Data from './data.js';
 import StopsScreen from './stops-screen.js';
 import RoutesScreen from './routes-screen.js';
 import ContextMenu from './context-menu.js';
+import AddEditInfoStop from './add-edit-info-stop.js';
 
 export default class MainApp {
     constructor(rootElement) { 
@@ -17,7 +18,9 @@ export default class MainApp {
         this.stopsScreen = new StopsScreen(this, this.rootElement);
         this.routesScreen = new RoutesScreen(this, this.rootElement);
         this.routesScreen.hide();
+        this.addEditInfoStopScreen = new AddEditInfoStop(this);
 
+        this.stopsScreen.addNewStopButton.addEventListener('click', this.addEditInfoStopScreen.startNewStopCreation.bind(this.addEditInfoStopScreen));
         
         this.data.readFromFile("./example-data.json").then(() => {
             this.data.stops.forEach(stop => this.stopsScreen.renderStop(stop));

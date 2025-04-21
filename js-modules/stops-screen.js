@@ -58,7 +58,7 @@ export default class StopsScreen {
         this.toolbar.appendChild(this.searchContainer);
 
         this.addNewStopButton = document.createElement('button');
-        this.addNewStopButton.classList.add('stops-toolbar__add-new-stop');
+        this.addNewStopButton.classList.add('button', 'stops-toolbar__add-new-stop');
         this.addNewStopButton.textContent = 'Add new stop';
         this.toolbar.appendChild(this.addNewStopButton);
     }
@@ -141,6 +141,25 @@ export default class StopsScreen {
             </div>
         `;
         this.stopsListBody.appendChild(row);
+    }
+
+    rerenderStop(stopId) {
+        const stopRow = this.stopsListBody.querySelector(`.stops-list__row[data-stop-id="${stopId}"]`);
+
+        const stop = this.mainApp.data.getStopById(stopId);
+        stopRow.innerHTML = `
+            <div class="name-cell">${stop.name}</div>
+            <div class="coords-cell">
+                <span>Lat: ${stop.lat.toFixed(5)}</span>
+                <span>Lon: ${stop.lon.toFixed(5)}</span>
+            </div>
+            <div class="audio-cell">${stop.audioTrackNumber}</div>
+            <div class="radius-cell">${stop.radius}</div>
+            <div class="routes-cell">
+                ${stop.routes.length}
+                <span class="show-routes">show</span>
+            </div>
+        `;
     }
 
     clearStopsList() {
