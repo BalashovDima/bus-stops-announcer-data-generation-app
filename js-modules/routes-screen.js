@@ -1,3 +1,5 @@
+import ReorderContainer from './reorder-container.js'
+
 export default class RoutesScreen {
     constructor(mainAppInstance, parentElement) {
         this.mainApp = mainAppInstance;
@@ -66,6 +68,12 @@ export default class RoutesScreen {
     selectRoute(e) {
         const option = e.target.closest('.route-select-option');
         if(!option) return;
+
+        // save stops data of previous route
+        if(this.routeInput.hasAttribute('data-route-id')) {
+            this.mainApp.data.updateRouteStops(this.routeInput.dataset.routeId, this.getSelectedRouteStops());
+        }
+
         const routeId = option.dataset.routeId;
         const route = this.mainApp.data.getRouteById(routeId);
         this.routeInput.value = route.name;
@@ -110,6 +118,8 @@ export default class RoutesScreen {
         this.routeSelectList.innerHTML = '';
         this.routeSelectList.dataset.numberOfRoutes = 0;
         this.routeInput.setAttribute('placeholder', 'No routes available');
+        this.routeInput.value = '';
+        delete this.routeInput.dataset.routeId;
     }
 
     createRoutesContent() {
@@ -176,7 +186,14 @@ export default class RoutesScreen {
             </div>
             `;
 
-        this.routesContentBody = document.createElement('ol');
+        this.routesStopsReorder = new ReorderContainer({
+            containerElementName: 'ol',
+            dragHandleSelector: '.route-stop__drag-handle',
+            reorderElementSelector: '.route-stop__row',
+
+        });
+        this.routesStopsReorder.enableReordering();
+        this.routesContentBody = this.routesStopsReorder.element;
         this.routesContentBody.classList.add('routes-content__body', 'routes-content-grid-layout');
         this.routesContentBody.dataset.numberOfStops = 0;
         this.routesContentContainer.appendChild(this.routesContentBody);
@@ -232,6 +249,8 @@ export default class RoutesScreen {
 
     clearRouteContentStops() {
         this.routesContentBody.innerHTML = '';
+        this.routesContentBody.dataset.numberOfStops = 0;
+        this.showNoStopsInRouteMessage();
     }
 
     hide() {
@@ -248,5 +267,22 @@ export default class RoutesScreen {
 
     showNoStopsInRouteMessage() {
         this.noStopInRouteMessage.style.display = 'flex';
+    }
+
+    getSelectedRouteStops() {
+        const routeStopsData = [];
+
+        const rows = [...this.routesContentBody.querySelectorAll('.route-stop__row')];
+
+        rows.forEach((row) => {
+            const stop = [];
+
+            stop.push(row.querySelector('.route-stop__ste-stop').dataset.stopId);
+            stop.push(row.querySelector('.route-stop__ets-stop').dataset.stopId);
+
+            routeStopsData.push(stop);
+        })
+
+        return routeStopsData;
     }
 }

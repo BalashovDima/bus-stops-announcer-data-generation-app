@@ -81,6 +81,10 @@ export default class Data {
         }
     }
 
+    updateRouteStops(routeId, stopsArr) {
+        this.#_routes.find(route => route.id === routeId).stops = stopsArr;
+    }
+
     get stops() {
         return this.#_stops;
     }

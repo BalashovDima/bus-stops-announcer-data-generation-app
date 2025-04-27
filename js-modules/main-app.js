@@ -28,7 +28,10 @@ export default class MainApp {
             this.data.routes.forEach(route => this.routesScreen.addRouteToList(route));
         });
 
-        // this.routesButton.click();
+        this.routesButton.click();
+        setTimeout(() => {
+            this.routesScreen.routeSelectList.childNodes[3].click();
+        }, 200);
 
         document.addEventListener('mousedown', (event) => {
             if(this.currentPopUp) {
@@ -96,6 +99,10 @@ export default class MainApp {
 
         this.openFileButton.addEventListener('click', this.openFile.bind(this));
         this.saveFileButton.addEventListener('click', () => {
+            // if a route is selected, then update route stops in case changes were made (like reordering)
+            if(this.routesScreen.routeInput.hasAttribute('data-route-id')) {
+                this.data.updateRouteStops(this.routesScreen.routeInput.dataset.routeId, this.routesScreen.getSelectedRouteStops());
+            }
             const filename = prompt('Enter filename:', 'bus-stops-anouncer-data.json');
             if(filename === null) return;
             this.data.saveToFile(filename);
@@ -110,6 +117,7 @@ export default class MainApp {
             this.data.readFromFile(file).then(() => {
                 this.stopsScreen.clearStopsList();
                 this.routesScreen.clearRoutesList();
+                this.routesScreen.clearRouteContentStops();
 
                 this.data.stops.forEach(stop => this.stopsScreen.renderStop(stop));
                 this.data.routes.forEach(stop => this.routesScreen.addRouteToList(stop));
