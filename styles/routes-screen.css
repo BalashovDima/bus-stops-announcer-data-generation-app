@@ -16,30 +16,58 @@
 }
 
 .routes-select-container {
+    width: 400px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     position: relative;
 }
 
+.route-select-grid-layout {
+    display: grid;
+    grid-template-columns: [disp-num-start] 13% [disp-num-end name-start] 1fr [name-end];
+    column-gap: 10px;
+}
+
 .selected-route-container {
     position: relative;
+    border-bottom: 2px solid #2f313e;
+    border-radius: 8px 8px 0 0;
+}
+
+.selected-route-container.active {
+    box-shadow: inset 0 0 0 1px #fff;
+}
+
+.route-display-number {
+    grid-column: disp-num-start / disp-num-end;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    color: #999;
+    position: relative;
+}
+
+.route-display-number::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 60%;
+    background-color: #2f313e;
 }
 
 .selected-route-input {
     background-color: transparent;
     border: none;
-    border-bottom: 2px solid #2f313e;
-    width: 400px;
-    border-radius: 8px 8px 0 0;
+    width: 100%;
     color: #999;
     font-size: 1.1rem;
-    padding: 12px 15% 12px 24px;
+    padding: 12px 15% 12px 10px;
     outline: none;
-}
-
-.selected-route-input.active {
-    border: 1px solid #fff;
 }
 
 .selected-route-input::placeholder {
@@ -77,13 +105,14 @@
 .route-select-list {
     position: absolute;
     z-index: 5;
-    top: 100%;
+    top: calc(100% - 2px);
     left: 50%;
     transform: translate(-50%, 0%);
     background-color: #1E1E2F;
     color: #999;
     width: 100%;
-    transition: all 0.3s;
+    transition: 0.3s max-height, 0.3s opacity ease;
+    box-shadow: inset 0 0 0 1px #fff;
     border-radius: 0 0 8px 8px;
     list-style-type: none;
     overflow: hidden;
@@ -95,13 +124,14 @@
 .route-select-list.active {
     pointer-events: auto;
     max-height: 240px;
-    border: 1px solid #fff;
     opacity: 1;
     overflow-y: scroll;
 }
 
 .route-select-option {
-    padding: 12px 24px;
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-column: disp-num-start / name-end;
     cursor: pointer;
     color: #999;
     font-family: Roboto Mono, monospace;
@@ -115,6 +145,31 @@
 
 .route-select-option:last-child {
     border-bottom: 8px;
+}
+
+.route-select-option__display-number {
+    grid-column: disp-num-start / disp-num-end;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.95rem;
+    color: #999;
+    position: relative;
+}
+
+.route-select-option__display-number::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background-color: #2f313e;
+}
+
+.route-select-option__name {
+    grid-column: name-start / name-end;
+    padding: 12px 15% 12px 10px;
 }
 
 .routes-content-grid-layout {

@@ -14,6 +14,7 @@ export default class ReorderContainer {
 
         this.element = document.createElement(containerElementName);
         
+        this.itemBeingDragged = null;
         this.isReorderEnabled = false;
         this.itemsGap = 0;
 

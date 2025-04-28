@@ -30,8 +30,12 @@ export default class RoutesScreen {
         this.wrapper.appendChild(this.routesSelectContainer);
 
         this.selectedRouteContainer = document.createElement('div');
-        this.selectedRouteContainer.classList.add('selected-route-container');
+        this.selectedRouteContainer.classList.add('selected-route-container', 'route-select-grid-layout');
         this.routesSelectContainer.appendChild(this.selectedRouteContainer);
+
+        this.routeDisplayNumber = document.createElement('span');
+        this.routeDisplayNumber.classList.add('route-display-number');
+        this.selectedRouteContainer.appendChild(this.routeDisplayNumber);
 
         this.routeInput = document.createElement('input');
         this.routeInput.classList.add('selected-route-input');
@@ -49,7 +53,7 @@ export default class RoutesScreen {
         this.selectedRouteContainer.appendChild(this.routeSelectArrow);
 
         this.routeSelectList = document.createElement('ul');
-        this.routeSelectList.classList.add('route-select-list', 'small-scrollbar');
+        this.routeSelectList.classList.add('route-select-list', 'small-scrollbar', 'route-select-grid-layout');
         this.routeSelectList.dataset.numberOfRoutes = 0;
         this.routesSelectContainer.appendChild(this.routeSelectList);
 
@@ -76,6 +80,7 @@ export default class RoutesScreen {
 
         const routeId = option.dataset.routeId;
         const route = this.mainApp.data.getRouteById(routeId);
+        this.routeDisplayNumber.textContent = route.displayNumber;
         this.routeInput.value = route.name;
         this.routeInput.dataset.routeId = routeId;
         this.hideDropdown();
@@ -90,13 +95,13 @@ export default class RoutesScreen {
     showDropdown() {
         this.routeSelectList.classList.add('active');
         this.routeSelectArrow.classList.add('active');
-        this.routeInput.classList.add('active');
+        this.selectedRouteContainer.classList.add('active');
     }
 
     hideDropdown() {
         this.routeSelectList.classList.remove('active');
         this.routeSelectArrow.classList.remove('active');
-        this.routeInput.classList.remove('active');
+        this.selectedRouteContainer.classList.remove('active');
     }
 
     addRouteToList(route) {
@@ -109,8 +114,11 @@ export default class RoutesScreen {
 
         const option = document.createElement('li');
         option.classList.add('route-select-option');
-        option.textContent = route.name;
         option.dataset.routeId = route.id;
+        option.innerHTML = `
+            <span class="route-select-option__display-number">${route.displayNumber}</span>
+            <span class="route-select-option__name">${route.name}</span>
+        `;
         this.routeSelectList.appendChild(option);
     }
 

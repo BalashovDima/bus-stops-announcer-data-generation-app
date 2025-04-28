@@ -130,6 +130,7 @@
     "routes": [
         {
             "id": "m8vdw8l5qv8ju1tmd",
+            "displayNumber": 1,
             "name": "Route 1",
             "stops": [
                 ["m8ykl9qaqz191ibie6l", "m8ykl9qaqz191ibie6l"],
@@ -141,6 +142,7 @@
         },
         {
             "id": "m8vdwfyfo7wvvja4vt",
+            "displayNumber": 2,
             "name": "Route 2",
             "stops": [
                 ["m8vcqizls0jfkyq7ydi", "m8vcqizls0jfkyq7ydi"],
@@ -150,6 +152,7 @@
         },
         {
             "id": "m8vdwlb2fzi6b49hd2",
+            "displayNumber": 3,
             "name": "Route 3",
             "stops": [
                 ["m8vd7u9lib11n49v7dt", "m8vd7u9lib11n49v7dt"],
@@ -159,6 +162,7 @@
         },
         {
             "id": "m8ykz5kyfk1z58bsnqh",
+            "displayNumber": 6,
             "name": "Route 6",
             "stops": [
                 ["m8vcqizls0jfkyq7ydi", "m8vcqizls0jfkyq7ydi"],
@@ -179,6 +183,7 @@
         },
         {
             "id": "m8yl6h83a975m8tl3wl",
+            "displayNumber": 15,
             "name": "Route 15",
             "stops": [
                 ["m8ykwjmd0f1qnpl9olqt", "m8ykwjmd0f1qnpl9olqt"],
