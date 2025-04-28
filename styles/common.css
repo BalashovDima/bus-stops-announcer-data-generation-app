@@ -68,3 +68,25 @@ input[type="number"]::-webkit-inner-spin-button {
 .button:active {
     box-shadow: inset 0 0 2px 2px rgba(255, 255, 255, 0.3);
 }
+
+.icon-button {
+    width: fit-content;
+    background-color: transparent;
+    border: none;
+    border-radius: 50em;
+    padding: 7px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.icon-button svg {
+    display: block;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.icon-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}

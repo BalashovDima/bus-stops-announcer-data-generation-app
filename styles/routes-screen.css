@@ -15,7 +15,52 @@
     font-size: 1.3rem;
 }
 
+.route-controls {
+    width: 90%;
+    display: grid;
+    grid-template-columns: [add-stop-start] 1fr [add-stop-end create-start] auto [create-end select-start] minmax(300px, 400px) [select-end edit-start] auto [edit-end delete-start] auto [delete-end];
+    align-items: center;
+    column-gap: 5px;
+}
+
+.add-route-stop-btn {
+    width: fit-content;
+    height: fit-content;
+    grid-column: add-stop-start / add-stop-end;
+    grid-row: 1;
+}
+
+.create-new-route-btn {
+    grid-column: create-start / create-end;
+    grid-row: 1;
+}
+
+.edit-route-btn {
+    grid-column: edit-start / edit-end;
+    grid-row: 1;
+}
+
+.delete-route-btn {
+    grid-column: delete-start / delete-end;
+    grid-row: 1;
+}
+
+.create-new-route-btn svg,
+.edit-route-btn svg,
+.delete-route-btn  svg{
+    stroke: #8e8e8e;
+    stroke-width: 1;
+}
+
+.create-new-route-btn:hover svg,
+.edit-route-btn:hover svg,
+.delete-route-btn:hover svg {
+    stroke: #fff;
+}
+
 .routes-select-container {
+    grid-column: select-start / select-end;
+    grid-row: 1;
     width: 400px;
     display: flex;
     flex-direction: column;

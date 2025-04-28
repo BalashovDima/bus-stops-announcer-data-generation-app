@@ -9,8 +9,53 @@ export default class RoutesScreen {
         this.wrapper.classList.add('routes-screen-wrapper');
         this.parentElement.appendChild(this.wrapper);
         
-        this.createRouteSelect();
+        this.createRouteControls();
         this.createRoutesContent();
+    }
+
+    createRouteControls() {
+        this.routeControls = document.createElement('div');
+        this.routeControls.classList.add('route-controls');
+        this.wrapper.appendChild(this.routeControls);
+
+        this.addRouteStopBtn = document.createElement('button');
+        this.addRouteStopBtn.classList.add('button', 'add-route-stop-btn');
+        this.addRouteStopBtn.title = 'Add stop to the selected route';
+        this.addRouteStopBtn.textContent = 'Add stop';
+        this.routeControls.appendChild(this.addRouteStopBtn);
+
+        this.createRouteSelect();
+        this.routeControls.appendChild(this.routesSelectContainer);
+        
+        this.createNewRouteBtn = document.createElement('button');
+        this.createNewRouteBtn.classList.add('icon-button', 'create-new-route-btn');
+        this.createNewRouteBtn.title = 'Create new route';
+        this.createNewRouteBtn.innerHTML = `
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15" stroke-linecap="round"/>
+            <path d="M22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C21.5093 4.43821 21.8356 5.80655 21.9449 8" stroke-linecap="round"/>
+        </svg>`;
+        this.routeControls.appendChild(this.createNewRouteBtn);
+
+        this.editRouteBtn = document.createElement('button');
+        this.editRouteBtn.classList.add('icon-button', 'edit-route-btn');
+        this.editRouteBtn.title = 'Edit selected route';
+        this.editRouteBtn.innerHTML = `
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13 21H21" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M20.0651 7.39423L7.09967 20.4114C6.72438 20.7882 6.21446 21 5.68265 21H4.00383C3.44943 21 3 20.5466 3 19.9922V18.2987C3 17.7696 3.20962 17.2621 3.58297 16.8873L16.5517 3.86681C19.5632 1.34721 22.5747 4.87462 20.0651 7.39423Z" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M15.3097 5.30981L18.7274 8.72755" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>`;
+        this.routeControls.appendChild(this.editRouteBtn);
+        
+        this.deleteRouteBtn = document.createElement('button');
+        this.deleteRouteBtn.classList.add('icon-button', 'delete-route-btn');
+        this.deleteRouteBtn.title = 'Delete selected route';
+        this.deleteRouteBtn.innerHTML = `
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 7V18C6 19.1046 6.89543 20 8 20H16C17.1046 20 18 19.1046 18 18V7M6 7H5M6 7H8M18 7H19M18 7H16M10 11V16M14 11V16M8 7V5C8 3.89543 8.89543 3 10 3H14C15.1046 3 16 3.89543 16 5V7M8 7H16" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>`;
+        this.routeControls.appendChild(this.deleteRouteBtn);
     }
 
     createRouteSelect() {
@@ -27,7 +72,6 @@ export default class RoutesScreen {
         // div
         this.routesSelectContainer = document.createElement('div');
         this.routesSelectContainer.classList.add('routes-select-container');
-        this.wrapper.appendChild(this.routesSelectContainer);
 
         this.selectedRouteContainer = document.createElement('div');
         this.selectedRouteContainer.classList.add('selected-route-container', 'route-select-grid-layout');
@@ -35,6 +79,7 @@ export default class RoutesScreen {
 
         this.routeDisplayNumber = document.createElement('span');
         this.routeDisplayNumber.classList.add('route-display-number');
+        this.routeDisplayNumber.title = 'Route display number';
         this.selectedRouteContainer.appendChild(this.routeDisplayNumber);
 
         this.routeInput = document.createElement('input');
