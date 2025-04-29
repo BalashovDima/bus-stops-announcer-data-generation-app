@@ -123,19 +123,17 @@
 .route-select-arrow {
     position: absolute;
     top: 50%;
-    right: 5%;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    transform: rotate(90deg) scale(1, 1.5) translate(-50%, 0%);
+    right: 1%;
+    transform: translate(0, -50%);
     transition: 0.2s ease;
+    padding: 10px;
 }
 
 .route-select-arrow svg {
-    display: block;
     width: 20px;
     height: 20px;
     fill: #999;
+    transform: rotate(90deg) scale(1, 1.5) translate(10%, 0%);
     transition: 0.2s ease;
 }
 
@@ -143,8 +141,8 @@
     fill: #fff;
 }
 
-.route-select-arrow.active {
-    transform: rotate(-90deg) scale(1, 1.5) translate(50%, 0%);
+.route-select-arrow.active svg{
+    transform: rotate(-90deg) scale(1, 1.5) translate(10%, 0%);
 }
 
 .route-select-list {

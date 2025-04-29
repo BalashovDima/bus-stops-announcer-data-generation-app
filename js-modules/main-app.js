@@ -13,7 +13,6 @@ export default class MainApp {
 
         this.rootElement = rootElement;
 
-        // this.createStopsAndRoutesSwitch();
         this.createControls();
         this.stopsScreen = new StopsScreen(this, this.rootElement);
         this.routesScreen = new RoutesScreen(this, this.rootElement);
@@ -29,9 +28,17 @@ export default class MainApp {
         });
 
         this.routesButton.click();
-        setTimeout(() => {
-            this.routesScreen.routeSelectList.childNodes[3].click();
-        }, 200);
+        setTimeout(selectFourthRoute.bind(this), 10);
+
+        function selectFourthRoute() {
+            setTimeout(() => {
+                if(this.routesScreen.routeSelectList.childNodes[3]) {
+                    this.routesScreen.routeSelectList.childNodes[3].click();
+                } else {
+                    selectFourthRoute();
+                }
+            }, 200);
+        }
 
         document.addEventListener('mousedown', (event) => {
             if(this.currentPopUp) {
@@ -39,13 +46,18 @@ export default class MainApp {
                     case 'contextMenu':
                         if(!this.contextMenu.contextMenuContainer.contains(event.target)) {
                             this.contextMenu.hideContextMenu();
-                            this.currentPopUp = null;
                         }
                         break;
-                    // case 'routesInfo':
-                    //     this.routesScreen.hideStopRoutesInfo();
-                    //     this.currentPopUp = null;
-                    //     break;
+                    case 'routesInfo':
+                        if(!this.stopsScreen.routesInfoContainer.contains(event.target)) {
+                            this.stopsScreen.hideStopRoutesInfo();
+                        }
+                        break;
+                    case 'routeSelect':
+                        if(!this.routesScreen.routesSelectContainer.contains(event.target)) {
+                            this.routesScreen.hideDropdown();
+                        }
+                        break;
                 }
             }
         });
@@ -56,13 +68,18 @@ export default class MainApp {
                     case 'contextMenu':
                         if(!this.contextMenu.contextMenuContainer.contains(event.target)) {
                             this.contextMenu.hideContextMenu();
-                            this.currentPopUp = null;
                         }
                         break;
-                    // case 'routesInfo':
-                    //     this.routesScreen.hideStopRoutesInfo();
-                    //     this.currentPopUp = null;
-                    //     break;
+                    case 'routesInfo':
+                        if(!this.stopsScreen.routesInfoContainer.contains(event.target)) {
+                            this.stopsScreen.hideStopRoutesInfo();
+                        }
+                        break;
+                    case 'routeSelect':
+                        if(!this.routesScreen.routesSelectContainer.contains(event.target)) {
+                            this.routesScreen.hideDropdown();
+                        }
+                        break;
                 }
             }
         }, true);

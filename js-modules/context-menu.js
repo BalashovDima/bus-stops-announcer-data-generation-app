@@ -1,6 +1,6 @@
 export default class ContextMenu {
     constructor(mainAppInstance) {
-        this.mainAppInstance = mainAppInstance;
+        this.mainApp = mainAppInstance;
 
         this.createContextMenu();
     }
@@ -151,7 +151,7 @@ export default class ContextMenu {
         if(action === undefined) return;
 
         const id = this.menuTarget.closest('.stops-list__row')?.dataset.stopId || this.menuTarget.closest('.route-stop')?.dataset.stopId;
-        const stop = this.mainAppInstance.data.getStopById(id);
+        const stop = this.mainApp.data.getStopById(id);
 
         switch(action) {
             case 'openCopySubMenu':
@@ -195,11 +195,11 @@ export default class ContextMenu {
                 break;
             case 'showStopInfo':
                 this.hideContextMenu();
-                this.mainAppInstance.addEditInfoStopScreen.showStopInfo(id);
+                this.mainApp.addEditInfoStopScreen.showStopInfo(id);
                 break;
             case 'editStop':
                 this.hideContextMenu();
-                this.mainAppInstance.addEditInfoStopScreen.startStopEdit(id);
+                this.mainApp.addEditInfoStopScreen.startStopEdit(id);
                 break;
             default:
                 return;
@@ -246,7 +246,7 @@ export default class ContextMenu {
         this.contextMenuContainer.style.transform = 'translateY(0)';
         this.contextMenuContainer.style.pointerEvents = 'all';
 
-        this.mainAppInstance.currentPopUp = 'contextMenu';
+        this.mainApp.currentPopUp = 'contextMenu';
     }
 
     hideContextMenu() {
@@ -255,6 +255,7 @@ export default class ContextMenu {
         this.contextMenuContainer.style.opacity = '0';
         this.contextMenuContainer.style.transform = 'translate(-10px, -20px)';
         this.contextMenuContainer.style.pointerEvents = 'none';
+        this.mainApp.currentPopUp = null
     }
 
     showCopySubMenu() {

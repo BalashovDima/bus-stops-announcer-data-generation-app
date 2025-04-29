@@ -221,6 +221,7 @@ export default class StopsScreen {
     }
 
     showRoutesInfo(stop, buttonRect) {
+        this.mainApp.currentPopUp = 'routesInfo';
         this.routesInfoHeader.textContent = stop.name;
         this.routesInfoHeader.title = stop.name;
         this.routesInfoList.innerHTML = '';
@@ -230,16 +231,22 @@ export default class StopsScreen {
             this.routesInfoList.appendChild(li);
         });
 
-        this.routesInfoContainer.style.display = 'block';
         const infoRect = this.routesInfoContainer.getBoundingClientRect();
         const right = buttonRect.right - infoRect.width + 5;
         const top = buttonRect.bottom;
 
         this.routesInfoContainer.style.top = top + 'px';
         this.routesInfoContainer.style.left = right + 'px';
+
+        this.routesInfoContainer.style.opacity = '1';
+        this.routesInfoContainer.style.pointerEvents = 'all';
+        this.routesInfoContainer.style.transform = 'translate(0, 0)';
     }
 
     hideStopRoutesInfo(event) {
-        this.routesInfoContainer.style.display = 'none';
+        this.routesInfoContainer.style.opacity = '0';
+        this.routesInfoContainer.style.pointerEvents = 'none';
+        this.routesInfoContainer.style.transform = 'translate(10px, -5px)';
+        this.mainApp.currentPopUp = null;
     }
 }
