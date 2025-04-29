@@ -110,6 +110,9 @@ export default class ContextMenu {
             this.editStop.style.display = 'block';
             this.deleteStop.style.display = 'block';
             this.copySubMenuButton.style.display = 'flex';
+
+            this.highlightedElement = event.target.closest('.stops-list__row');
+            this.highlightedElement.classList.add('highlight-by-context-menu');
         } else if(event.target.closest('.route-stop__row') !== null) {
             this.menuFor = 'routeStop';
 
@@ -130,6 +133,9 @@ export default class ContextMenu {
             this.deleteStop.style.display = 'none';
 
             this.selectStop.style.display = 'block';
+
+            this.highlightedElement = stop;
+            this.highlightedElement.classList.add('highlight-by-context-menu');
         } else {
             return;
         }
@@ -201,6 +207,9 @@ export default class ContextMenu {
                 this.hideContextMenu();
                 this.mainApp.addEditInfoStopScreen.startStopEdit(id);
                 break;
+            case 'deleteStop':
+                this.mainApp.stopsScreen.deleteStop(id);
+                break;
             default:
                 return;
         }
@@ -250,6 +259,7 @@ export default class ContextMenu {
     }
 
     hideContextMenu() {
+        this.highlightedElement.classList.remove('highlight-by-context-menu');
         this.hideCopySubMenu();
         this.hideSubMenuTimeout = null;
         this.contextMenuContainer.style.opacity = '0';

@@ -3,6 +3,7 @@ import StopsScreen from './stops-screen.js';
 import RoutesScreen from './routes-screen.js';
 import ContextMenu from './context-menu.js';
 import AddEditInfoStop from './add-edit-info-stop.js';
+import RemovedItemsHistory from './removed-items-history.js';
 
 export default class MainApp {
     constructor(rootElement) { 
@@ -18,6 +19,7 @@ export default class MainApp {
         this.routesScreen = new RoutesScreen(this, this.rootElement);
         this.routesScreen.hide();
         this.addEditInfoStopScreen = new AddEditInfoStop(this);
+        this.removedItemsHistory = new RemovedItemsHistory(this);
 
         this.stopsScreen.addNewStopButton.addEventListener('click', this.addEditInfoStopScreen.startNewStopCreation.bind(this.addEditInfoStopScreen));
         
@@ -27,7 +29,7 @@ export default class MainApp {
             this.data.routes.forEach(route => this.routesScreen.addRouteToList(route));
         });
 
-        this.routesButton.click();
+        // this.routesButton.click();
         setTimeout(selectFourthRoute.bind(this), 10);
 
         function selectFourthRoute() {

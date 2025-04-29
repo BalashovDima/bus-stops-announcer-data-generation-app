@@ -122,13 +122,17 @@ export default class RoutesScreen {
         if(this.routeInput.hasAttribute('data-route-id')) {
             this.mainApp.data.updateRouteStops(this.routeInput.dataset.routeId, this.getSelectedRouteStops());
         }
+        this.hideDropdown();
 
         const routeId = option.dataset.routeId;
+        this.renderRoute(routeId);
+    }
+
+    renderRoute(routeId) {
         const route = this.mainApp.data.getRouteById(routeId);
         this.routeDisplayNumber.textContent = route.displayNumber;
         this.routeInput.value = route.name;
         this.routeInput.dataset.routeId = routeId;
-        this.hideDropdown();
 
         this.clearRouteContentStops();
 

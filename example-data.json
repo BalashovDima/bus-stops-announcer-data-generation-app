@@ -133,8 +133,8 @@
             "displayNumber": 1,
             "name": "Route 1",
             "stops": [
-                ["m8ykl9qaqz191ibie6l", "m8ykl9qaqz191ibie6l"],
-                ["m8vcsbtq828ukefk6mo", "m8vcsbtq828ukefk6mo"],
+                ["m8ykl9qaqz191ibie6l", "m8vcsbtq828ukefk6mo"],
+                ["m8vcsbtq828ukefk6mo", "m8ykl9qaqz191ibie6l"],
                 ["m8vcsho74s2w3xsplff", "m8vcsho74s2w3xsplff"],
                 ["m8vd7u9lib11n49v7dt", "m8vd7u9lib11n49v7dt"],
                 ["m8ykjc93zqg1lgops17", "m8ykjc93zqg1lgops17"]
@@ -165,8 +165,8 @@
             "displayNumber": 6,
             "name": "Route 6",
             "stops": [
-                ["m8vcqizls0jfkyq7ydi", "m8vcqizls0jfkyq7ydi"],
-                ["m8vcsbtq828ukefk6mo", "m8vcsbtq828ukefk6mo"],
+                ["m8vcqizls0jfkyq7ydi", "m8vcsbtq828ukefk6mo"],
+                ["m8vcsbtq828ukefk6mo", "m8vcqizls0jfkyq7ydi"],
                 ["m8vcsho74s2w3xsplff", "m8vcsho74s2w3xsplff"],
                 ["m8vd7u9lib11n49v7dt", "m8vd7u9lib11n49v7dt"],
                 ["m8vdaakmtlmxcz5pzhp", "m8vdaakmtlmxcz5pzhp"],

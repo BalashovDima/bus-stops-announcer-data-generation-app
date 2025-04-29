@@ -162,6 +162,56 @@ export default class StopsScreen {
         `;
     }
 
+    deleteStop(stopId) {
+        const stop = this.mainApp.data.getStopById(stopId);
+        const currentlyRenderedRouteId = this.mainApp.routesScreen.routeInput.dataset.routeId;
+        const deletedStopInCurrentRoute = stop.routes.some((id)=>id === currentlyRenderedRouteId);
+        
+        if(deletedStopInCurrentRoute) { 
+            // if deleted stop is in the route that's currently selected then update route stops in case there was reordering done
+            this.mainApp.data.updateRouteStops(this.mainApp.routesScreen.routeInput.dataset.routeId, this.mainApp.routesScreen.getSelectedRouteStops());
+        }
+
+        // delete the stop visually 
+        const stopRow = this.stopsListBody.querySelector(`.stops-list__row[data-stop-id="${stopId}"]`);
+        stopRow.remove();
+
+        // delete the stop from data and record restoreData
+        const restoreData = this.mainApp.data.deleteStop(stopId);
+
+        if(deletedStopInCurrentRoute) {
+            // if deleted stop is in the route that's currently selected, then rerender that route (it might be better to only remove the specific stops but i'm lazy to implement that)
+            this.mainApp.routesScreen.renderRoute(currentlyRenderedRouteId);
+        }
+
+        // add deleted stop to history to allow restoring
+        this.mainApp.removedItemsHistory.addItem(
+            `<b>Deleted:</b> ${stop.name}`,
+            restoreData,
+            this.restoreStop.bind(this)
+        );
+    }
+
+    restoreStop(restoreData) {
+        const currentlyRenderedRouteId = this.mainApp.routesScreen.routeInput.dataset.routeId;
+        const deletedStopInCurrentRoute = restoreData.routes.some((route)=>route.id === currentlyRenderedRouteId);
+
+        if(deletedStopInCurrentRoute) { 
+            // if deleted stop was in the route that's currently selected then update route stops in case there was reordering or editing done
+            this.mainApp.data.updateRouteStops(this.mainApp.routesScreen.routeInput.dataset.routeId, this.mainApp.routesScreen.getSelectedRouteStops());
+        }
+
+        this.mainApp.data.restoreStop(restoreData);
+
+        // --------------- later make it insert the stop in order of selected sort option
+        this.renderStop(restoreData);
+
+        if(deletedStopInCurrentRoute) {
+            // if deleted stop was in the route that's currently selected, then rerender that route (it might be better to modify/add the specific stops but i'm lazy to implement that)
+            this.mainApp.routesScreen.renderRoute(currentlyRenderedRouteId);
+        }
+    }
+
     clearStopsList() {
         this.stopsListBody.innerHTML = '';
         this.stopsListBody.dataset.numberOfStops = 0;

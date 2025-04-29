@@ -1,0 +1,81 @@
+.removed-items-history {
+    opacity: 1;
+    pointer-events: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    max-height: 240px;
+    overflow-y: hidden;
+    /* mask is applied in js when needed */
+    /* -webkit-mask-image: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 80%, rgba(0,0,0,0.1) 100%);
+    mask-image: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 80%, rgba(0,0,0,0.1) 100%); */
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 10px;
+    align-items: end;
+    justify-content: space-between;
+    background: none;
+    border: none;
+    z-index: 1000;
+}
+
+.removed-item {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 350px;
+    width: fit-content;
+    background-color: #9d3b3b;
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: 1px solid #ff0000;
+    color: #fff;
+    font-family:  Roboto Mono, monospace; 
+    font-size: 15px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+}
+
+.restore-removed {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin: 0;
+    margin-left: 10px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: 1px solid #ff0000;
+    color: #fff;
+    font-family:  Roboto Mono, monospace; 
+    font-size: 16px;
+    transition: all 0.2s;
+}
+
+.restore-removed:hover {
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
+
+.restore-removed:active {
+    box-shadow: inset 0 0 5px rgba(255, 0, 0, 0.4);
+}
+
+.restore-removed:hover svg {
+    transform: translateX(-3px);
+}
+
+.restore-removed svg {
+    width: 25px;
+    height: 25px;
+    stroke: #fff;
+    fill: #fff;
+    transition: all 0.2s ease;
+}
+.removed-item img {
+    width: 20px;
+    height: 20px;
+}
