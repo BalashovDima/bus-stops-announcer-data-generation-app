@@ -136,7 +136,7 @@ export default class StopsScreen {
             <div class="audio-cell">${stop.audioTrackNumber}</div>
             <div class="radius-cell">${stop.radius}</div>
             <div class="routes-cell">
-                ${stop.routes.length}
+                <span class="routes-cell__count">${stop.routes.length}</span>
                 <span class="show-routes">show</span>
             </div>
         `;
@@ -156,10 +156,14 @@ export default class StopsScreen {
             <div class="audio-cell">${stop.audioTrackNumber}</div>
             <div class="radius-cell">${stop.radius}</div>
             <div class="routes-cell">
-                ${stop.routes.length}
+                <span class="routes-cell__count">${stop.routes.length}</span>
                 <span class="show-routes">show</span>
             </div>
         `;
+    }
+
+    updateStopRouteCount(stopId) {
+        const stopRow = this.stopsListBody.querySelector(`.stops-list__row[data-stop-id="${stopId}"] .routes-cell__count`).textContent = this.mainApp.data.getStopById(stopId).routes.length;
     }
 
     deleteStop(stopId) {

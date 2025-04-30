@@ -210,6 +210,9 @@ export default class ContextMenu {
             case 'deleteStop':
                 this.mainApp.stopsScreen.deleteStop(id);
                 break;
+            case 'removeStopFromRoute':
+                this.mainApp.routesScreen.removeRouteStop(this.menuTarget.closest('.route-stop__ste-stop, .route-stop__ets-stop'))
+                break;
             default:
                 return;
         }

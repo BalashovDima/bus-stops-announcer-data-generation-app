@@ -15,7 +15,7 @@ export default class RemovedItemsHistory {
         this.maxHeight = maxHeightStr.endsWith('px') ? parseFloat(maxHeightStr) : Infinity;
     }
 
-    addItem(htmlToShow, restoreData, restoreCallback, timeoutDelay = 5000) {
+    addItem(htmlToShow, restoreData, undoCallback, customUndoBtn = null, timeoutDelay = 5000) {
         if(this.itemsInHistory === 0) {
             this.container.style.pointerEvents = 'all';
             this.container.style.opacity = 1;
@@ -28,12 +28,17 @@ export default class RemovedItemsHistory {
         itemContent.innerHTML = htmlToShow;
         item.appendChild(itemContent);
 
-        const restoreBtn = document.createElement('button');
-        restoreBtn.classList.add('restore-removed');
-        restoreBtn.innerHTML = `
+        let undoBtn;
+        if(customUndoBtn) {
+            undoBtn = customUndoBtn;
+        } else {
+            undoBtn = document.createElement('button');
+            undoBtn.classList.add('restore-removed');
+            undoBtn.innerHTML = `
                 <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M10 16.682l5.69 5.685 1.408-1.407-3.283-3.28h10.131c1.147 0 2.19.467 2.943 1.222a4.157 4.157 0 011.225 2.946 4.18 4.18 0 01-4.168 4.168h-5.628V28h5.522c3.387 0 6.16-2.77 6.16-6.157a6.117 6.117 0 00-1.81-4.343 6.143 6.143 0 00-4.35-1.805H13.815l3.283-3.285L15.69 11 10 16.682z" fill-rule="nonzero"/></svg>
                 Undo`;
-        item.appendChild(restoreBtn);
+        }
+        item.appendChild(undoBtn);
 
 
         // delete from history after delay
@@ -61,7 +66,7 @@ export default class RemovedItemsHistory {
         }, timeoutDelay);
 
         // add handler for the restore button
-        restoreBtn.addEventListener('click', (e) => {
+        undoBtn.addEventListener('click', (e) => {
             clearTimeout(item.dataset.timeoutIdentifier);
             item.remove();
             this.itemsInHistory--;
@@ -70,7 +75,7 @@ export default class RemovedItemsHistory {
                 this.container.style.pointerEvents = 'none';
             }
 
-            restoreCallback(restoreData);
+            undoCallback(restoreData);
         });
 
         // increase items count and append the new item

@@ -389,3 +389,45 @@
 .route-stop__ets-stop {
     grid-column: ets-name-start / ste-name-end;
 }
+
+.copy-removed-stop-id-btn span { 
+    font-size: 0.7rem;
+    text-wrap: nowrap;
+}
+.copy-removed-stop-id-btn {
+    display: flex;
+    gap: 7px;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin: 0;
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: 1px solid #ff0000;
+    color: #fff;
+    font-family:  Roboto Mono, monospace; 
+    font-size: 16px;
+    transition: all 0.2s;
+}
+
+.copy-removed-stop-id-btn:hover {
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
+
+.copy-removed-stop-id-btn:active {
+    box-shadow: inset 0 0 5px rgba(255, 0, 0, 0.4);
+}
+
+.copy-removed-stop-id-btn:hover svg {
+    /* transform: translateX(-3px); */
+    transform: scale(1.05);
+}
+
+.copy-removed-stop-id-btn svg {
+    width: 20px;
+    height: 20px;
+    stroke: #fff;
+    fill: none;
+    transition: all 0.2s ease;
+}

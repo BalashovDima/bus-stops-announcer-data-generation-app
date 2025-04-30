@@ -186,6 +186,12 @@ export default class Data {
         return this.#_routes.find(route => route.id === id);
     }
 
+    removeRouteFromStop(stopId, routeId) {
+        const stop = this.getStopById(stopId);
+
+        stop.routes.splice(stop.routes.indexOf(routeId), 1);
+    }
+
     generateId() {
         return Date.now().toString(36) + Math.random().toString(36).substring(2);
     }

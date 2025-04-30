@@ -120,7 +120,7 @@ export default class RoutesScreen {
 
         // save stops data of previous route
         if(this.routeInput.hasAttribute('data-route-id')) {
-            this.mainApp.data.updateRouteStops(this.routeInput.dataset.routeId, this.getSelectedRouteStops());
+            this.mainApp.data.updateRouteStops(this.getSelectedRouteId(), this.getSelectedRouteStops());
         }
         this.hideDropdown();
 
@@ -137,7 +137,7 @@ export default class RoutesScreen {
         this.clearRouteContentStops();
 
         route.stops.forEach((stop) => {
-            this.renderRouteStop(stop);
+            this.addRouteStopRow(stop);
         });
     }
 
@@ -264,7 +264,7 @@ export default class RoutesScreen {
         this.routesContentContainer.appendChild(this.noStopInRouteMessage);
     }
 
-    renderRouteStop(stop) {
+    addRouteStopRow(stops) {
         if(+this.routesContentBody.dataset.numberOfStops === 0) {
             this.hideNoStopsInRouteMessage();
             this.routesContentBody.dataset.numberOfStops = 1;
@@ -285,23 +285,23 @@ export default class RoutesScreen {
 
         const steStop = document.createElement('div');
         steStop.classList.add('route-stop__ste-stop', 'route-stop');
-        steStop.dataset.stopId = stop[0];
-        if(stop[0] === '0') {
+        steStop.dataset.stopId = stops[0];
+        if(stops[0] === '0') {
             steStop.textContent = 'No stop';
             steStop.classList.add('route-stop__no-stop', 'route-stop');
         } else {
-            steStop.textContent = this.mainApp.data.getStopById(stop[0]).name;
+            steStop.textContent = this.mainApp.data.getStopById(stops[0]).name;
         }
         row.appendChild(steStop);
 
         const etsStop = document.createElement('div');
         etsStop.classList.add('route-stop__ets-stop', 'route-stop');
-        etsStop.dataset.stopId = stop[1];
-        if(stop[1] === '0') {
+        etsStop.dataset.stopId = stops[1];
+        if(stops[1] === '0') {
             etsStop.textContent = 'No stop';
             etsStop.classList.add('route-stop__no-stop', 'route-stop');
         } else {
-            etsStop.textContent = this.mainApp.data.getStopById(stop[1]).name;
+            etsStop.textContent = this.mainApp.data.getStopById(stops[1]).name;
         }
         row.appendChild(etsStop);
     }
@@ -310,6 +310,73 @@ export default class RoutesScreen {
         this.routesContentBody.innerHTML = '';
         this.routesContentBody.dataset.numberOfStops = 0;
         this.showNoStopsInRouteMessage();
+    }
+
+    removeRouteStop(target) {
+        const ste = target.closest('.route-stop__ste-stop');
+        const ets = target.closest('.route-stop__ets-stop');
+        let removedStopId = null;
+        let removedStopName = '';
+
+        if(ste) { // if stop is 'start-to-end' stop
+            removedStopId = ste.dataset.stopId;
+            const row = ste.closest('.route-stop__row'); // get the row div the stop is in
+            if(row.querySelector('.route-stop__ets-stop').dataset.stopId === '0') {
+                // if the there is no 'end-to-start' stop in the row, then remove the row as it's empty
+                row.remove();
+            } else {
+                // else set the stop as empty (therefore removeing it)
+                ste.dataset.stopId = '0';
+                ste.classList.add('route-stop__no-stop');
+                removedStopName = ste.textContent;
+                ste.textContent = 'No stop';
+            }
+        } else if(ets) {
+            removedStopId = ets.dataset.stopId;
+            const row = ets.closest('.route-stop__row');
+            if(row.querySelector('.route-stop__ste-stop').dataset.stopId === '0') {
+                row.remove();
+            } else {
+                ets.dataset.stopId = '0';
+                ets.classList.add('route-stop__no-stop');
+                removedStopName = ets.textContent;
+                ets.textContent = 'No stop';
+            }
+        }
+
+        const routeStops = this.getSelectedRouteStops();
+        this.mainApp.data.updateRouteStops(this.getSelectedRouteId(), routeStops);
+        if(!routeStops.some((row) => {
+            // some will return true if the removed stop is still in the route
+            return (row[0] === removedStopId || row[1] === removedStopId);
+        })) { 
+            console.log('stop no longer in the route');
+            // remove the route from the route list of the removed stop (if this stop is no longer in the route, if above checks it)
+            this.mainApp.data.removeRouteFromStop(removedStopId, this.getSelectedRouteId());
+
+            this.mainApp.stopsScreen.updateStopRouteCount(removedStopId);
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text)
+                            .then(() => console.log("Copied to clipboard!"))
+                            .catch(err => alert("Failed to copy: " + err));
+        }
+        const copyButton = document.createElement('button');
+        copyButton.classList.add('copy-removed-stop-id-btn');
+        copyButton.innerHTML = `
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 11C6 8.17157 6 6.75736 6.87868 5.87868C7.75736 5 9.17157 5 12 5H15C17.8284 5 19.2426 5 20.1213 5.87868C21 6.75736 21 8.17157 21 11V16C21 18.8284 21 20.2426 20.1213 21.1213C19.2426 22 17.8284 22 15 22H12C9.17157 22 7.75736 22 6.87868 21.1213C6 20.2426 6 18.8284 6 16V11Z" />
+                <path d="M6 19C4.34315 19 3 17.6569 3 16V10C3 6.22876 3 4.34315 4.17157 3.17157C5.34315 2 7.22876 2 11 2H15C16.6569 2 18 3.34315 18 5" />
+            </svg>
+            <span>Copy ID</span>`;
+        this.mainApp.removedItemsHistory.addItem(
+            `<b>Removed from route:</b> ${removedStopName}`,
+            removedStopId,
+            copyToClipboard,
+            copyButton,
+            50000
+        );
     }
 
     hide() {
@@ -343,5 +410,9 @@ export default class RoutesScreen {
         })
 
         return routeStopsData;
+    }
+
+    getSelectedRouteId() {
+        return this.routeInput.dataset.routeId;
     }
 }
