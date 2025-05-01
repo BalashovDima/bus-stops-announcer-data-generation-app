@@ -3,6 +3,7 @@ export default class ContextMenu {
         this.mainApp = mainAppInstance;
 
         this.createContextMenu();
+        this.visible = false;
     }
 
     createContextMenu() {
@@ -200,11 +201,9 @@ export default class ContextMenu {
                             .catch(err => alert("Failed to copy: " + err));
                 break;
             case 'showStopInfo':
-                this.hideContextMenu();
                 this.mainApp.addEditInfoStopScreen.showStopInfo(id);
                 break;
             case 'editStop':
-                this.hideContextMenu();
                 this.mainApp.addEditInfoStopScreen.startStopEdit(id);
                 break;
             case 'deleteStop':
@@ -213,6 +212,12 @@ export default class ContextMenu {
             case 'removeStopFromRoute':
                 this.mainApp.routesScreen.removeRouteStop(this.menuTarget.closest('.route-stop__ste-stop, .route-stop__ets-stop'))
                 break;
+            case 'selectStop':
+                // first hide the menu (and there set mainApp.currentPopUp to null)
+                this.hideContextMenu(true);
+                // then show stop select (and there set mainApp.currentPopUp to routeStopSelect)
+                this.mainApp.routesScreen.showRouteStopSelect(this.menuTarget);
+                break;
             default:
                 return;
         }
@@ -220,7 +225,8 @@ export default class ContextMenu {
         this.hideContextMenu();
     }
  
-    showContextMenu(cursorX, cursorY) {        
+    showContextMenu(cursorX, cursorY) {
+        this.visible = true;
         const menuRect = this.contextMenuContainer.getBoundingClientRect();
         const subMenuRect = this.copySubMenuContainer.getBoundingClientRect();
         const spaceRight = window.innerWidth - cursorX;
@@ -261,14 +267,18 @@ export default class ContextMenu {
         this.mainApp.currentPopUp = 'contextMenu';
     }
 
-    hideContextMenu() {
-        this.highlightedElement.classList.remove('highlight-by-context-menu');
+    hideContextMenu(keepHighlight) {
+        if(!this.visible) return;
+        if(!keepHighlight) {
+            this.highlightedElement.classList.remove('highlight-by-context-menu');
+        }
         this.hideCopySubMenu();
         this.hideSubMenuTimeout = null;
         this.contextMenuContainer.style.opacity = '0';
         this.contextMenuContainer.style.transform = 'translate(-10px, -20px)';
         this.contextMenuContainer.style.pointerEvents = 'none';
         this.mainApp.currentPopUp = null
+        this.visible = false;
     }
 
     showCopySubMenu() {

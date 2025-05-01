@@ -16,7 +16,7 @@
     justify-content: space-between;
     background: none;
     border: none;
-    z-index: 1000;
+    z-index: 10;
 }
 
 .removed-item {

@@ -11,6 +11,8 @@ export default class RoutesScreen {
         
         this.createRouteControls();
         this.createRoutesContent();
+
+        this.createRouteStopSelect();
     }
 
     createRouteControls() {
@@ -264,6 +266,81 @@ export default class RoutesScreen {
         this.routesContentContainer.appendChild(this.noStopInRouteMessage);
     }
 
+    createRouteStopSelect() {
+        this.routeStopSelectContainer = document.createElement('div');
+        this.routeStopSelectContainer.classList.add('route-stop-select__container');
+        this.wrapper.appendChild(this.routeStopSelectContainer);
+
+        this.routeStopSelectInput = document.createElement('input');
+        this.routeStopSelectInput.classList.add('route-stop-select__input');
+        this.routeStopSelectInput.setAttribute('type', 'text');
+        this.routeStopSelectInput.setAttribute('placeholder', 'Enter stop ID');
+        this.routeStopSelectContainer.appendChild(this.routeStopSelectInput);
+
+
+        this.routeStopSelectPaste = document.createElement('button');
+        this.routeStopSelectPaste.classList.add('icon-button', 'route-stop-select__paste');
+        this.routeStopSelectPaste.title = 'Paste';
+        this.routeStopSelectPaste.innerHTML = `
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 0C11.2347 0 10.6293 0.125708 10.1567 0.359214C9.9845 0.44429 9.82065 0.544674 9.68861 0.62717L9.59036 0.688808C9.49144 0.751003 9.4082 0.803334 9.32081 0.853848C9.09464 0.984584 9.00895 0.998492 9.00053 0.999859C8.99983 0.999973 9.00019 0.999859 9.00053 0.999859C7.89596 0.999859 7 1.89543 7 3H6C4.34315 3 3 4.34315 3 6V20C3 21.6569 4.34315 23 6 23H18C19.6569 23 21 21.6569 21 20V6C21 4.34315 19.6569 3 18 3H17C17 1.89543 16.1046 1 15 1C15.0003 1 15.0007 1.00011 15 1C14.9916 0.998633 14.9054 0.984584 14.6792 0.853848C14.5918 0.80333 14.5086 0.751004 14.4096 0.688804L14.3114 0.62717C14.1793 0.544674 14.0155 0.44429 13.8433 0.359214C13.3707 0.125708 12.7653 0 12 0ZM16.7324 5C16.3866 5.5978 15.7403 6 15 6H9C8.25972 6 7.61337 5.5978 7.26756 5H6C5.44772 5 5 5.44772 5 6V20C5 20.5523 5.44772 21 6 21H18C18.5523 21 19 20.5523 19 20V6C19 5.44772 18.5523 5 18 5H16.7324ZM11.0426 2.15229C11.1626 2.09301 11.4425 2 12 2C12.5575 2 12.8374 2.09301 12.9574 2.15229C13.0328 2.18953 13.1236 2.24334 13.2516 2.32333L13.3261 2.37008C13.43 2.43542 13.5553 2.51428 13.6783 2.58539C13.9712 2.75469 14.4433 3 15 3V4H9V3C9.55666 3 10.0288 2.75469 10.3217 2.58539C10.4447 2.51428 10.57 2.43543 10.6739 2.37008L10.7484 2.32333C10.8764 2.24334 10.9672 2.18953 11.0426 2.15229Z"/>
+            </svg>`;
+        this.routeStopSelectContainer.appendChild(this.routeStopSelectPaste);
+
+        this.routeStopSelectConfirm = document.createElement('button');
+        this.routeStopSelectConfirm.classList.add('icon-button', 'route-stop-select__confirm');
+        this.routeStopSelectConfirm.title = 'Confirm';
+        this.routeStopSelectConfirm.innerHTML = `
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <g id="Complete">
+                <g id="tick">
+                <polyline points="3.7 14.3 9.6 19 20.3 5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"/>
+                </g>
+            </g>
+            </svg>`;
+        this.routeStopSelectContainer.appendChild(this.routeStopSelectConfirm);
+
+        this.routeStopSelectText = document.createElement('span');
+        this.routeStopSelectText.classList.add('route-stop-select__text');
+        this.routeStopSelectContainer.appendChild(this.routeStopSelectText);
+
+        
+        this.routeStopSelectInput.addEventListener('input', () => {
+            const stop = this.mainApp.data.getStopById(this.routeStopSelectInput.value.trim());
+
+            if(stop) {
+                this.routeStopSelectText.style.display = 'block';
+                this.routeStopSelectText.textContent = stop.name;
+                this.routeStopSelectText.classList.remove('error');
+            } else {
+                this.routeStopSelectText.style.display = 'none';
+            }
+        });
+
+        this.routeStopSelectPaste.addEventListener('click', () => {
+            navigator.clipboard.readText().then(text => {
+                this.routeStopSelectInput.value = text;
+                this.routeStopSelectInput.dispatchEvent(new Event('input', { bubbles: true }));
+            }).catch(err => {
+                console.error('Failed to read clipboard: ', err);
+            });
+        });
+
+        this.routeStopSelectConfirm.addEventListener('click', () => {
+            const stop = this.mainApp.data.getStopById(this.routeStopSelectInput.value.trim());
+
+            if(stop) {
+                this.setRouteStop(this.routeStopSelectTarget, stop.id, stop);
+
+                this.hideRouteStopSelect();
+            } else {
+                this.routeStopSelectText.style.display = 'block';
+                this.routeStopSelectText.textContent = 'Stop with this ID not found';
+                this.routeStopSelectText.classList.add('error');
+            }
+        });
+    }
+
     addRouteStopRow(stops) {
         if(+this.routesContentBody.dataset.numberOfStops === 0) {
             this.hideNoStopsInRouteMessage();
@@ -312,11 +389,68 @@ export default class RoutesScreen {
         this.showNoStopsInRouteMessage();
     }
 
+    showRouteStopSelect(target) {
+        this.mainApp.currentPopUp = 'routeStopSelect';
+        this.routeStopSelectTarget = target.closest('.route-stop');
+        const routeStopRect = this.routeStopSelectTarget.getBoundingClientRect();
+        
+        this.routeStopSelectContainer.style.bottom = window.innerHeight - (routeStopRect.bottom - routeStopRect.height / 2 - 7) + 'px';
+        this.routeStopSelectContainer.style.left = routeStopRect.left + routeStopRect.width / 2 + 'px';
+        
+        this.routeStopSelectText.style.display = 'none';
+        this.routeStopSelectInput.value = '';
+        this.routeStopSelectContainer.style.opacity = '1';
+        this.routeStopSelectContainer.style.pointerEvents = 'all';
+        this.routeStopSelectContainer.style.transform = 'translate(-50%, 0)';
+        this.routeStopSelectInput.focus();
+    }
+
+    hideRouteStopSelect() {
+        this.routeStopSelectTarget.classList.remove('highlight-by-context-menu');
+        this.routeStopSelectContainer.style.opacity = '0';
+        this.routeStopSelectContainer.style.pointerEvents = 'none';
+        this.routeStopSelectContainer.style.transform = 'translate(-50%, 20px)';
+        this.mainApp.currentPopUp = null;
+    }
+
+    setRouteStop(target, stopId, stopData = null) {
+        let stop;
+        if(!stopData) {
+            stop = this.mainApp.getStopById(stopId);
+        } else {
+            stop = stopData;
+        }
+        
+        const routeStop = target.closest('.route-stop');
+
+        routeStop.dataset.stopId = stop.id;
+        routeStop.textContent = stop.name;
+        routeStop.classList.remove('route-stop__no-stop');
+
+        // save added stop to data object
+        this.mainApp.data.updateRouteStops(this.getSelectedRouteId(), this.getSelectedRouteStops());
+
+        const route = this.mainApp.data.getRouteById(this.getSelectedRouteId());
+
+        // check if the added stop was used in the route before 
+        let count = 0;
+        for (const [steId, etsId] of route.stops) {
+            if (steId === stop.id || etsId === stop.id) {
+                count++;
+                if (count > 1) return; // early exit, no need to add this route to that stop's 'used in routes' list
+            }
+        }
+
+        // add route to the stop's routes list 
+        this.mainApp.data.addRouteToStop(stop.id, this.getSelectedRouteId());
+        this.mainApp.stopsScreen.updateStopRouteCount(stop.id);
+    }
+
     removeRouteStop(target) {
         const ste = target.closest('.route-stop__ste-stop');
         const ets = target.closest('.route-stop__ets-stop');
         let removedStopId = null;
-        let removedStopName = '';
+        let removedStopName = 'error';
 
         if(ste) { // if stop is 'start-to-end' stop
             removedStopId = ste.dataset.stopId;
@@ -324,6 +458,7 @@ export default class RoutesScreen {
             if(row.querySelector('.route-stop__ets-stop').dataset.stopId === '0') {
                 // if the there is no 'end-to-start' stop in the row, then remove the row as it's empty
                 row.remove();
+                removedStopName = ste.textContent;
             } else {
                 // else set the stop as empty (therefore removeing it)
                 ste.dataset.stopId = '0';
@@ -336,6 +471,7 @@ export default class RoutesScreen {
             const row = ets.closest('.route-stop__row');
             if(row.querySelector('.route-stop__ste-stop').dataset.stopId === '0') {
                 row.remove();
+                removedStopName = ets.textContent;
             } else {
                 ets.dataset.stopId = '0';
                 ets.classList.add('route-stop__no-stop');
@@ -350,7 +486,6 @@ export default class RoutesScreen {
             // some will return true if the removed stop is still in the route
             return (row[0] === removedStopId || row[1] === removedStopId);
         })) { 
-            console.log('stop no longer in the route');
             // remove the route from the route list of the removed stop (if this stop is no longer in the route, if above checks it)
             this.mainApp.data.removeRouteFromStop(removedStopId, this.getSelectedRouteId());
 
@@ -374,8 +509,7 @@ export default class RoutesScreen {
             `<b>Removed from route:</b> ${removedStopName}`,
             removedStopId,
             copyToClipboard,
-            copyButton,
-            50000
+            copyButton
         );
     }
 

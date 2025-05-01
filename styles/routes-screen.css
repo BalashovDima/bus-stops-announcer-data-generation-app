@@ -390,6 +390,112 @@
     grid-column: ets-name-start / ste-name-end;
 }
 
+.route-stop-select__container {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 20px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    background: #262637;
+    box-shadow: 1px 3px 8px 1px rgba(0, 0, 0, 0.4);
+    border: 1px solid #bcbcbc;
+    border-radius: 8px;
+    padding: 0.5em;
+    width: 300px;
+    display: grid;
+    grid-template-columns: [input-start] 1fr [input-end paste-start] auto [paste-end confirm-start] auto [confirm-end];
+    gap: 5px;
+}
+
+.route-stop-select__container::before {
+    /* pointing triangle, outer border */
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-width: 10px;
+    border-style: solid;
+    border-color: #bcbcbc transparent transparent transparent;
+    transform: translate(-50%, 0);
+}
+
+.route-stop-select__container::after {
+    /* pointing triangle, inner fill */
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-width: 8px;
+    border-style: solid;
+    border-color: #262637 transparent transparent transparent;
+    transform: translate(-50%, 0);
+}
+
+.route-stop-select__input {
+    width: 100%;
+    background-color: #2A2A3D;
+    border: 1px solid #999;
+    color: #ffffff;
+    font-size: 0.9rem;
+    padding: 2px 8px;
+    border-radius: 8px;
+    grid-column: input-start / input-end;
+    grid-row: 1;
+}
+
+.route-stop-select__input::placeholder {
+    color: #999;
+    font-size: 0.9rem;
+}
+
+.route-stop-select__paste {
+    grid-column: paste-start / paste-end;
+    grid-row: 1;
+}
+
+.route-stop-select__confirm {
+    grid-column: confirm-start / confirm-end;
+    grid-row: 1;
+}
+
+.route-stop-select__confirm svg,
+.route-stop-select__paste svg {
+    stroke: #999;
+    fill: none;
+    width: 20px;
+    height: 20px;
+}
+
+.route-stop-select__paste svg {
+    fill: #999;
+    stroke: none;
+}
+
+.route-stop-select__confirm:hover svg {
+    stroke: #fff;
+} 
+
+.route-stop-select__paste:hover svg {
+    /* stroke: #fff; */
+    fill: #fff;
+} 
+
+.route-stop-select__text {
+    grid-column: input-start / confirm-end;
+    grid-row: 2;
+    font-size: 0.8rem;
+}
+
+.route-stop-select__text.error {
+    color: rgb(254, 66, 66);
+    text-align: center;
+}
+
 .copy-removed-stop-id-btn span { 
     font-size: 0.7rem;
     text-wrap: nowrap;

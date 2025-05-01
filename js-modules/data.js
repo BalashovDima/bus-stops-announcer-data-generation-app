@@ -186,6 +186,15 @@ export default class Data {
         return this.#_routes.find(route => route.id === id);
     }
 
+    /**
+     * Add given route to stop's "used in routes" list
+     */
+    addRouteToStop(stopId, routeId) {
+        const stop = this.getStopById(stopId);
+
+        stop.routes.push(routeId);
+    }
+
     removeRouteFromStop(stopId, routeId) {
         const stop = this.getStopById(stopId);
 

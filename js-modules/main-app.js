@@ -7,6 +7,7 @@ import RemovedItemsHistory from './removed-items-history.js';
 
 export default class MainApp {
     constructor(rootElement) { 
+        window.app = this;
         this.data = new Data();
         this.contextMenu = new ContextMenu(this);
 
@@ -60,6 +61,11 @@ export default class MainApp {
                             this.routesScreen.hideDropdown();
                         }
                         break;
+                    case 'routeStopSelect':
+                        if(!this.routesScreen.routeStopSelectContainer.contains(event.target)) {
+                            this.routesScreen.hideRouteStopSelect();
+                        }
+                        break;
                 }
             }
         });
@@ -80,6 +86,11 @@ export default class MainApp {
                     case 'routeSelect':
                         if(!this.routesScreen.routesSelectContainer.contains(event.target)) {
                             this.routesScreen.hideDropdown();
+                        }
+                        break;
+                    case 'routeStopSelect':
+                        if(!this.routesScreen.routeStopSelectContainer.contains(event.target)) {
+                            this.routesScreen.hideRouteStopSelect();
                         }
                         break;
                 }
