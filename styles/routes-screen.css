@@ -18,7 +18,7 @@
 .route-controls {
     width: 90%;
     display: grid;
-    grid-template-columns: [add-stop-start] 1fr [add-stop-end create-start] auto [create-end select-start] minmax(300px, 400px) [select-end edit-start] auto [edit-end delete-start] auto [delete-end];
+    grid-template-columns: [add-stop-start] 1fr [add-stop-end create-start] auto [create-end select-start] minmax(300px, 400px) [select-end edit-start confirm-start] auto [edit-end confirm-end delete-start cancel-start] auto [delete-end cancel-end];
     align-items: center;
     column-gap: 5px;
 }
@@ -47,14 +47,18 @@
 
 .create-new-route-btn svg,
 .edit-route-btn svg,
-.delete-route-btn  svg{
+.delete-route-btn  svg,
+.add-edit-route__confirm-btn svg,
+.add-edit-route__cancel-btn svg {
     stroke: #8e8e8e;
     stroke-width: 1;
 }
 
 .create-new-route-btn:hover svg,
 .edit-route-btn:hover svg,
-.delete-route-btn:hover svg {
+.delete-route-btn:hover svg,
+.add-edit-route__confirm-btn:hover svg,
+.add-edit-route__cancel-btn:hover svg {
     stroke: #fff;
 }
 
@@ -143,6 +147,88 @@
 
 .route-select-arrow.active svg{
     transform: rotate(-90deg) scale(1, 1.5) translate(10%, 0%);
+}
+
+.route-controls.edit .selected-route-container,
+.route-controls.edit .add-route-stop-btn,
+.route-controls.edit .create-new-route-btn,
+.route-controls.edit .edit-route-btn,
+.route-controls.edit .delete-route-btn {
+    display: none;
+}
+
+.add-edit-route__container {
+    display: none;
+    grid-template-columns: [disp-num-start] 70px [disp-num-end name-start] 1fr [name-end];
+    column-gap: 10px;
+    grid-column: select-start / select-end;
+    grid-row: 1;
+    height: 100%;
+    position: relative;
+}
+
+.add-edit-route__container.error::after {
+    content: 'Fill in both inputs';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, 3px);
+    font-size: 0.7rem;
+    color: rgb(254, 66, 66);
+}
+
+.add-edit-route__input {
+    width: 100%;
+    background-color: transparent;
+    border: 1px solid #999;
+    color: #ffffff;
+    font-size: 1.1rem;
+    padding: 5px 12px;
+    border-radius: 8px;
+    grid-column: name-start / name-end;
+    grid-row: 1;
+}
+
+.add-edit-route__display-number {
+    width: 100%;
+    background-color: transparent;
+    border: 1px solid #999;
+    color: #ffffff;
+    font-size: 1.1rem;
+    padding: 5px 12px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.route-controls.edit .add-edit-route__container {
+    display: grid;
+}
+
+.route-controls.edit .add-edit-route__confirm-btn,
+.route-controls.edit .add-edit-route__cancel-btn {
+    display: block;
+}
+
+.add-edit-route__confirm-btn {
+    grid-column: confirm-start / confirm-end;
+}
+
+.add-edit-route__cancel-btn {
+    grid-column: cancel-start / cancel-end;
+}
+
+.add-edit-route__confirm-btn,
+.add-edit-route__cancel-btn {
+    grid-row: 1;
+    display: none;
+}
+
+.add-edit-route__cancel-btn svg {
+    fill: #8e8e8e;
+}
+
+.add-edit-route__cancel-btn:hover svg {
+    fill: #fff;
 }
 
 .route-select-list {

@@ -61,6 +61,19 @@ export default class Data {
         return id; 
     }
 
+    addNewRoute(displayNumber, name) {
+        const id = this.generateId();
+        const route = {
+            "id": id,
+            "displayNumber": displayNumber,
+            "name": name,
+            "stops": []
+        }
+
+        this.#_routes.push(route);
+        return id; 
+    }
+
     editStop(stopId, newName = '', newLat = '', newLon = '', newAudio = '', newRadius = '') {
         const index = this.#_stops.findIndex(stop => stop.id === stopId);
 

@@ -42,6 +42,7 @@ export default class RoutesScreen {
             <path d="M22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C21.5093 4.43821 21.8356 5.80655 21.9449 8" stroke-linecap="round"/>
         </svg>`;
         this.routeControls.appendChild(this.createNewRouteBtn);
+        this.createNewRouteBtn.addEventListener('click', this.startNewRouteCreation.bind(this));
 
         this.editRouteBtn = document.createElement('button');
         this.editRouteBtn.classList.add('icon-button', 'edit-route-btn');
@@ -62,6 +63,74 @@ export default class RoutesScreen {
             <path d="M6 7V18C6 19.1046 6.89543 20 8 20H16C17.1046 20 18 19.1046 18 18V7M6 7H5M6 7H8M18 7H19M18 7H16M10 11V16M14 11V16M8 7V5C8 3.89543 8.89543 3 10 3H14C15.1046 3 16 3.89543 16 5V7M8 7H16" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>`;
         this.routeControls.appendChild(this.deleteRouteBtn);
+
+        this.addEditRouteContainer = document.createElement('div');
+        this.addEditRouteContainer.classList.add('add-edit-route__container');
+        this.routeControls.appendChild(this.addEditRouteContainer);
+
+        this.addEditRouteDisplayNumber = document.createElement('input');
+        this.addEditRouteDisplayNumber.classList.add('add-edit-route__display-number');
+        this.addEditRouteDisplayNumber.setAttribute('type', 'number');
+        this.addEditRouteDisplayNumber.setAttribute('placeholder', '#');
+        this.addEditRouteContainer.appendChild(this.addEditRouteDisplayNumber);
+        this.addEditRouteDisplayNumber.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                this.addEditRouteInput.focus();
+            } else if (e.key === 'Escape') {
+                this.cancelAddEditRouteBtn.click();
+            }
+        });
+
+        this.addEditRouteInput = document.createElement('input');
+        this.addEditRouteInput.classList.add('add-edit-route__input');
+        this.addEditRouteInput.setAttribute('type', 'text');
+        this.addEditRouteInput.setAttribute('placeholder', 'Enter route name');
+        this.addEditRouteContainer.appendChild(this.addEditRouteInput);
+        this.addEditRouteInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                this.confirmAddEditRouteBtn.click();
+            } else if (e.key === 'Escape') {
+                this.cancelAddEditRouteBtn.click();
+            }
+        });
+
+        this.confirmAddEditRouteBtn = document.createElement('button');
+        this.confirmAddEditRouteBtn.classList.add('icon-button', 'add-edit-route__confirm-btn');
+        this.confirmAddEditRouteBtn.title = 'Confirm';
+        this.confirmAddEditRouteBtn.innerHTML = `
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g>
+            <polyline points="3.7 14.3 9.6 19 20.3 5" fill="none"  stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+            </g>
+        </svg>`;
+        this.routeControls.appendChild(this.confirmAddEditRouteBtn);
+        this.confirmAddEditRouteBtn.addEventListener('click', (e) => {
+            let displayNumber = this.addEditRouteDisplayNumber.value;
+            displayNumber = displayNumber === '' ? false : Number(displayNumber);
+            const name = this.addEditRouteInput.value;
+            if(!displayNumber || name === '') {
+                this.addEditRouteContainer.classList.add('error');
+                return;
+            }
+            const routeId = this.mainApp.data.addNewRoute(displayNumber, name);
+            this.addRouteToList(this.mainApp.data.getRouteById(routeId)).click();
+            this.cancelAddEditRouteBtn.click();
+        });
+        
+        this.cancelAddEditRouteBtn = document.createElement('button');
+        this.cancelAddEditRouteBtn.classList.add('icon-button', 'add-edit-route__cancel-btn');
+        this.cancelAddEditRouteBtn.title = 'Cancel';
+        this.cancelAddEditRouteBtn.innerHTML = `
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M5.46967 5.46967C5.76256 5.17678 6.23744 5.17678 6.53033 5.46967L18.5303 17.4697C18.8232 17.7626 18.8232 18.2374 18.5303 18.5303C18.2374 18.8232 17.7626 18.8232 17.4697 18.5303L5.46967 6.53033C5.17678 6.23744 5.17678 5.76256 5.46967 5.46967Z"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5303 5.46967C18.8232 5.76256 18.8232 6.23744 18.5303 6.53033L6.53035 18.5303C6.23745 18.8232 5.76258 18.8232 5.46969 18.5303C5.17679 18.2374 5.17679 17.7626 5.46968 17.4697L17.4697 5.46967C17.7626 5.17678 18.2374 5.17678 18.5303 5.46967Z"/>
+        </svg>`;
+        this.routeControls.appendChild(this.cancelAddEditRouteBtn);
+        this.cancelAddEditRouteBtn.addEventListener('click', (e) => {
+            this.routeControls.classList.remove('edit');
+        });
     }
 
     createRouteSelect() {
@@ -178,6 +247,8 @@ export default class RoutesScreen {
             <span class="route-select-option__name">${route.name}</span>
         `;
         this.routeSelectList.appendChild(option);
+
+        return option;
     }
 
     clearRoutesList() {
@@ -185,6 +256,7 @@ export default class RoutesScreen {
         this.routeSelectList.dataset.numberOfRoutes = 0;
         this.routeInput.setAttribute('placeholder', 'No routes available');
         this.routeInput.value = '';
+        this.routeDisplayNumber.textContent = '#';
         delete this.routeInput.dataset.routeId;
     }
 
@@ -344,6 +416,17 @@ export default class RoutesScreen {
                 this.routeStopSelectText.classList.add('error');
             }
         });
+    }
+
+    startNewRouteCreation() {
+        this.routeControls.classList.add('edit');
+        this.addEditRouteContainer.classList.remove('error');
+
+        this.addEditRouteInput.value = '';
+        this.addEditRouteInput.dataset.routeId = 'new';
+        this.addEditRouteDisplayNumber.value = '';
+        
+        this.addEditRouteDisplayNumber.focus();
     }
 
     addRouteStopRow(stops) {
