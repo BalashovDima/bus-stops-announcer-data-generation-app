@@ -25,6 +25,10 @@ export default class RoutesScreen {
         this.addRouteStopBtn.title = 'Add stop to the selected route';
         this.addRouteStopBtn.textContent = 'Add stop';
         this.routeControls.appendChild(this.addRouteStopBtn);
+        this.addRouteStopBtn.addEventListener('click', (e) => {
+            this.addRouteStopRow(['0', '0']);
+            this.routesContentContainer.scrollTo({ top: this.routesContentContainer.scrollHeight, behavior: 'smooth' });
+        });
 
         this.createRouteSelect();
         this.routeControls.appendChild(this.routesSelectContainer);
@@ -122,6 +126,7 @@ export default class RoutesScreen {
 
         // save stops data of previous route
         if(this.routeInput.hasAttribute('data-route-id')) {
+            this.removeEmptyStopRows();
             this.mainApp.data.updateRouteStops(this.getSelectedRouteId(), this.getSelectedRouteStops());
         }
         this.hideDropdown();
@@ -541,12 +546,24 @@ export default class RoutesScreen {
             stop.push(row.querySelector('.route-stop__ets-stop').dataset.stopId);
 
             routeStopsData.push(stop);
-        })
+        });
 
         return routeStopsData;
     }
 
     getSelectedRouteId() {
         return this.routeInput.dataset.routeId;
+    }
+
+    removeEmptyStopRows() {
+        const rows = this.routesContentBody.querySelectorAll('.route-stop__row');
+
+        for(let i = 0; i < rows.length; i++) {
+            if(rows[i].querySelector('.route-stop__ste-stop').dataset.stopId === '0') {
+                if(rows[i].querySelector('.route-stop__ets-stop').dataset.stopId === '0') {
+                    rows[i].remove();
+                }
+            }
+        }
     }
 }
