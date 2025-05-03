@@ -190,6 +190,24 @@ export default class Data {
         this.#_stops.push(restoreData);
     }
 
+    deleteRoute(routeId) {
+        const index = this.#_routes.findIndex((route) => route.id === routeId);
+
+        const route = this.#_routes.splice(index, 1)[0];
+        route.insertIndex = index;
+
+        [...new Set(route.stops.flat())].forEach(stopId => this.removeRouteFromStop(stopId, route.id));
+
+        return route;
+    }
+
+    restoreRoute(route) {
+        this.#_routes.splice(route.insertIndex, 0, route);
+        delete route.insertIndex;
+
+        [...new Set(route.stops.flat())].forEach(stopId => this.addRouteToStop(stopId, route.id));
+    }
+
     get stops() {
         return this.#_stops;
     }
@@ -210,15 +228,30 @@ export default class Data {
      * Add given route to stop's "used in routes" list
      */
     addRouteToStop(stopId, routeId) {
+        if(stopId === '0') return;
+        
         const stop = this.getStopById(stopId);
+        if(!stop) {
+            console.error("Can't add route to stop. Stop not found.")
+            return;
+        }
 
         stop.routes.push(routeId);
     }
 
     removeRouteFromStop(stopId, routeId) {
+        if(stopId === '0') return;
+        
         const stop = this.getStopById(stopId);
+        if(!stop) {
+            console.error("Can't remove route from stop. Stop not found.")
+            return;
+        }
+        const routeIndex = stop.routes.indexOf(routeId);
 
-        stop.routes.splice(stop.routes.indexOf(routeId), 1);
+        if(routeIndex === -1) return;
+
+        stop.routes.splice(routeIndex, 1);
     }
 
     generateId() {

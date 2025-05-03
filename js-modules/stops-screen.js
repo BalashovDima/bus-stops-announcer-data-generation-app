@@ -163,7 +163,15 @@ export default class StopsScreen {
     }
 
     updateStopRouteCount(stopId) {
-        const stopRow = this.stopsListBody.querySelector(`.stops-list__row[data-stop-id="${stopId}"] .routes-cell__count`).textContent = this.mainApp.data.getStopById(stopId).routes.length;
+        if(stopId === '0') return;
+        
+        const stop = this.mainApp.data.getStopById(stopId);
+        if(!stop) {
+            console.error("Can't update stop's routes count. Stop not found.")
+            return;
+        }
+
+        const stopRow = this.stopsListBody.querySelector(`.stops-list__row[data-stop-id="${stopId}"] .routes-cell__count`).textContent = stop.routes.length;
     }
 
     deleteStop(stopId) {

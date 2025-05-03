@@ -64,6 +64,7 @@ export default class RoutesScreen {
             <path d="M6 7V18C6 19.1046 6.89543 20 8 20H16C17.1046 20 18 19.1046 18 18V7M6 7H5M6 7H8M18 7H19M18 7H16M10 11V16M14 11V16M8 7V5C8 3.89543 8.89543 3 10 3H14C15.1046 3 16 3.89543 16 5V7M8 7H16" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>`;
         this.routeControls.appendChild(this.deleteRouteBtn);
+        this.deleteRouteBtn.addEventListener('click', this.deleteSelectedRoute.bind(this));
 
         this.addEditRouteContainer = document.createElement('div');
         this.addEditRouteContainer.classList.add('add-edit-route__container');
@@ -244,10 +245,11 @@ export default class RoutesScreen {
         this.mainApp.currentPopUp = null;
     }
 
-    addRouteToList(route) {
+    addRouteToList(route, insertIndex = -1) {
         if(+this.routeSelectList.dataset.numberOfRoutes === 0) {
             this.routeInput.setAttribute('placeholder', 'Select Route');
             this.routeSelectList.dataset.numberOfRoutes = 1;
+            insertIndex = -1;
         } else {
             this.routeSelectList.dataset.numberOfRoutes++;
         }
@@ -259,7 +261,17 @@ export default class RoutesScreen {
             <span class="route-select-option__display-number">${route.displayNumber}</span>
             <span class="route-select-option__name">${route.name}</span>
         `;
-        this.routeSelectList.appendChild(option);
+
+        if(insertIndex === -1) {
+            this.routeSelectList.appendChild(option);
+        } else {
+            const sibling = this.routeSelectList.children[insertIndex];
+            if (sibling) {
+                this.routeSelectList.insertBefore(option, sibling);
+            } else {
+                this.routeSelectList.appendChild(option); 
+            }
+        }
 
         return option;
     }
@@ -271,6 +283,37 @@ export default class RoutesScreen {
         this.routeInput.value = '';
         this.routeDisplayNumber.textContent = '#';
         delete this.routeInput.dataset.routeId;
+    }
+
+    deleteSelectedRoute() {
+        const routeId = this.getSelectedRouteId();
+        this.mainApp.data.updateRouteStops(routeId, this.getSelectedRouteStops());
+
+        this.routeSelectList.querySelector(`.route-select-option[data-route-id="${routeId}"]`).remove();
+        this.routeSelectList.dataset.numberOfRoutes--;
+        this.routeInput.value = '';
+        this.routeDisplayNumber.textContent = '#';
+        delete this.routeInput.dataset.routeId;
+        
+        this.clearRouteContentStops();
+
+        const route = this.mainApp.data.deleteRoute(routeId);
+        [...new Set(route.stops.flat())].forEach(stopId => this.mainApp.stopsScreen.updateStopRouteCount(stopId));
+
+        this.mainApp.removedItemsHistory.addItem(
+            `<b>Deleted route:</b> ${route.name}`,
+            route,
+            this.restoreRoute.bind(this)
+        );
+    }
+
+    restoreRoute(restoreData) {
+        const routeSelectOption = this.addRouteToList(restoreData, restoreData.insertIndex);
+        this.mainApp.data.restoreRoute(restoreData);
+
+        [...new Set(restoreData.stops.flat())].forEach(stopId => this.mainApp.stopsScreen.updateStopRouteCount(stopId));
+
+        routeSelectOption.click();
     }
 
     createRoutesContent() {
