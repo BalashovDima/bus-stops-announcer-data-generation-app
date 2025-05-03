@@ -54,6 +54,7 @@ export default class RoutesScreen {
             <path d="M15.3097 5.30981L18.7274 8.72755" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>`;
         this.routeControls.appendChild(this.editRouteBtn);
+        this.editRouteBtn.addEventListener('click', this.startRouteEdit.bind(this));
         
         this.deleteRouteBtn = document.createElement('button');
         this.deleteRouteBtn.classList.add('icon-button', 'delete-route-btn');
@@ -114,9 +115,21 @@ export default class RoutesScreen {
                 this.addEditRouteContainer.classList.add('error');
                 return;
             }
-            const routeId = this.mainApp.data.addNewRoute(displayNumber, name);
-            this.addRouteToList(this.mainApp.data.getRouteById(routeId)).click();
-            this.cancelAddEditRouteBtn.click();
+
+            if(this.addEditRouteInput.dataset.routeId === 'new') {
+                const routeId = this.mainApp.data.addNewRoute(displayNumber, name);
+                this.addRouteToList(this.mainApp.data.getRouteById(routeId)).click();
+                this.cancelAddEditRouteBtn.click();
+            } else {
+                const routeOptionElement = this.routeSelectList.querySelector(`.route-select-option[data-route-id="${this.addEditRouteInput.dataset.routeId}"]`);
+                routeOptionElement.querySelector('.route-select-option__display-number').textContent = displayNumber;
+                routeOptionElement.querySelector('.route-select-option__name').textContent = name;
+                this.routeInput.value = name;
+                this.routeDisplayNumber.textContent = displayNumber;
+
+                this.mainApp.data.editRoute(this.addEditRouteInput.dataset.routeId, displayNumber, name);
+                this.cancelAddEditRouteBtn.click();
+            }
         });
         
         this.cancelAddEditRouteBtn = document.createElement('button');
@@ -425,6 +438,18 @@ export default class RoutesScreen {
         this.addEditRouteInput.value = '';
         this.addEditRouteInput.dataset.routeId = 'new';
         this.addEditRouteDisplayNumber.value = '';
+        
+        this.addEditRouteDisplayNumber.focus();
+    }
+
+    startRouteEdit() {
+        this.routeControls.classList.add('edit');
+        this.addEditRouteContainer.classList.remove('error');
+
+        const route = this.mainApp.data.getRouteById(this.getSelectedRouteId());
+        this.addEditRouteInput.value = route.name;
+        this.addEditRouteInput.dataset.routeId = route.id;
+        this.addEditRouteDisplayNumber.value = route.displayNumber;
         
         this.addEditRouteDisplayNumber.focus();
     }

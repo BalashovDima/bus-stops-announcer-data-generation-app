@@ -94,6 +94,13 @@ export default class Data {
         }
     }
 
+    editRoute(routeId, newDisplayNumber, newName) {
+        const route = this.getRouteById(routeId);
+
+        route.displayNumber = newDisplayNumber;
+        route.name = newName;
+    }
+
     updateRouteStops(routeId, stopsArr) {
         this.#_routes.find(route => route.id === routeId).stops = stopsArr;
     }
