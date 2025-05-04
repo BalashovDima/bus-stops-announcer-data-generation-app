@@ -461,8 +461,25 @@ export default class RoutesScreen {
 
         this.routeStopSelectConfirm.addEventListener('click', () => {
             const stop = this.mainApp.data.getStopById(this.routeStopSelectInput.value.trim());
+            const prevStopId = this.routeStopSelectTarget.dataset.stopId;
 
             if(stop) {
+                if(prevStopId !== '0') {
+                    // check if the stop selected before reselect was used more than once
+                    const selectedRoute = this.mainApp.data.getRouteById(this.getSelectedRouteId());
+                    let count = 0;
+                    for (const stopId of selectedRoute.stops.flat()) {
+                        if (prevStopId === stopId) {
+                            count++;
+                            if (count > 1) break; // early exit
+                        }
+                    }
+                    // remove the route from stop's route list, as it is no longer in this route
+                    if(count === 1) {
+                        this.mainApp.data.removeRouteFromStop(prevStopId, this.getSelectedRouteId());
+                    }
+                    this.mainApp.stopsScreen.updateStopRouteCount(prevStopId);
+                }
                 this.setRouteStop(this.routeStopSelectTarget, stop.id, stop);
 
                 this.hideRouteStopSelect();
@@ -590,8 +607,8 @@ export default class RoutesScreen {
 
         // check if the added stop was used in the route before 
         let count = 0;
-        for (const [steId, etsId] of route.stops) {
-            if (steId === stop.id || etsId === stop.id) {
+        for (const routeStop of route.stops.flat()) {
+            if (routeStop === stopId) {
                 count++;
                 if (count > 1) return; // early exit, no need to add this route to that stop's 'used in routes' list
             }
