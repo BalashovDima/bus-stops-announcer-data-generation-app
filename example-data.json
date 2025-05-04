@@ -1,6 +1,7 @@
 {
     "stops": [
         {
+            "creationTimestamp": 1743525505,
             "id": "m8vcqizls0jfkyq7ydi",
             "name": "Будинок національних художніх колективів України",
             "lat": 50.44608,
@@ -10,6 +11,7 @@
             "routes": ["m8vdwfyfo7wvvja4vt", "m8ykz5kyfk1z58bsnqh"]
         },
         {
+            "creationTimestamp": 1743683520,
             "id": "m8vcsbtq828ukefk6mo",
             "name": "вул. Івана Франка",
             "lat": 50.44456,
@@ -19,6 +21,7 @@
             "routes": ["m8vdw8l5qv8ju1tmd", "m8vdwfyfo7wvvja4vt", "m8ykz5kyfk1z58bsnqh"]
         },
         {
+            "creationTimestamp": 1743852560,
             "id": "m8vcsho74s2w3xsplff",
             "name": "вул. Володимирська",
             "lat": 50.44367,
@@ -28,6 +31,7 @@
             "routes": ["m8vdw8l5qv8ju1tmd", "m8ykz5kyfk1z58bsnqh", "m8yl6h83a975m8tl3wl"]
         },
         {
+            "creationTimestamp": 1743533401,
             "id": "m8vd7u9lib11n49v7dt",
             "name": "бул. Тараса Шевченка",
             "lat": 50.44329, 
@@ -37,6 +41,7 @@
             "routes": ["m8vdw8l5qv8ju1tmd", "m8vdwlb2fzi6b49hd2", "m8ykz5kyfk1z58bsnqh", "m8yl6h83a975m8tl3wl"]
         },
         {
+            "creationTimestamp": 1743839034,
             "id": "m8vdaakmtlmxcz5pzhp",
             "name": "пл. Бессарабська",
             "lat": 50.44177,  
@@ -46,6 +51,7 @@
             "routes": ["m8vdwlb2fzi6b49hd2", "m8ykz5kyfk1z58bsnqh"]
         },
         {
+            "creationTimestamp": 1743840816,
             "id": "m8vdboinpstxohc2n7r",
             "name": "Музей \"Київська фортеця\"",
             "lat": 50.43457,   
@@ -55,6 +61,7 @@
             "routes": ["m8vdwlb2fzi6b49hd2", "m8ykz5kyfk1z58bsnqh"]
         },
         {
+            "creationTimestamp": 1743803561,
             "id": "m8vdh33yy8aw0bpryug",
             "name": "пров. Кріпосний",
             "lat": 50.44475,   
@@ -64,6 +71,7 @@
             "routes": ["m8vdwfyfo7wvvja4vt", "m8ykz5kyfk1z58bsnqh"]
         },
         {
+            "creationTimestamp": 1743781623,
             "id": "m8ykjc93zqg1lgops17",
             "name": "вул. Раїси Окіпної",
             "lat": 50.44900,   
@@ -73,6 +81,7 @@
             "routes": ["m8vdw8l5qv8ju1tmd", "m8ykz5kyfk1z58bsnqh", "m8yl6h83a975m8tl3wl"]
         },
         {
+            "creationTimestamp": 1743882876,
             "id": "m8ykl9qaqz191ibie6l",
             "name": "ст. м. Лівобережна",
             "lat": 50.44984,  
@@ -82,6 +91,7 @@
             "routes": ["m8vdw8l5qv8ju1tmd", "m8ykz5kyfk1z58bsnqh"]
         },
         {
+            "creationTimestamp": 1743830367,
             "id": "m8ykno0js0sx64jxqtl",
             "name": "ст. м. Дарниця",
             "lat": 50.45357,  
@@ -91,6 +101,7 @@
             "routes": ["m8ykz5kyfk1z58bsnqh"]
         },
         {
+            "creationTimestamp": 1743480613,
             "id": "m8ykpf3hapac8w2smm",
             "name": "вул. Анатолія Слов'яненка",
             "lat": 50.46530, 
@@ -100,6 +111,7 @@
             "routes": ["m8ykz5kyfk1z58bsnqh", "m8yl6h83a975m8tl3wl"]
         },
         {
+            "creationTimestamp": 1743817785,
             "id": "m8ykuz5iihgxm4v2u",
             "name": "вул. Юності",
             "lat": 50.46936,  
@@ -109,6 +121,7 @@
             "routes": ["m8ykz5kyfk1z58bsnqh"]
         },
         {
+            "creationTimestamp": 1743636962,
             "id": "m8ykuhb0g2kbyw33xa",
             "name": "пр. Алішера Навої",
             "lat": 50.47218,
@@ -118,6 +131,7 @@
             "routes": ["m8ykz5kyfk1z58bsnqh"]
         },
         {
+            "creationTimestamp": 1743549574,
             "id": "m8ykwjmd0f1qnpl9olqt",
             "name": "вул. Щекавицька",
             "lat": 50.46873,  

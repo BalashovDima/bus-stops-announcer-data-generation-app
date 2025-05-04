@@ -48,6 +48,7 @@ export default class Data {
     addNewStop(name, lat, lon, audio, radius) {
         const id = this.generateId();
         const stop = {
+            "creationTimestamp": Date.now(),
             "id": id,
             "name": name,
             "lat": lat,
@@ -58,7 +59,7 @@ export default class Data {
         }
 
         this.#_stops.push(stop);
-        return id; 
+        return stop; 
     }
 
     addNewRoute(displayNumber, name) {

@@ -63,6 +63,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    gap: 3px;
     background-color: #1E1E2F;
     border: 1px solid #999;
     border-radius: 10px;
@@ -83,16 +84,44 @@
     width: fit-content;
 }
 
+.add-edit-info__id-container {
+    display: flex;
+    align-items: center;
+}
+
+.add-edit-info__id-container,
+.add-edit-info__creation-timestamp-span {
+    color: #999;
+    font-size: 0.8rem;
+}
+
+.add-edit-info__copy-id-btn svg {
+    width: 15px;
+    height: 15px;
+    stroke: #999;
+    fill: none;
+}
+
+.add-edit-info__copy-id-btn:hover svg {
+    stroke: #fff;
+}
+
 .add-edit-info__input-grid-container {
     width: 100%;
     border-bottom: 1px solid #999;
     height: auto;
-    padding: 15px 0;
+    padding-bottom: 15px;
+    padding-top: 8px;
     display: grid;
     gap: 10px;
     align-items: center;
     grid-template-columns: [label-start] auto [label-end input-start] 1fr [input-end];
     grid-template-rows: [name-start] auto [name-end lat-start] auto [lat-end lon-start] auto [lon-end audio-start] auto [audio-end radius-start] auto [radius-end routes-start] auto [routes-end];
+}
+
+.add-edit-info__input-grid-container.info {
+    gap: 0;
+    padding-top: 0;
 }
 
 .add-edit-info__input-grid-container input,

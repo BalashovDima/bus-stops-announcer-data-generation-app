@@ -20,6 +20,33 @@ export default class AddEditInfoStop {
         this.title.innerText = 'Add new stop';
         this.container.appendChild(this.title);
 
+        this.idContainer = document.createElement('div');
+        this.idContainer.classList.add('add-edit-info__id-container');
+        this.idContainer.innerHTML = '<span>ID:&nbsp;</span';
+        this.container.appendChild(this.idContainer);
+
+        this.idValue = document.createElement('span');
+        this.idValue.classList.add('add-edit-info__id-value');
+        this.idContainer.appendChild(this.idValue);
+
+        this.copyIdBtn = document.createElement('button');
+        this.copyIdBtn.classList.add('add-edit-info__copy-id-btn', 'icon-button');
+        this.copyIdBtn.innerHTML = `
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 11C6 8.17157 6 6.75736 6.87868 5.87868C7.75736 5 9.17157 5 12 5H15C17.8284 5 19.2426 5 20.1213 5.87868C21 6.75736 21 8.17157 21 11V16C21 18.8284 21 20.2426 20.1213 21.1213C19.2426 22 17.8284 22 15 22H12C9.17157 22 7.75736 22 6.87868 21.1213C6 20.2426 6 18.8284 6 16V11Z" />
+            <path d="M6 19C4.34315 19 3 17.6569 3 16V10C3 6.22876 3 4.34315 4.17157 3.17157C5.34315 2 7.22876 2 11 2H15C16.6569 2 18 3.34315 18 5" />
+        </svg>`;
+        this.idContainer.appendChild(this.copyIdBtn);
+        this.copyIdBtn.addEventListener('click', (e) => {
+            navigator.clipboard.writeText(this.idValue.textContent)
+                            .then(() => console.log("Copied to clipboard!"))
+                            .catch(err => alert("Failed to copy: " + err));
+        });
+
+        this.creationTimestampSpan = document.createElement('span');
+        this.creationTimestampSpan.classList.add('add-edit-info__creation-timestamp-span');
+        this.container.appendChild(this.creationTimestampSpan);
+
         this.inputGridContainer = document.createElement('div');
         this.inputGridContainer.classList.add('add-edit-info__input-grid-container');
         this.container.appendChild(this.inputGridContainer);
@@ -184,8 +211,8 @@ export default class AddEditInfoStop {
             return;
         }
 
-        const id = this.mainApp.data.addNewStop(name, Number(lat), Number(lon), Number(audio), Number(radius));
-        this.mainApp.stopsScreen.renderStop(this.mainApp.data.getStopById(id));
+        const stop = this.mainApp.data.addNewStop(name, Number(lat), Number(lon), Number(audio), Number(radius));
+        this.mainApp.stopsScreen.renderStop(stop);
 
         this.hide();
     }
@@ -268,20 +295,27 @@ export default class AddEditInfoStop {
         this.radiusInput.value = '';
         this.title.textContent = 'Add new stop';
 
+        this.inputGridContainer.classList.remove('info');
         this.cancelButton.style.display = 'block';
         this.addNewButton.style.display = 'block';
         this.saveEditButton.style.display = 'none';
         this.closeButton.style.display = 'none';
         this.routesUsingLabel.style.display = 'none';
         this.routesUsingContainer.style.display = 'none';
+        this.idContainer.style.display = 'none';
+        this.creationTimestampSpan.style.display = 'none';
 
         this.show();
     }
 
     startStopEdit(stopId) {
         this.editingStopId = stopId;
+        this.inputGridContainer.classList.remove('info');
         const stop = this.mainApp.data.getStopById(stopId);
+        const creationDate = new Date(stop.creationTimestamp *1000);
 
+        this.idValue.textContent = stop.id;
+        this.creationTimestampSpan.textContent = `Creation time: ${creationDate.toLocaleDateString()} ${creationDate.toLocaleTimeString()}`;
         this.nameTextarea.value = stop.name;
         this.nameTextarea.style.height = "auto"; // Reset height
         this.nameTextarea.style.height = this.nameTextarea.scrollHeight + 2 + "px";
@@ -292,6 +326,8 @@ export default class AddEditInfoStop {
         this.title.textContent = 'Edit stop';
 
         this.fillRouteUsing(stopId);
+        this.idContainer.style.display = 'flex';
+        this.creationTimestampSpan.style.display = 'block';
         this.routesUsingLabel.style.display = 'block';
         this.routesUsingContainer.style.display = 'block';
 
@@ -305,9 +341,12 @@ export default class AddEditInfoStop {
 
     showStopInfo(stopId) {
         this.inputGridContainer.classList.add('show-stop-info');
+        this.inputGridContainer.classList.add('info');
 
         const stop = this.mainApp.data.getStopById(stopId);
-
+        const creationDate = new Date(stop.creationTimestamp *1000);
+        this.idValue.textContent = stop.id;
+        this.creationTimestampSpan.textContent = `Creation time: ${creationDate.toLocaleDateString()} ${creationDate.toLocaleTimeString()}`;
         this.nameTextarea.value = stop.name;
         this.nameTextarea.style.height = "auto"; // Reset height
         this.nameTextarea.style.height = this.nameTextarea.scrollHeight + 2 + "px";
@@ -323,6 +362,8 @@ export default class AddEditInfoStop {
         this.title.textContent = 'Stop info';
 
         this.fillRouteUsing(stopId);
+        this.idContainer.style.display = 'flex';
+        this.creationTimestampSpan.style.display = 'block';
         this.routesUsingLabel.style.display = 'block';
         this.routesUsingContainer.style.display = 'block';
 
