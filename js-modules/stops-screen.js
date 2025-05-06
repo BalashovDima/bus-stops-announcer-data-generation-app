@@ -33,11 +33,11 @@ export default class StopsScreen {
         this.sortBox.innerHTML = `
             <span class="sorb-box__label">Sort by:</span>
             <select class="stops-toolbar__sort-select">
-                <option value="add-order">Add order</option>
-                <option value="name">Name</option>
-                <option value="audio">Audio</option>
-                <option value="radius">Radius</option>
-                <option value="routes">Routes</option>
+                <option class="stops-toolbar__sort-option" value="creationTimestamp">Add order</option>
+                <option class="stops-toolbar__sort-option" value="name">Name</option>
+                <option class="stops-toolbar__sort-option" value="audioTrackNumber">Audio</option>
+                <option class="stops-toolbar__sort-option" value="radius">Radius</option>
+                <option class="stops-toolbar__sort-option" value="routes">Routes</option>
             </select>
             <div class="sort-ascend-descend-indicator ascending">
                 <svg class="ascending" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -50,6 +50,31 @@ export default class StopsScreen {
         `;
         this.toolbar.appendChild(this.sortBox);
 
+        this.sortSelect = this.sortBox.querySelector('.stops-toolbar__sort-select');
+        this.sortAscendDescendBtn = this.sortBox.querySelector('.sort-ascend-descend-indicator');
+
+        this.sortSelect.addEventListener('change', (e) => {
+            this.mainApp.data.sortStops(this.sortSelect.value, this.isSortAscending());
+
+            this.clearStopsList();
+            this.mainApp.data.stops.forEach(stop => this.renderStop(stop));
+        });
+        
+        this.sortAscendDescendBtn.addEventListener('click', (e) => {
+            if(this.sortAscendDescendBtn.classList.contains('ascending')) {
+                this.sortAscendDescendBtn.classList.remove('ascending');
+                this.sortAscendDescendBtn.classList.add('descending');
+            } else {
+                this.sortAscendDescendBtn.classList.remove('descending');
+                this.sortAscendDescendBtn.classList.add('ascending');
+            }
+
+            this.mainApp.data.sortStops(this.sortSelect.value, this.isSortAscending());
+
+            this.clearStopsList();
+            this.mainApp.data.stops.forEach(stop => this.renderStop(stop));
+        });
+
         this.searchContainer = document.createElement('div');
         this.searchContainer.classList.add('stops-toolbar__search-container');
         this.searchContainer.innerHTML = `
@@ -61,6 +86,14 @@ export default class StopsScreen {
         this.addNewStopButton.classList.add('button', 'stops-toolbar__add-new-stop');
         this.addNewStopButton.textContent = 'Add new stop';
         this.toolbar.appendChild(this.addNewStopButton);
+    }
+
+    isSortAscending() {
+        if(this.sortAscendDescendBtn.classList.contains('ascending')) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     createStopsList() {
@@ -174,6 +207,12 @@ export default class StopsScreen {
         const stopRow = this.stopsListBody.querySelector(`.stops-list__row[data-stop-id="${stopId}"] .routes-cell__count`).textContent = stop.routes.length;
     }
 
+    scrollToStop(stopId) {
+        const stopRow = this.stopsListBody.querySelector(`.stops-list__row[data-stop-id="${stopId}"]`);
+
+        stopRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
     deleteStop(stopId) {
         const stop = this.mainApp.data.getStopById(stopId);
         const currentlyRenderedRouteId = this.mainApp.routesScreen.routeInput.dataset.routeId;
@@ -215,8 +254,11 @@ export default class StopsScreen {
 
         this.mainApp.data.restoreStop(restoreData);
 
-        // --------------- later make it insert the stop in order of selected sort option
-        this.renderStop(restoreData);
+        // sort stops after restoring
+        this.mainApp.data.sortStops(this.sortSelect.value, this.isSortAscending());
+        this.clearStopsList();
+        this.mainApp.data.stops.forEach(stop => this.renderStop(stop));
+        this.scrollToStop(restoreData.id);
 
         if(deletedStopInCurrentRoute) {
             // if deleted stop was in the route that's currently selected, then rerender that route (it might be better to modify/add the specific stops but i'm lazy to implement that)

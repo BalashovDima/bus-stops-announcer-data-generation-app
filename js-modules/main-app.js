@@ -25,12 +25,21 @@ export default class MainApp {
         this.stopsScreen.addNewStopButton.addEventListener('click', this.addEditInfoStopScreen.startNewStopCreation.bind(this.addEditInfoStopScreen));
         
         this.data.readFromFile("./example-data.json").then(() => {
+            this.stopsScreen.sortSelect.value = this.data.sortCriteria;
+            if(this.data.sortIsAscending) {
+                this.stopsScreen.sortAscendDescendBtn.classList.add('ascending');
+                this.stopsScreen.sortAscendDescendBtn.classList.remove('descending');
+            } else {
+                this.stopsScreen.sortAscendDescendBtn.classList.remove('ascending');
+                this.stopsScreen.sortAscendDescendBtn.classList.add('descending');
+            }
+
             this.data.stops.forEach(stop => this.stopsScreen.renderStop(stop));
 
             this.data.routes.forEach(route => this.routesScreen.addRouteToList(route));
         });
 
-        this.routesButton.click();
+        // this.routesButton.click();
         setTimeout(selectFourthRoute.bind(this), 10);
 
         function selectFourthRoute() {
@@ -145,6 +154,15 @@ export default class MainApp {
             const file = await fileHandle.getFile();
             
             this.data.readFromFile(file).then(() => {
+                this.stopsScreen.sortSelect.value = this.data.sortCriteria;
+                if(this.data.sortIsAscending) {
+                    this.stopsScreen.sortAscendDescendBtn.classList.add('ascending');
+                    this.stopsScreen.sortAscendDescendBtn.classList.remove('descending');
+                } else {
+                    this.stopsScreen.sortAscendDescendBtn.classList.remove('ascending');
+                    this.stopsScreen.sortAscendDescendBtn.classList.add('descending');
+                }
+
                 this.stopsScreen.clearStopsList();
                 this.routesScreen.clearRoutesList();
                 this.routesScreen.clearRouteContentStops();

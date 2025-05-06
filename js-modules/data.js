@@ -24,6 +24,8 @@ export default class Data {
     
             this.#_stops = data.stops || [];
             this.#_routes = data.routes || [];
+            this.sortCriteria = data.sortCriteria || '';
+            this.sortIsAscending = data.sortIsAscending;
         } catch (error) {
             alert("Error reading file: " + error.message);
             console.error("Error opening file:", error);
@@ -32,6 +34,8 @@ export default class Data {
 
     saveToFile(filename) {
         const data = {
+            sortCriteria: this.sortCriteria,
+            sortIsAscending: this.sortIsAscending,
             stops: this.#_stops,
             routes: this.#_routes
         };
@@ -48,7 +52,7 @@ export default class Data {
     addNewStop(name, lat, lon, audio, radius) {
         const id = this.generateId();
         const stop = {
-            "creationTimestamp": Date.now(),
+            "creationTimestamp": Date.now() / 1000, // second instead of milliseconds
             "id": id,
             "name": name,
             "lat": lat,
@@ -207,6 +211,33 @@ export default class Data {
         delete route.insertIndex;
 
         [...new Set(route.stops.flat())].forEach(stopId => this.addRouteToStop(stopId, route.id));
+    }
+
+    sortStops(criteria, ascending = true) {
+        if(criteria === this.sortCriteria) {
+            if(ascending !== this.sortIsAscending) {
+                this.#_stops.reverse();
+                this.sortIsAscending = ascending;
+                return;
+            } 
+        }
+
+        if(criteria === 'routes') {
+            this.#_stops.sort((a, b) => {
+                if (a.routes.length < b.routes.length) return ascending ? -1 : 1;
+                if (a.routes.length > b.routes.length) return ascending ? 1 : -1;
+                return 0;
+            });
+        } else {   
+            this.#_stops.sort((a, b) => {
+                if (a[criteria] < b[criteria]) return ascending ? -1 : 1;
+                if (a[criteria] > b[criteria]) return ascending ? 1 : -1;
+                return 0;
+            });
+        }
+
+        this.sortCriteria = criteria;
+        this.sortIsAscending = ascending;
     }
 
     get stops() {

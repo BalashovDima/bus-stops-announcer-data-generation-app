@@ -212,7 +212,12 @@ export default class AddEditInfoStop {
         }
 
         const stop = this.mainApp.data.addNewStop(name, Number(lat), Number(lon), Number(audio), Number(radius));
-        this.mainApp.stopsScreen.renderStop(stop);
+
+        // sort stops after adding a new one
+        this.mainApp.data.sortStops(this.mainApp.stopsScreen.sortSelect.value, this.mainApp.stopsScreen.isSortAscending());
+        this.mainApp.stopsScreen.clearStopsList();
+        this.mainApp.data.stops.forEach(stop => this.mainApp.stopsScreen.renderStop(stop));
+        this.mainApp.stopsScreen.scrollToStop(stop.id);
 
         this.hide();
     }

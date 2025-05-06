@@ -1,124 +1,18 @@
 {
+    "sortCriteria": "audioTrackNumber",
+    "sortIsAscending": false,
     "stops": [
         {
-            "creationTimestamp": 1743525505,
-            "id": "m8vcqizls0jfkyq7ydi",
-            "name": "Будинок національних художніх колективів України",
-            "lat": 50.44608,
-            "lon": 30.49836,
-            "radius": 25,
-            "audioTrackNumber": 1,
-            "routes": ["m8vdwfyfo7wvvja4vt", "m8ykz5kyfk1z58bsnqh"]
-        },
-        {
-            "creationTimestamp": 1743683520,
-            "id": "m8vcsbtq828ukefk6mo",
-            "name": "вул. Івана Франка",
-            "lat": 50.44456,
-            "lon": 30.50804,
-            "radius": 25,
-            "audioTrackNumber": 2,
-            "routes": ["m8vdw8l5qv8ju1tmd", "m8vdwfyfo7wvvja4vt", "m8ykz5kyfk1z58bsnqh"]
-        },
-        {
-            "creationTimestamp": 1743852560,
-            "id": "m8vcsho74s2w3xsplff",
-            "name": "вул. Володимирська",
-            "lat": 50.44367,
-            "lon": 30.51307,
-            "radius": 20,
-            "audioTrackNumber": 3,
-            "routes": ["m8vdw8l5qv8ju1tmd", "m8ykz5kyfk1z58bsnqh", "m8yl6h83a975m8tl3wl"]
-        },
-        {
-            "creationTimestamp": 1743533401,
-            "id": "m8vd7u9lib11n49v7dt",
-            "name": "бул. Тараса Шевченка",
-            "lat": 50.44329, 
-            "lon": 30.51574,
-            "radius": 27,
-            "audioTrackNumber": 4,
-            "routes": ["m8vdw8l5qv8ju1tmd", "m8vdwlb2fzi6b49hd2", "m8ykz5kyfk1z58bsnqh", "m8yl6h83a975m8tl3wl"]
-        },
-        {
-            "creationTimestamp": 1743839034,
-            "id": "m8vdaakmtlmxcz5pzhp",
-            "name": "пл. Бессарабська",
-            "lat": 50.44177,  
-            "lon": 30.51986,
-            "radius": 30,
-            "audioTrackNumber": 5,
-            "routes": ["m8vdwlb2fzi6b49hd2", "m8ykz5kyfk1z58bsnqh"]
-        },
-        {
-            "creationTimestamp": 1743840816,
-            "id": "m8vdboinpstxohc2n7r",
-            "name": "Музей \"Київська фортеця\"",
-            "lat": 50.43457,   
-            "lon": 30.53074,
-            "radius": 25,
-            "audioTrackNumber": 6,
-            "routes": ["m8vdwlb2fzi6b49hd2", "m8ykz5kyfk1z58bsnqh"]
-        },
-        {
-            "creationTimestamp": 1743803561,
-            "id": "m8vdh33yy8aw0bpryug",
-            "name": "пров. Кріпосний",
-            "lat": 50.44475,   
-            "lon": 30.53894,
-            "radius": 20,
-            "audioTrackNumber": 7,
-            "routes": ["m8vdwfyfo7wvvja4vt", "m8ykz5kyfk1z58bsnqh"]
-        },
-        {
-            "creationTimestamp": 1743781623,
-            "id": "m8ykjc93zqg1lgops17",
-            "name": "вул. Раїси Окіпної",
-            "lat": 50.44900,   
-            "lon": 30.59392,
-            "radius": 22,
-            "audioTrackNumber": 8,
-            "routes": ["m8vdw8l5qv8ju1tmd", "m8ykz5kyfk1z58bsnqh", "m8yl6h83a975m8tl3wl"]
-        },
-        {
-            "creationTimestamp": 1743882876,
-            "id": "m8ykl9qaqz191ibie6l",
-            "name": "ст. м. Лівобережна",
-            "lat": 50.44984,  
-            "lon": 30.59865,
-            "radius": 19,
-            "audioTrackNumber": 9,
-            "routes": ["m8vdw8l5qv8ju1tmd", "m8ykz5kyfk1z58bsnqh"]
-        },
-        {
-            "creationTimestamp": 1743830367,
-            "id": "m8ykno0js0sx64jxqtl",
-            "name": "ст. м. Дарниця",
-            "lat": 50.45357,  
-            "lon": 30.61101,
-            "radius": 27,
-            "audioTrackNumber": 10,
-            "routes": ["m8ykz5kyfk1z58bsnqh"]
-        },
-        {
-            "creationTimestamp": 1743480613,
-            "id": "m8ykpf3hapac8w2smm",
-            "name": "вул. Анатолія Слов'яненка",
-            "lat": 50.46530, 
-            "lon": 30.62712,
-            "radius": 25,
-            "audioTrackNumber": 14,
-            "routes": ["m8ykz5kyfk1z58bsnqh", "m8yl6h83a975m8tl3wl"]
-        },
-        {
-            "creationTimestamp": 1743817785,
-            "id": "m8ykuz5iihgxm4v2u",
-            "name": "вул. Юності",
-            "lat": 50.46936,  
-            "lon": 30.62045,
-            "radius": 27,
-            "audioTrackNumber": 15,
-            "routes": ["m8ykz5kyfk1z58bsnqh"]
+            "creationTimestamp": 1743549574,
+            "id": "m8ykwjmd0f1qnpl9olqt",
+            "name": "вул. Щекавицька",
+            "lat": 50.46873,
+            "lon": 30.50963,
+            "radius": 23,
+            "audioTrackNumber": 19,
+            "routes": [
+                "m8ykz5kyfk1z58bsnqh"
+            ]
         },
         {
             "creationTimestamp": 1743636962,
@@ -128,17 +22,168 @@
             "lon": 30.61164,
             "radius": 27,
             "audioTrackNumber": 16,
-            "routes": ["m8ykz5kyfk1z58bsnqh"]
+            "routes": [
+                "m8ykz5kyfk1z58bsnqh"
+            ]
         },
         {
-            "creationTimestamp": 1743549574,
-            "id": "m8ykwjmd0f1qnpl9olqt",
-            "name": "вул. Щекавицька",
-            "lat": 50.46873,  
-            "lon": 30.50963,
-            "radius": 23,
-            "audioTrackNumber": 19,
-            "routes": ["m8ykz5kyfk1z58bsnqh"]
+            "creationTimestamp": 1743817785,
+            "id": "m8ykuz5iihgxm4v2u",
+            "name": "вул. Юності",
+            "lat": 50.46936,
+            "lon": 30.62045,
+            "radius": 27,
+            "audioTrackNumber": 15,
+            "routes": [
+                "m8ykz5kyfk1z58bsnqh"
+            ]
+        },
+        {
+            "creationTimestamp": 1743480613,
+            "id": "m8ykpf3hapac8w2smm",
+            "name": "вул. Анатолія Слов'яненка",
+            "lat": 50.4653,
+            "lon": 30.62712,
+            "radius": 25,
+            "audioTrackNumber": 14,
+            "routes": [
+                "m8ykz5kyfk1z58bsnqh",
+                "m8yl6h83a975m8tl3wl"
+            ]
+        },
+        {
+            "creationTimestamp": 1743830367,
+            "id": "m8ykno0js0sx64jxqtl",
+            "name": "ст. м. Дарниця",
+            "lat": 50.45357,
+            "lon": 30.61101,
+            "radius": 27,
+            "audioTrackNumber": 10,
+            "routes": [
+                "m8ykz5kyfk1z58bsnqh"
+            ]
+        },
+        {
+            "creationTimestamp": 1743882876,
+            "id": "m8ykl9qaqz191ibie6l",
+            "name": "ст. м. Лівобережна",
+            "lat": 50.44984,
+            "lon": 30.59865,
+            "radius": 19,
+            "audioTrackNumber": 9,
+            "routes": [
+                "m8vdw8l5qv8ju1tmd",
+                "m8ykz5kyfk1z58bsnqh"
+            ]
+        },
+        {
+            "creationTimestamp": 1743781623,
+            "id": "m8ykjc93zqg1lgops17",
+            "name": "вул. Раїси Окіпної",
+            "lat": 50.449,
+            "lon": 30.59392,
+            "radius": 22,
+            "audioTrackNumber": 8,
+            "routes": [
+                "m8vdw8l5qv8ju1tmd",
+                "m8ykz5kyfk1z58bsnqh",
+                "m8yl6h83a975m8tl3wl"
+            ]
+        },
+        {
+            "creationTimestamp": 1743803561,
+            "id": "m8vdh33yy8aw0bpryug",
+            "name": "пров. Кріпосний",
+            "lat": 50.44475,
+            "lon": 30.53894,
+            "radius": 20,
+            "audioTrackNumber": 7,
+            "routes": [
+                "m8vdwfyfo7wvvja4vt",
+                "m8ykz5kyfk1z58bsnqh"
+            ]
+        },
+        {
+            "creationTimestamp": 1743840816,
+            "id": "m8vdboinpstxohc2n7r",
+            "name": "Музей \"Київська фортеця\"",
+            "lat": 50.43457,
+            "lon": 30.53074,
+            "radius": 25,
+            "audioTrackNumber": 6,
+            "routes": [
+                "m8vdwlb2fzi6b49hd2",
+                "m8ykz5kyfk1z58bsnqh"
+            ]
+        },
+        {
+            "creationTimestamp": 1743839034,
+            "id": "m8vdaakmtlmxcz5pzhp",
+            "name": "пл. Бессарабська",
+            "lat": 50.44177,
+            "lon": 30.51986,
+            "radius": 30,
+            "audioTrackNumber": 5,
+            "routes": [
+                "m8vdwlb2fzi6b49hd2",
+                "m8ykz5kyfk1z58bsnqh"
+            ]
+        },
+        {
+            "creationTimestamp": 1743533401,
+            "id": "m8vd7u9lib11n49v7dt",
+            "name": "бул. Тараса Шевченка",
+            "lat": 50.44329,
+            "lon": 30.51574,
+            "radius": 27,
+            "audioTrackNumber": 4,
+            "routes": [
+                "m8vdw8l5qv8ju1tmd",
+                "m8vdwlb2fzi6b49hd2",
+                "m8ykz5kyfk1z58bsnqh",
+                "m8yl6h83a975m8tl3wl"
+            ]
+        },
+        {
+            "creationTimestamp": 1743852560,
+            "id": "m8vcsho74s2w3xsplff",
+            "name": "вул. Володимирська",
+            "lat": 50.44367,
+            "lon": 30.51307,
+            "radius": 20,
+            "audioTrackNumber": 3,
+            "routes": [
+                "m8vdw8l5qv8ju1tmd",
+                "m8ykz5kyfk1z58bsnqh",
+                "m8yl6h83a975m8tl3wl"
+            ]
+        },
+        {
+            "creationTimestamp": 1743683520,
+            "id": "m8vcsbtq828ukefk6mo",
+            "name": "вул. Івана Франка",
+            "lat": 50.44456,
+            "lon": 30.50804,
+            "radius": 25,
+            "audioTrackNumber": 2,
+            "routes": [
+                "m8vdw8l5qv8ju1tmd",
+                "m8vdwfyfo7wvvja4vt",
+                "m8ykz5kyfk1z58bsnqh"
+            ]
+        },
+        {
+            "creationTimestamp": 1743525505,
+            "id": "m8vcqizls0jfkyq7ydi",
+            "name": "Будинок національних художніх колективів України",
+            "lat": 50.44608,
+            "lon": 30.49836,
+            "radius": 25,
+            "audioTrackNumber": 1,
+            "routes": [
+                "m8vdwfyfo7wvvja4vt",
+                "m8ykz5kyfk1z58bsnqh"
+            ]
         }
     ],
     "routes": [
@@ -147,11 +192,26 @@
             "displayNumber": 1,
             "name": "Route 1",
             "stops": [
-                ["m8ykl9qaqz191ibie6l", "m8vcsbtq828ukefk6mo"],
-                ["m8vcsbtq828ukefk6mo", "m8ykl9qaqz191ibie6l"],
-                ["m8vcsho74s2w3xsplff", "m8vcsho74s2w3xsplff"],
-                ["m8vd7u9lib11n49v7dt", "m8vd7u9lib11n49v7dt"],
-                ["m8ykjc93zqg1lgops17", "m8ykjc93zqg1lgops17"]
+                [
+                    "m8ykl9qaqz191ibie6l",
+                    "m8vcsbtq828ukefk6mo"
+                ],
+                [
+                    "m8vcsbtq828ukefk6mo",
+                    "m8ykl9qaqz191ibie6l"
+                ],
+                [
+                    "m8vcsho74s2w3xsplff",
+                    "m8vcsho74s2w3xsplff"
+                ],
+                [
+                    "m8vd7u9lib11n49v7dt",
+                    "m8vd7u9lib11n49v7dt"
+                ],
+                [
+                    "m8ykjc93zqg1lgops17",
+                    "m8ykjc93zqg1lgops17"
+                ]
             ]
         },
         {
@@ -159,9 +219,18 @@
             "displayNumber": 2,
             "name": "Route 2",
             "stops": [
-                ["m8vcqizls0jfkyq7ydi", "m8vcqizls0jfkyq7ydi"],
-                ["m8vcsbtq828ukefk6mo", "m8vcsbtq828ukefk6mo"],
-                ["m8vdh33yy8aw0bpryug", "m8vdh33yy8aw0bpryug"]
+                [
+                    "m8vcqizls0jfkyq7ydi",
+                    "m8vcqizls0jfkyq7ydi"
+                ],
+                [
+                    "m8vcsbtq828ukefk6mo",
+                    "m8vcsbtq828ukefk6mo"
+                ],
+                [
+                    "m8vdh33yy8aw0bpryug",
+                    "m8vdh33yy8aw0bpryug"
+                ]
             ]
         },
         {
@@ -169,9 +238,18 @@
             "displayNumber": 3,
             "name": "Route 3",
             "stops": [
-                ["m8vd7u9lib11n49v7dt", "m8vd7u9lib11n49v7dt"],
-                ["m8vdaakmtlmxcz5pzhp", "m8vdaakmtlmxcz5pzhp"],
-                ["m8vdboinpstxohc2n7r", "m8vdboinpstxohc2n7r"]
+                [
+                    "m8vd7u9lib11n49v7dt",
+                    "m8vd7u9lib11n49v7dt"
+                ],
+                [
+                    "m8vdaakmtlmxcz5pzhp",
+                    "m8vdaakmtlmxcz5pzhp"
+                ],
+                [
+                    "m8vdboinpstxohc2n7r",
+                    "m8vdboinpstxohc2n7r"
+                ]
             ]
         },
         {
@@ -179,20 +257,62 @@
             "displayNumber": 6,
             "name": "Route 6",
             "stops": [
-                ["m8vcqizls0jfkyq7ydi", "m8vcsbtq828ukefk6mo"],
-                ["m8vcsbtq828ukefk6mo", "m8vcqizls0jfkyq7ydi"],
-                ["m8vcsho74s2w3xsplff", "m8vcsho74s2w3xsplff"],
-                ["m8vd7u9lib11n49v7dt", "m8vd7u9lib11n49v7dt"],
-                ["m8vdaakmtlmxcz5pzhp", "m8vdaakmtlmxcz5pzhp"],
-                ["m8vdboinpstxohc2n7r", "m8vdboinpstxohc2n7r"],
-                ["m8vdh33yy8aw0bpryug", "m8vdh33yy8aw0bpryug"],
-                ["m8ykjc93zqg1lgops17", "m8ykjc93zqg1lgops17"],
-                ["m8ykl9qaqz191ibie6l", "m8ykl9qaqz191ibie6l"],
-                ["m8ykno0js0sx64jxqtl", "0"],
-                ["m8ykpf3hapac8w2smm", "m8ykpf3hapac8w2smm"],
-                ["m8ykuz5iihgxm4v2u", "m8ykuz5iihgxm4v2u"],
-                ["m8ykuhb0g2kbyw33xa", "m8ykuhb0g2kbyw33xa"],
-                ["m8ykwjmd0f1qnpl9olqt", "m8ykwjmd0f1qnpl9olqt"]
+                [
+                    "m8vcqizls0jfkyq7ydi",
+                    "m8vcsbtq828ukefk6mo"
+                ],
+                [
+                    "m8vcsbtq828ukefk6mo",
+                    "m8vcqizls0jfkyq7ydi"
+                ],
+                [
+                    "m8vcsho74s2w3xsplff",
+                    "m8vcsho74s2w3xsplff"
+                ],
+                [
+                    "m8vd7u9lib11n49v7dt",
+                    "m8vd7u9lib11n49v7dt"
+                ],
+                [
+                    "m8vdaakmtlmxcz5pzhp",
+                    "m8vdaakmtlmxcz5pzhp"
+                ],
+                [
+                    "m8vdboinpstxohc2n7r",
+                    "m8vdboinpstxohc2n7r"
+                ],
+                [
+                    "m8vdh33yy8aw0bpryug",
+                    "m8vdh33yy8aw0bpryug"
+                ],
+                [
+                    "m8ykjc93zqg1lgops17",
+                    "m8ykjc93zqg1lgops17"
+                ],
+                [
+                    "m8ykl9qaqz191ibie6l",
+                    "m8ykl9qaqz191ibie6l"
+                ],
+                [
+                    "m8ykno0js0sx64jxqtl",
+                    "0"
+                ],
+                [
+                    "m8ykpf3hapac8w2smm",
+                    "m8ykpf3hapac8w2smm"
+                ],
+                [
+                    "m8ykuz5iihgxm4v2u",
+                    "m8ykuz5iihgxm4v2u"
+                ],
+                [
+                    "m8ykuhb0g2kbyw33xa",
+                    "m8ykuhb0g2kbyw33xa"
+                ],
+                [
+                    "m8ykwjmd0f1qnpl9olqt",
+                    "m8ykwjmd0f1qnpl9olqt"
+                ]
             ]
         },
         {
@@ -200,10 +320,22 @@
             "displayNumber": 15,
             "name": "Route 15",
             "stops": [
-                ["m8ykwjmd0f1qnpl9olqt", "m8ykwjmd0f1qnpl9olqt"],
-                ["m8ykjc93zqg1lgops17","m8ykjc93zqg1lgops17"],
-                ["m8vd7u9lib11n49v7dt", "m8vd7u9lib11n49v7dt"],
-                ["m8vcsho74s2w3xsplff", "m8vcsho74s2w3xsplff"]
+                [
+                    "m8ykwjmd0f1qnpl9olqt",
+                    "m8ykwjmd0f1qnpl9olqt"
+                ],
+                [
+                    "m8ykjc93zqg1lgops17",
+                    "m8ykjc93zqg1lgops17"
+                ],
+                [
+                    "m8vd7u9lib11n49v7dt",
+                    "m8vd7u9lib11n49v7dt"
+                ],
+                [
+                    "m8vcsho74s2w3xsplff",
+                    "m8vcsho74s2w3xsplff"
+                ]
             ]
         }
     ]

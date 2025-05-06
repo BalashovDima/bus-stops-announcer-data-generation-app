@@ -54,6 +54,20 @@
     color: #fff;
 }
 
+.stops-toolbar__sort-option {
+    color: #999;
+    font-weight: bold;
+}
+
+.stops-toolbar__sort-option:hover {
+    color: #fff;
+}
+
+.sort-ascend-descend-indicator {
+    cursor: pointer;
+    user-select: none;
+}
+
 .sort-ascend-descend-indicator svg {
     display: none;
     width: 20px;
