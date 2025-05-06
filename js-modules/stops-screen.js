@@ -58,6 +58,9 @@ export default class StopsScreen {
 
             this.clearStopsList();
             this.mainApp.data.stops.forEach(stop => this.renderStop(stop));
+
+            // apply filter after rerendering everything
+            this.filterStops(this.searchInput.value);
         });
         
         this.sortAscendDescendBtn.addEventListener('click', (e) => {
@@ -73,19 +76,36 @@ export default class StopsScreen {
 
             this.clearStopsList();
             this.mainApp.data.stops.forEach(stop => this.renderStop(stop));
+            
+            // apply filter after rerendering everything
+            this.filterStops(this.searchInput.value);
         });
 
         this.searchContainer = document.createElement('div');
         this.searchContainer.classList.add('stops-toolbar__search-container');
         this.searchContainer.innerHTML = `
-            <input type="text" class="stops-toolbar__search-input" placeholder="Start entering name, id or coordinates to search"/>
+            <input type="text" class="stops-toolbar__search-input" placeholder="Search by id, name, coordinates, audio, radius"/>
         `;
         this.toolbar.appendChild(this.searchContainer);
+        this.searchInput = this.searchContainer.querySelector('.stops-toolbar__search-input');
+        this.searchInput.addEventListener('input', (e) => {
+            this.filterStops(this.searchInput.value);
+        });
 
         this.addNewStopButton = document.createElement('button');
         this.addNewStopButton.classList.add('button', 'stops-toolbar__add-new-stop');
         this.addNewStopButton.textContent = 'Add new stop';
         this.toolbar.appendChild(this.addNewStopButton);
+
+        this.stopsShownContainer = document.createElement('div');
+        this.stopsShownContainer.classList.add('stops-list__stops-shown-container');
+        this.stopsShownContainer.innerHTML = `
+            <span class="stops-shown-text">
+                showing <span class="stops-shown"></span>/</span><span class="stops-total"></span> stops`;
+        this.stopsShownText = this.stopsShownContainer.querySelector('.stops-shown-text');
+        this.stopsShownSpan = this.stopsShownContainer.querySelector('.stops-shown');
+        this.stopsTotalSpan = this.stopsShownContainer.querySelector('.stops-total');
+        this.toolbar.appendChild(this.stopsShownContainer);
     }
 
     isSortAscending() {
@@ -116,6 +136,7 @@ export default class StopsScreen {
         this.stopsListBody = document.createElement('div');
         this.stopsListBody.classList.add('stops-list__body', 'stops-list-grid-layout');
         this.stopsListBody.dataset.numberOfStops = 0;
+        this.stopsTotalSpan.textContent = 0;
         this.stopsListContainer.appendChild(this.stopsListBody);
 
         this.createPinUnpinHeaderButton();
@@ -149,12 +170,40 @@ export default class StopsScreen {
         });
     }
 
+    filterStops(term) {
+        if(term === '') {
+            this.stopsShownText.style.display = 'none';
+            [...this.stopsListBody.querySelectorAll(`.stops-list__row`)].forEach((row) => {
+                row.style.display = '';
+            });
+            return;
+        }
+
+        this.stopsShownText.style.display = 'inline-block';
+        this.stopsShownSpan.textContent = 0;
+
+        const lowerTerm = term.toLowerCase();
+        this.mainApp.data.stops.forEach((item) => {
+            const row = this.stopsListBody.querySelector(`.stops-list__row[data-stop-id="${item.id}"]`);
+            const matches = Object.values(item)
+                .some(val => String(val).toLowerCase().includes(lowerTerm));
+            if(matches) {
+                row.style.display = '';
+                this.stopsShownSpan.textContent++;
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+
     renderStop(stop) {
         if(+this.stopsListBody.dataset.numberOfStops === 0) {
             this.hideNoStopsMessage();
             this.stopsListBody.dataset.numberOfStops = 1;
+            this.stopsTotalSpan.textContent = 1;
         } else {
             this.stopsListBody.dataset.numberOfStops++;
+            this.stopsTotalSpan.textContent++;
         }
 
         const row = document.createElement('div');
@@ -226,6 +275,8 @@ export default class StopsScreen {
         // delete the stop visually 
         const stopRow = this.stopsListBody.querySelector(`.stops-list__row[data-stop-id="${stopId}"]`);
         stopRow.remove();
+        this.stopsListBody.dataset.numberOfStops--;
+        this.stopsTotalSpan.textContent--;
 
         // delete the stop from data and record restoreData
         const restoreData = this.mainApp.data.deleteStop(stopId);
@@ -269,6 +320,7 @@ export default class StopsScreen {
     clearStopsList() {
         this.stopsListBody.innerHTML = '';
         this.stopsListBody.dataset.numberOfStops = 0;
+        this.stopsTotalSpan.textContent = 0;
         this.showNoStopsMessage();
     }
 

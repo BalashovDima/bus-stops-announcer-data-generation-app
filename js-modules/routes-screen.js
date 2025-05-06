@@ -169,6 +169,7 @@ export default class RoutesScreen {
         this.routeDisplayNumber = document.createElement('span');
         this.routeDisplayNumber.classList.add('route-display-number');
         this.routeDisplayNumber.title = 'Route display number';
+        this.routeDisplayNumber.textContent = '#';
         this.selectedRouteContainer.appendChild(this.routeDisplayNumber);
 
         this.routeInput = document.createElement('input');
