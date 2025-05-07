@@ -75,6 +75,16 @@ export default class MainApp {
                             this.routesScreen.hideRouteStopSelect();
                         }
                         break;
+                    case 'newOrEditStop':
+                        if(!this.addEditInfoStopScreen.container.contains(event.target)) {
+                            this.addEditInfoStopScreen.cancelButton.click();
+                        }
+                        break;
+                    case 'stopInfo':
+                        if(!this.addEditInfoStopScreen.container.contains(event.target)) {
+                            this.addEditInfoStopScreen.closeButton.click();
+                        }
+                        break;
                 }
             }
         });

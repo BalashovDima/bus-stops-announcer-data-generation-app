@@ -184,19 +184,7 @@ export default class AddEditInfoStop {
         this.closeButton.classList.add('button', 'add-edit-info__close-button');
         this.closeButton.textContent = 'Close';
         this.controlsContainer.appendChild(this.closeButton);
-        this.closeButton.addEventListener('click', () => {
-            setTimeout(() => {
-                this.inputGridContainer.classList.remove('show-stop-info');
-            }, 500);
-            
-            this.nameTextarea.readOnly = false;
-            this.latInput.readOnly = false;
-            this.lonInput.readOnly = false;
-            this.audioTrackNumberInput.readOnly = false;
-            this.radiusInput.readOnly = false;
-            
-            this.hide();
-        })
+        this.closeButton.addEventListener('click', this.closeHandler().bind(this));
     }
 
     addNewStop() {
@@ -251,13 +239,14 @@ export default class AddEditInfoStop {
         this.discardUnsavedControls.appendChild(this.keepEditingButton);
 
         this.discardUnsavedButton.addEventListener('click', () => {
-            this.hideUnsaveWarning();
+            this.hideUnsavedWarning();
             this.hide();
+            this.mainApp.currentPopUp = null;
         });
-        this.keepEditingButton.addEventListener('click', this.hideUnsaveWarning.bind(this));
+        this.keepEditingButton.addEventListener('click', this.hideUnsavedWarning.bind(this));
     }
 
-    hideUnsaveWarning() {
+    hideUnsavedWarning() {
         this.unsavedWarningBackground.style.opacity = 0;
         this.unsavedWarningBackground.style.pointerEvents = 'none';
         this.unsavedWarningContainer.style.transform = 'scale(0.6)';
@@ -311,6 +300,7 @@ export default class AddEditInfoStop {
         this.creationTimestampSpan.style.display = 'none';
 
         this.show();
+        this.mainApp.currentPopUp = 'newOrEditStop';
     }
 
     startStopEdit(stopId) {
@@ -342,6 +332,7 @@ export default class AddEditInfoStop {
         this.closeButton.style.display = 'none';
 
         this.show();
+        this.mainApp.currentPopUp = 'newOrEditStop';
     }
 
     showStopInfo(stopId) {
@@ -378,6 +369,7 @@ export default class AddEditInfoStop {
         this.addNewButton.style.display = 'none';
 
         this.show();
+        this.mainApp.currentPopUp = 'stopInfo';
     }
 
     cancelHandler() {
@@ -386,6 +378,7 @@ export default class AddEditInfoStop {
                 this.showUnsavedWarning();
             } else {
                 this.hide();
+                this.mainApp.currentPopUp = null;
             }
         } else if(this.title.textContent == 'Edit stop') {
             const oldStop = this.mainApp.data.getStopById(this.editingStopId);
@@ -398,8 +391,24 @@ export default class AddEditInfoStop {
                 this.showUnsavedWarning();
             } else {
                 this.hide();
+                this.mainApp.currentPopUp = null;
             }
         }
+    }
+
+    closeHandler() {
+        setTimeout(() => {
+            this.inputGridContainer.classList.remove('show-stop-info');
+        }, 500);
+        
+        this.nameTextarea.readOnly = false;
+        this.latInput.readOnly = false;
+        this.lonInput.readOnly = false;
+        this.audioTrackNumberInput.readOnly = false;
+        this.radiusInput.readOnly = false;
+        
+        this.hide();
+        this.mainApp.currentPopUp = null;
     }
 
     saveEdit() {

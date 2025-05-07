@@ -201,9 +201,11 @@ export default class ContextMenu {
                             .catch(err => alert("Failed to copy: " + err));
                 break;
             case 'showStopInfo':
+                this.hideContextMenu();
                 this.mainApp.addEditInfoStopScreen.showStopInfo(id);
                 break;
             case 'editStop':
+                this.hideContextMenu();
                 this.mainApp.addEditInfoStopScreen.startStopEdit(id);
                 break;
             case 'deleteStop':
