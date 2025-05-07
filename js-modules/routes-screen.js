@@ -162,6 +162,25 @@ export default class RoutesScreen {
         this.routesSelectContainer = document.createElement('div');
         this.routesSelectContainer.classList.add('routes-select-container');
 
+        this.reorderRoutesBtn = document.createElement('button');
+        this.reorderRoutesBtn.classList.add('reorder-routes-btn', 'icon-button');
+        this.reorderRoutesBtn.innerHTML = `
+        <svg viewBox="0 0 76 76" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" baseProfile="full" enable-background="new 0 0 76.00 76.00" xml:space="preserve">
+            <path fill-opacity="1" stroke-width="0.2" stroke-linejoin="round" d="M 19,34L 27,34L 27,42L 19,42L 19,34 Z M 31,34L 57,34L 57,42L 31,42L 31,34 Z M 19,45L 27,45L 27,53L 19,53L 19,45 Z M 26,46L 20,46L 20,52L 26,52L 26,46 Z M 19,23L 27,23L 27,31L 19,31L 19,23 Z M 26,24L 20,24L 20,30L 26,30L 26,24 Z M 31,31L 31,23L 35,23L 35,24L 32,24L 32,30L 41,30L 41,31L 31,31 Z M 57,23L 57,31L 47,31L 47,30.0001L 56,30L 56,24L 53,24.0001L 53,23L 57,23 Z M 31,45L 41,45L 41,46L 32,46L 32,52L 35,52L 35,53L 31,53L 31,45 Z M 57,53L 53,53L 53,52L 56,52L 56,46L 47,46L 47,45L 57,45L 57,53 Z M 36,48.75L 42,54.75L 42,45L 46,45L 46,54.75L 52,48.75L 52,54.25L 44,62.25L 36,54.25L 36,48.75 Z M 36,27.25L 36,21.75L 44,13.75L 52,21.75L 52,27.25L 46,21.25L 46,31L 42,31L 42,21.25L 36,27.25 Z "/>
+        </svg>`;
+        this.routesSelectContainer.appendChild(this.reorderRoutesBtn);
+        this.reorderRoutesBtn.addEventListener('click', (e) => {
+            if(this.reorderRoutesBtn.classList.contains('active')) {
+                this.reorderRoutesBtn.classList.remove('active');
+                this.routeSelectList.classList.remove('reordering');
+                this.routeSelecListReorderObject.disableReordering();
+            } else {
+                this.reorderRoutesBtn.classList.add('active');
+                this.routeSelectList.classList.add('reordering');
+                this.routeSelecListReorderObject.enableReordering();
+            }
+        });
+
         this.selectedRouteContainer = document.createElement('div');
         this.selectedRouteContainer.classList.add('selected-route-container', 'route-select-grid-layout');
         this.routesSelectContainer.appendChild(this.selectedRouteContainer);
@@ -187,7 +206,19 @@ export default class RoutesScreen {
             </svg> `;
         this.selectedRouteContainer.appendChild(this.routeSelectArrow);
 
-        this.routeSelectList = document.createElement('ul');
+        this.routeSelecListReorderObject = new ReorderContainer({
+            containerElementName: 'ul',
+            dragHandleSelector: '.route-select-option',
+            reorderElementSelector: '.route-select-option',
+            dragEndCallback: (e) => {
+                // save new routes order to data
+                
+                const orderedIds = Array.from(this.routeSelectList.querySelectorAll('.route-select-option')).map(el => el.dataset.routeId);
+
+                this.mainApp.data.updateRoutesOrder(orderedIds);
+            }
+        });
+        this.routeSelectList = this.routeSelecListReorderObject.element;
         this.routeSelectList.classList.add('route-select-list', 'small-scrollbar', 'route-select-grid-layout');
         this.routeSelectList.dataset.numberOfRoutes = 0;
         this.routesSelectContainer.appendChild(this.routeSelectList);
@@ -201,7 +232,12 @@ export default class RoutesScreen {
             }
         });
 
-        this.routeSelectList.addEventListener('click', this.selectRoute.bind(this));
+        this.routeSelectList.addEventListener('click', (e) => {
+            if(this.reorderRoutesBtn.classList.contains('active')) {
+                return;
+            }
+            this.selectRoute(e);
+        });
     }
 
     selectRoute(e) {
@@ -234,12 +270,34 @@ export default class RoutesScreen {
 
     showDropdown() {
         this.mainApp.currentPopUp = 'routeSelect';
+        
+        this.reorderRoutesBtn.style.opacity = '1';
+        this.reorderRoutesBtn.style.pointerEvents = 'all';
+        this.reorderRoutesBtn.style.transform = 'translateX(0) scale(1)';
+        this.editRouteBtn.style.opacity = '0';
+        this.editRouteBtn.style.pointerEvents = 'none';
+        this.deleteRouteBtn.style.opacity = '0';
+        this.deleteRouteBtn.style.pointerEvents = 'none';
+
         this.routeSelectList.classList.add('active');
         this.routeSelectArrow.classList.add('active');
         this.selectedRouteContainer.classList.add('active');
     }
 
     hideDropdown() {
+        if(this.reorderRoutesBtn.classList.contains('active')) {
+            this.reorderRoutesBtn.classList.remove('active');
+            this.routeSelectList.classList.remove('reordering');
+            this.routeSelecListReorderObject.disableReordering();
+        }
+        this.reorderRoutesBtn.style.opacity = '';
+        this.reorderRoutesBtn.style.pointerEvents = '';
+        this.reorderRoutesBtn.style.transform = '';
+        this.editRouteBtn.style.opacity = '1';
+        this.editRouteBtn.style.pointerEvents = 'all';
+        this.deleteRouteBtn.style.opacity = '1';
+        this.deleteRouteBtn.style.pointerEvents = 'all';
+
         this.routeSelectList.classList.remove('active');
         this.routeSelectArrow.classList.remove('active');
         this.selectedRouteContainer.classList.remove('active');

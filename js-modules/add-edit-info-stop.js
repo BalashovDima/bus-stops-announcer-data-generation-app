@@ -184,7 +184,7 @@ export default class AddEditInfoStop {
         this.closeButton.classList.add('button', 'add-edit-info__close-button');
         this.closeButton.textContent = 'Close';
         this.controlsContainer.appendChild(this.closeButton);
-        this.closeButton.addEventListener('click', this.closeHandler().bind(this));
+        this.closeButton.addEventListener('click', this.closeHandler.bind(this));
     }
 
     addNewStop() {

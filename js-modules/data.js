@@ -106,6 +106,12 @@ export default class Data {
         route.name = newName;
     }
 
+    updateRoutesOrder(orderedIds) {
+        this.#_routes.sort((a, b) => {
+            return orderedIds.indexOf(a.id) - orderedIds.indexOf(b.id);
+        });
+    }
+
     updateRouteStops(routeId, stopsArr) {
         this.#_routes.find(route => route.id === routeId).stops = stopsArr;
     }

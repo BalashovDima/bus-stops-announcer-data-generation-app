@@ -39,7 +39,7 @@ export default class MainApp {
             this.data.routes.forEach(route => this.routesScreen.addRouteToList(route));
         });
 
-        // this.routesButton.click();
+        this.routesButton.click();
         setTimeout(selectFourthRoute.bind(this), 10);
 
         function selectFourthRoute() {

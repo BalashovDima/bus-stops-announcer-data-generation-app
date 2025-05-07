@@ -42,7 +42,7 @@ export default class ReorderContainer {
     handlePointerDown(e) {
         if(e.target.closest(this.dragHandleSelector) === null) return;
 
-        this.itemBeingDragged = e.target.closest('.route-stop__row');
+        this.itemBeingDragged = e.target.closest(this.reorderElementSelector);
         this.itemBeingDragged.classList.add('dragging'); 
         this.element.style.userSelect = 'none'; 
         document.body.style.cursor = 'grabbing';
@@ -61,6 +61,8 @@ export default class ReorderContainer {
 
         this.element.setPointerCapture(e.pointerId); // set pointer to the container of reordering items
         this.element.addEventListener('pointermove', this.boundPointerMoveHandler);
+
+        this.dragStartCallback(e);
     }
 
     handlePointerUp(e) {
@@ -105,6 +107,8 @@ export default class ReorderContainer {
         
         this.element.releasePointerCapture(e.pointerId);
         this.element.removeEventListener('pointermove', this.boundPointerMoveHandler);
+
+        this.dragEndCallback(e);
     }
     
     
@@ -176,6 +180,8 @@ export default class ReorderContainer {
                 item.style.transform = '';
             }
         });
+
+        this.dragMoveCallback(e);
     }
 
     setItemsGap() {
