@@ -87,6 +87,30 @@ export default class AddEditInfoStop {
                 this.lonInput.focus();
             }
         });
+        this.latInput.addEventListener('paste', (e) => {
+            const pastedData = (e.clipboardData || window.Clipboard).getData("text");
+
+            const floats = splitToFloats(pastedData);
+
+            if(floats) {
+                this.latInput.value = floats[0];
+                this.lonInput.value = floats[1];
+                
+                this.audioTrackNumberInput.focus();
+                e.preventDefault();
+            }
+
+            function splitToFloats(input) {
+                // Define regex pattern to match common delimiters
+                let parts = input.split(/[\s,;\t|]+/);
+                
+                // Convert to float and filter out invalid values
+                let numbers = parts.map(num => parseFloat(num)).filter(num => !isNaN(num));
+                
+                // Ensure we only return the first two numbers
+                return numbers.length >= 2 ? numbers.slice(0, 2) : null;
+            }
+        });
 
         // longitude
         this.lonLabel = document.createElement('span');
@@ -208,6 +232,7 @@ export default class AddEditInfoStop {
         this.mainApp.stopsScreen.scrollToStop(stop.id);
 
         this.hide();
+        this.mainApp.currentPopUp = null;
     }
 
     createUnsavedWarning() {
@@ -300,6 +325,7 @@ export default class AddEditInfoStop {
         this.creationTimestampSpan.style.display = 'none';
 
         this.show();
+        this.nameTextarea.focus();
         this.mainApp.currentPopUp = 'newOrEditStop';
     }
 
