@@ -4,6 +4,7 @@ import RoutesScreen from './routes-screen.js';
 import ContextMenu from './context-menu.js';
 import AddEditInfoStop from './add-edit-info-stop.js';
 import RemovedItemsHistory from './removed-items-history.js';
+import GenerateCodeScreen from './generate-code-screen.js';
 
 export default class MainApp {
     constructor(rootElement) { 
@@ -21,8 +22,11 @@ export default class MainApp {
         this.routesScreen.hide();
         this.addEditInfoStopScreen = new AddEditInfoStop(this);
         this.removedItemsHistory = new RemovedItemsHistory(this);
+        this.generateCodeScreen = new GenerateCodeScreen(this);
 
         this.stopsScreen.addNewStopButton.addEventListener('click', this.addEditInfoStopScreen.startNewStopCreation.bind(this.addEditInfoStopScreen));
+        
+        //  ----------------------------------------
         
         this.data.readFromFile("./example-data.json").then(() => {
             this.stopsScreen.sortSelect.value = this.data.sortCriteria;
@@ -51,6 +55,8 @@ export default class MainApp {
                 }
             }, 200);
         }
+        
+        //  ----------------------------------------
 
         document.addEventListener('mousedown', (event) => {
             if(this.currentPopUp) {
@@ -145,6 +151,9 @@ export default class MainApp {
         this.generateCodeButton.textContent = 'generate code';
         this.generateCodeButton.classList.add('generate-code-button');
         this.controlsContainer.appendChild(this.generateCodeButton);
+        this.generateCodeButton.addEventListener('click', (e) => {
+            this.generateCodeScreen.show();
+        });
 
         this.openFileButton.addEventListener('click', this.openFile.bind(this));
         this.saveFileButton.addEventListener('click', () => {
