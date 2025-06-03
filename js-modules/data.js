@@ -234,11 +234,11 @@ export default class Data {
                 if (a.routes.length > b.routes.length) return ascending ? 1 : -1;
                 return 0;
             });
-        } else {   
-            this.#_stops.sort((a, b) => {
-                if (a[criteria] < b[criteria]) return ascending ? -1 : 1;
-                if (a[criteria] > b[criteria]) return ascending ? 1 : -1;
-                return 0;
+        } else {
+            const uksort = new Intl.Collator('uk', { numeric: true, sensitivity: 'base' }).compare;
+
+            this.#_stops.sort((a, b) => {         
+                return uksort(a[criteria], b[criteria]);
             });
         }
 
